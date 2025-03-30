@@ -1,5 +1,11 @@
 {
   "name": "monolith",
   "type": "module",
-  "private": true
+  "private": true,
+  "scripts": {
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
 }
