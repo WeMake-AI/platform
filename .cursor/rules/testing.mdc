@@ -1,0 +1,21 @@
+---
+description: 
+globs: tests/**/*.ts
+alwaysApply: false
+---
+# Testing Ruless
+
+- Implement unit tests for utility functions, hooks, and helpers.
+- Use integration tests for complex components and pages.
+- Implement end-to-end tests for critical user flows.
+- Implement visual regression testing if applicable.
+- Use performance profiling and monitoring tools to identify bottlenecks.
+- Conduct cross-device testing to ensure consistent performance across platforms.
+- Set up error logging and crash reporting for easier debugging in production.
+- Address browser-specific issues with appropriate workarounds.
+- Write comprehensive unit tests for game logic and systems.
+- Implement integration tests for game scenes and major features.
+- Create automated performance tests to catch regressions.
+- Use mocks for external services or APIs.
+- Implement global error and alert handlers.
+- Integrate a crash reporting service for the application.

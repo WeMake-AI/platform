@@ -1,0 +1,8 @@
+---
+description: Global Rules
+globs: 
+alwaysApply: true
+---
+# Global Rules
+
+- Use bun as package manager.
