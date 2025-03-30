@@ -1,4 +1,3 @@
-
 # 💙 WeMake Monolith
 
 WeMake's core platform monolith repository - empowering digital transformation through AI-driven solutions.
