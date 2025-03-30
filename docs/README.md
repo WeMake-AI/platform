@@ -62,6 +62,17 @@ bun run build
 bun run test
 ```
 
+## Commands
+
+All commands are run from the root of the project, from a terminal:
+
+| Command                | Action                                           |
+| :--------------------- | :----------------------------------------------- |
+| `bun i`                | Installs dependencies                            |
+| `bun format`           | Format code with Prettier                        |
+
+[Learn more about bun](https://bun.sh/docs).
+
 ## Modular Architecture
 
 This repository follows a modular monolith architecture with:
