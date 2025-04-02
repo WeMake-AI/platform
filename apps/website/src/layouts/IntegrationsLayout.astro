@@ -1,0 +1,202 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import CtaCommunity from "@/components/cta/CtaCommunity.astro";
+
+interface LogoDetail {
+  url: string;
+  alt: string;
+}
+
+interface Detail {
+  title: string;
+  value: string;
+  url?: string;
+}
+
+interface IntegrationFrontmatter {
+  integration: string;
+  logo: LogoDetail;
+  details: Detail[];
+  permissions: string[];
+  description: string;
+}
+
+const { frontmatter } = Astro.props as { frontmatter: IntegrationFrontmatter };
+const title = frontmatter.integration;
+const description = frontmatter.description;
+---
+
+<BaseLayout title={title} description={description}>
+  <section x-data="{ open: false }">
+    <div
+      class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 lg:flex pt-24"
+    >
+      <div class="lg:w-1/2 lg:pl-12 lg:ml-auto">
+        <div class="lg:sticker lg:sticky pb-16 pt-8 top-0">
+          <div class="lg:pl-36 md:pl-12">
+            <nav class="bg-slate-50 rounded-lg p-4 lg:p-8">
+              <img src={frontmatter.logo.url} alt={frontmatter.logo.alt} class="size-8 object-scale-down"  title={frontmatter.logo.alt}/>
+              <ul class="mt-12 space-y-4">
+                {
+                  frontmatter.details.map((detail) => (
+                    <li>
+                      <p class="text-blue-950 font-semibold  text-base tracking-tight">
+                        {detail.title}
+                      </p>
+                      <div class="mt-2 text-sm text-slate-500 lg:text-pretty">
+                        {detail.url ? (
+                          <a class="text-blue-600 hover:text-blue-800" href={detail.url}  target="_blank" rel="noopener noreferrer">
+                            {detail.value}
+                          </a>
+                        ) : (
+                          detail.value
+                        )}
+                      </div>
+                    </li>
+                  ))
+                }
+              </ul>
+              <div class="mt-12">
+                <button
+                  x-on:click="open = true"
+                  class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 w-full ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600"
+                  type="button"
+                  title="Verbinden"
+                  aria-label="Verbinden"
+                >
+                  Verbinden
+                </button>
+                <!-- Modal -->
+                <div
+                  x-show="open"
+                  style="display: none"
+                  x-on:keydown.escape.prevent.stop="open = false"
+                  role="dialog"
+                  aria-modal="true"
+                  x-id="['modal-title']"
+                  :aria-labelledby="$id('modal-title')"
+                  class="fixed inset-0 z-10 overflow-y-auto"
+                >
+                  <!-- Overlay -->
+                  <div
+                    x-show="open"
+                    x-transition.opacity
+                    class="fixed inset-0 bg-white bg-opacity-50"
+                  >
+                  </div>
+
+                  <!-- Panel -->
+                  <div
+                    x-show="open"
+                    x-transition
+                    x-on:click="open = false"
+                    class="relative flex min-h-screen items-center justify-center p-4"
+                  >
+                    <div
+                      x-on:click.stop
+                      x-trap.noscroll.inert="open"
+                      class="relative w-full max-w-2xl text-center overflow-y-auto rounded-2xl bg-white border 50 p-12"
+                    >
+                      <h2
+                        class="text-3xl mt-6 tracking-tight font-medium text-blue-950"
+                        :id="$id('modal-title')"
+                      >
+                        Verbinde {frontmatter.integration} mit WeMake AI
+                      </h2>
+
+                      <!-- Content -->
+
+                      <p class="mt-6 text-slate-500 text-sm max-w-md mx-auto">
+                        Priorisiere Aufgaben und Projekte basierend auf den
+                        Anforderungen deiner Kunden und etabliere einen engeren
+                        Feedback-Kreislauf mit ihnen.
+                      </p>
+
+                      <div class="max-w-md mx-auto mt-6">
+                        <p class="text-blue-950 text-left font-medium">
+                          WeMake möchte
+                        </p>
+                        <ul
+                          role="list"
+                          class="text-left list-none text-slate-500 mt-3 space-y-3 text-base"
+                        >
+                          {
+                            frontmatter.permissions.map((permission) => (
+                              <li class="flex items-start gap-3">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  class="icon icon-tabler icon-tabler-circle-check"
+                                  width="20"
+                                  height="20"
+                                  viewBox="0 0 24 24"
+                                  stroke-width="2"
+                                  stroke="currentColor"
+                                  fill="none"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                >
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                  <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                                  <path d="M9 12l2 2l4 -4" />
+                                </svg>
+                                {permission}
+                              </li>
+                            ))
+                          }
+                        </ul>
+                        <p class="text-slate-400 text-left text-xs mt-12">
+                          Wir legen Wert auf deine Privatsphäre, wie in unserer <a
+                            class="text-blue-500 hover:text-blue-950"
+                            href="/legal/privacy"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Datenschutzerklärung</a
+                          >
+                          dargelegt. Indem du auf "Zugriff erlauben" klickst, erteilst du WeMake AI
+                          die Erlaubnis, auf deine Informationen zuzugreifen.
+                        </p>
+                      </div>
+                      <div
+                        class="inline-flex flex-wrap gap-1 items-center mt-12 pt-6 border-t w-full max-w-md"
+                      >
+                        <button
+                        x-on:click="open = false"
+                          type="button"
+                          class="text-blue-600 items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-100 hover:bg-blue-50 w-auto ml-auto"
+                          title="Abbrechen"
+                          aria-label="Abbrechen"
+                        >
+                          Abbrechen
+                        </button>
+                        <button
+                          type="submit"
+                          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600"
+                          title="Zugriff erlauben"
+                          aria-label="Zugriff erlauben"
+                          >
+                          Zugriff erlauben
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <div class="lg:w-1/2 lg:order-first">
+        <div class="flex-shrink-0">
+          <div class="max-w-[40rem] prose-lg hover:prose-a:text-blue-500 prose prose-a:font-semibold prose-a:text-blue-300 prose-blockquote:text-blue-600 prose-h3:text-blue-950 text-slate-500">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CtaCommunity />
+</BaseLayout>

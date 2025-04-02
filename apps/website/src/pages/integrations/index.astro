@@ -1,0 +1,74 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("integrations");
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Entries from "@/components/integrations/Entries.astro";
+
+const pageTitle = "Integrationen";
+const pageDescription = "Erweitere und automatisiere deinen Workflow mit Integrationen für deine Lieblingstools.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >Integrationen</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl lg:text-balance mt-6"
+      >
+        Finde die passende Integration
+      </h2>
+      <p class="text-slate-500 mt-5 lg:text-pretty">
+        Erweitere und automatisiere deinen Workflow mit Integrationen für deine Lieblingstools.
+      </p>
+      <div>
+        <ul
+          role="list"
+          class="grid grid-cols-2 lg:grid-cols-4 gap-4 list-none lg:gap-x-6 lg:gap-y-24 mt-12"
+        >
+          {
+            allPosts
+              .slice()
+              .map((post) => (
+                <Entries
+                  url={"/integrations/" + post.slug}
+                  integration={post.data.integration}
+                  description={post.data.description}
+                  alt={post.data.integration}
+                  permissions={post.data.permissions}
+                  logo={post.data.logo.url}
+                />
+              ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="bg-slate-50">
+    <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="text-blue-950 font-semibold tracking-tight text-3xl">
+            Bereit für die Vernetzung?
+          </h2>
+          <div class="max-w-xl mt-6">
+            <p class="text-slate-500">
+              Kontaktiere uns, um mehr über die Zusammenarbeit mit Partnern zu erfahren.
+            </p>
+          </div>
+          <div class="mt-10">
+            <a
+              class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+              title="WeMake AI kontaktieren"
+              aria-label="WeMake AI kontaktieren"
+              href="/contact"
+            >
+              WeMake kontaktieren
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

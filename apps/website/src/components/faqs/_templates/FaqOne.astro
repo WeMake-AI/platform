@@ -1,0 +1,68 @@
+---
+// Define the FAQ data
+const faqs = [
+  {
+    question: "Can I use spaziobianco for my site?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed. management district stocks. Potential funds consulting expenses.",
+  },
+  {
+    question: "Will I get updates?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How much do disputes cost?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How do refunds work?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How long do payouts take?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "Is there a fee to use Google Pay?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  // Add more FAQs as needed
+];
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <h2 class="inline-flex items-center text-blue-600">
+      <span class="text-base font-medium tracking-tight">FAQ</span>
+    </h2>
+    <h2
+      class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+    >
+      Frequent questions and answers
+    </h2>
+
+    <div
+      class="gap-x-2 gap-y-14 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 mt-12"
+    >
+      {
+        faqs.map((faq) => (
+          <div>
+            <div class="space-y-3">
+              <div>
+                <p class="font-semibold text-blue-950 lg:mt-0">
+                  {faq.question}
+                </p>
+              </div>
+              <p class="text-sm text-slate-500 mt-5">{faq.answer}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

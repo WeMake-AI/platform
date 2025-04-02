@@ -1,0 +1,203 @@
+---
+const extended = [
+  {
+    title: "Tools for crafting optimal sign-up",
+    benefits: [
+      "Customizable forms",
+      "UI toolkit for email design",
+      "Support for automated responses",
+    ],
+  },
+  {
+    title: "Corldwide reach with single integration",
+    benefits: [
+      "Global email templates",
+      "Localization tools",
+      "Compliance and regulation support",
+    ],
+  },
+  {
+    title: "In-depth security protocols",
+    benefits: [
+      "Encryption for email data",
+      "Anti-spam filters",
+      "User authentication processes",
+    ],
+  },
+  {
+    title: "detailed analytics and reporting",
+    benefits: [
+      "Real-time open rates",
+      "Click-through rate analysis",
+      "Subscriber growth tracking",
+    ],
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+      >pricing</span
+    >
+    <h2
+      class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl lg:text-balance"
+    >
+      Always know what you'll pay, transparent pricing for everyone.
+    </h2>
+    <p class="text-slate-500 mt-5 lg:text-balance">
+      Choose a plan that works the best for you and your team. Start small,
+      upgrade when you need.
+    </p>
+
+    <div class="mt-12 space-y-4">
+      <div
+        class="grid grid-cols-1 lg:grid-cols-5 border border-slate-200 rounded-xl overflow-clip"
+      >
+        <div class="flex flex-col flex-shrink-0 mb-6 md:mb-0 lg:col-span-2 p-4">
+          <span class="font-semibold text-blue-950 text-xl"
+            >Pay-as-you-go
+          </span>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-3 lg:col-span-3">
+          <div
+            class="lg:col-span-2 p-4 border-slate-200 border-t border-l-0 lg:border-l lg:border-t-0"
+          >
+            <p class="font-semibold text-blue-950">
+              Instant bank account verifications
+            </p>
+            <p class="mt-2 text-slate-500 text-sm">
+              Obtain bank names and tokenized account numbers to connect a
+              user’s bank account and verify that it’s open.
+            </p>
+          </div>
+          <div class="bg-slate-50 border-l-2 border-blue-500">
+            <div class="p-4 border-t lg:border-t-0 border-slate-200">
+              <p class="font-semibold text-blue-950">$1.50</p>
+              <p class="mt-2 text-slate-500 text-sm">Per verified account</p>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 lg:col-start-3">
+          <div class="grid grid-cols-1 lg:grid-cols-3">
+            <div
+              class="lg:col-span-2 p-4 border-t lg:border-l border-l-0 border-slate-200"
+            >
+              <p class="font-semibold text-blue-950">Balances</p>
+              <p class="mt-2 text-slate-500 text-sm">
+                Retrieve account balances for underwriting, financial
+                management, or preventing payment failures due to insufficient
+                funds.
+              </p>
+            </div>
+            <div class="bg-slate-50 border-l-2 border-blue-500">
+              <div class="p-4 border-t border-slate-200">
+                <p class="font-semibold text-blue-950">10¢</p>
+                <p class="mt-2 text-slate-500 text-sm">
+                  Per successful API call
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="lg:col-span-3 lg:col-start-3">
+          <div class="grid grid-cols-1 lg:grid-cols-3">
+            <div
+              class="lg:col-span-2 p-4 border-t lg:border-l border-l-0 border-slate-200"
+            >
+              <p class="font-semibold text-blue-950">Account owners</p>
+              <p class="mt-2 text-slate-500 text-sm">
+                Pull account owner information, such as first name, last name,
+                and address.
+              </p>
+            </div>
+            <div class="bg-slate-50 border-l-2 border-blue-500">
+              <div class="p-4 border-t border-slate-200">
+                <p class="font-semibold text-blue-950">$4.50</p>
+                <p class="mt-2 text-slate-500 text-sm">
+                  Per successful API call
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="grid grid-cols-1 lg:grid-cols-5 pt-6 border-t border-slate-200"
+      >
+        <div class="flex flex-col flex-shrink-0 mb-6 md:mb-0 lg:col-span-2">
+          <span class="font-semibold text-blue-950 text-xl"
+            >Custom pricing
+          </span>
+        </div>
+        <div class="lg:col-span-3">
+          <div class="lg:col-span-2">
+            <p class="mt-2 text-slate-500 text-sm">
+              Custom pricing is available for companies with a high volume of
+              API calls or unique business models.
+            </p>
+            <p>
+              <a
+                title="link to your page"
+                aria-label="your label"
+                href="/submit"
+                class="text-blue-600 font-semibold hover:text-blue-950 text-sm inline-flex items-center group"
+              >
+                Contact sales
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-12">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >EXPLANATION</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        What's in the box
+      </h2>
+    </div>
+    <div
+      class="gap-x-2 gap-y-14 lg:gap-12 grid sm:grid-cols-2 lg:grid-cols-4 mt-12"
+    >
+      {
+        extended.map((feature) => (
+          <div>
+            <p class="font-semibold text-blue-950 text-base">{feature.title}</p>
+            <div class="mt-6">
+              <ul
+                role="list"
+                class="flex flex-col gap-y-2 text-slate-500 text-sm"
+              >
+                {feature.benefits.map((benefit) => (
+                  <li class="flex items-start">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-circle-check"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    <span class="ml-4">{benefit}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

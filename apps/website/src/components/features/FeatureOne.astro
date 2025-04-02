@@ -1,0 +1,74 @@
+---
+interface FeatureItem {
+  title: string;
+  items: string[];
+}
+
+interface Props {
+  features: FeatureItem[];
+  overline: string;
+  title: string;
+  description: string;
+}
+
+const { features, overline, title, description } = Astro.props;
+---
+
+<section class="overflow-hidden border-b border-slate-200">
+  <div
+    class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 pt-24 items-center"
+  >
+    <div>
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >{overline}</span
+      >
+
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        {title}
+      </h2>
+      <div class="max-w-xl mt-6">
+        <p class="text-slate-500">
+          {description}
+        </p>
+      </div>
+    </div>
+    <div class="mt-12">
+      <div class="gap-x-2 gap-y-14 lg:gap-12 grid grid-cols-1 lg:grid-cols-2">
+        {
+          features.map((section) => (
+            <div>
+              <div>
+                <div>
+                  <p class="font-semibold text-blue-950">{section.title}</p>
+                </div>
+                <div class="mt-6">
+                  <ul
+                    role="list"
+                    class="order-last flex flex-col gap-y-2 text-sm text-slate-500"
+                  >
+                    {section.items.map((item: string) => (
+                      <li class="flex items-start">
+                        —<span class="ml-4">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div
+        class="w-full -mb-12 mt-12 ring-1 ring-slate-200 bg-slate-50 rounded-t-3xl p-3"
+      >
+        <img
+          src="/images/chart.jpg"
+          alt="thumbnail"
+          class="drop-shadow-2xl rounded-t-2xl w-full ring-1 ring-slate-200"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+---
+// Define the logos data
+const logos = [
+  "/logos/1.svg",
+  "/logos/2.svg",
+  "/logos/3.svg",
+  "/logos/4.svg",
+  "/logos/5.svg",
+  "/logos/6.svg",
+  // Add more logo paths as needed
+];
+---
+
+<section class="bg-gradient-to-tr from-blue-950 to-blue-950">
+  <div class="mx-auto max-w-7xl py-24 px-24 text-center">
+    <span class="text-sm uppercase font-medium tracking-wide text-white"
+      >our customers</span
+    >
+
+    <div
+      class="grid grid-cols-2 gap-12 md:grid-cols-3 mt-12 lg:grid-cols-6 mx-auto"
+    >
+      {
+        logos.map((logo, index) => (
+          <img
+            class="col-span-1 flex justify-center grayscale  invert"
+            src={logo}
+            alt={`Logo ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

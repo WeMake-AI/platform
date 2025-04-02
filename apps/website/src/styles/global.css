@@ -1,0 +1,91 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@font-face {
+  font-family: "Inter";
+  src: url("/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-VariableFont_wdth,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Typography */
+  --font-sans: "Inter", sans-serif;
+  --font-headers: "IBM Plex Sans", sans-serif;
+
+  /* Colors */
+  --color-blue-50: #eef3ff;
+  --color-blue-100: #d9e4ff;
+  --color-blue-200: #bcd0ff;
+  --color-blue-300: #8eb3ff;
+  --color-blue-400: #5989ff;
+  --color-blue-500: #3863ff;
+  --color-blue-600: #1b3bf5;
+  --color-blue-700: #1428e1;
+  --color-blue-800: #1722b6;
+  --color-blue-900: #19248f;
+  --color-blue-950: #141857;
+  --color-blue-1000: #000c25;
+  /* Border radius */
+  --border-radius-4xl: 2rem;
+  --border-radius-5xl: 3rem;
+  --border-radius-6xl: 5rem;
+}
+
+@supports (font-variation-settings: normal) {
+  /* Use variable font if supported */
+  :root {
+    font-family: "Inter", sans-serif;
+  }
+}
+
+:root {
+  font-family: "Inter", sans-serif;
+  font-feature-settings:
+    "liga" 1,
+    "calt" 1,
+    /* Contextual Alternates */ "dlig" 1,
+    /* Discretionary Ligatures */ "ss07" 1,
+    /* fSquare punctuation */ "ss08" 1,
+    /* Square quotes */ "zero" 1,
+    /* Slashed zero */ "tnum" 1,
+    /* Tabular numbers */ "cv03" 1,
+    /* Open six */ "cv04" 1,
+    /* Open nine */ "cv01" 1,
+    /* Alternate one */ "cv09",
+    /* Flat-top three */ "cv02" 1; /* Open 4 */
+}
+
+/* Set IBM Plex Sans for headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "IBM Plex Sans", sans-serif;
+}
+
+/* Update Astro code styling tokens to match v5 naming convention */
+:root {
+  --astro-code-foreground: theme("colors.blue.300");
+  --astro-code-background: theme("colors.blue.950");
+  --astro-code-token-constant: theme("colors.slate.400");
+  --astro-code-token-string: theme("colors.slate.300");
+  --astro-code-token-comment: theme("colors.slate.500");
+  --astro-code-token-keyword: theme("colors.slate.400");
+  --astro-code-token-parameter: theme("colors.slate.400");
+  --astro-code-token-function: theme("colors.slate.400");
+  --astro-code-token-string-expression: theme("colors.white");
+  --astro-code-token-punctuation: theme("colors.slate.400");
+  --astro-code-token-link: theme("colors.slate.400");
+}

@@ -1,0 +1,282 @@
+---
+const footerSections = [
+  {
+    title: "Plattform",
+    links: [
+      { href: "/integrations", label: "Integrationen" },
+      { href: "/legal", label: "Legal Hub" },
+    ],
+  },
+  {
+    title: "Ressourcen",
+    links: [
+      { href: "/legal/ethics", label: "Ethikrichtlinie" },
+      { href: "/blog", label: "Blog" },
+      { href: "/helpdesk", label: "Helpdesk" },
+      { href: "https://billing.wemake.cx/p/login/14k14gcHy75I2GYcMM", label: "Rechnungsportal" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      {
+        href: "/about-us",
+        label: "Über uns",
+      },
+      {
+        href: "/career",
+        label: "Karriere",
+      },
+      {
+        href: "/career/open-roles",
+        label: "Offene Stellen (0)",
+      },
+      {
+        href: "/community/discord",
+        label: "Discord Community",
+      },
+    ],
+  },
+  {
+    title: "Socials",
+    links: [
+      {
+        href: "https://instagram.com/wemake.cx",
+        label: "Instagram",
+      },
+      { href: "https://github.com/WeMake-AI", label: "GitHub" },
+      { href: "https://www.linkedin.com/company/WeMakeAI", label: "LinkedIn" },
+      { href: "https://www.crunchbase.com/organization/WeMake-CX", label: "Crunchbase" },
+      { href: "https://www.youtube.com/@WeMake-AI", label: "YouTube" },
+    ],
+  },
+];
+---
+
+<footer class="bg-blue-1000">
+  <div
+    class="items-center max-w-7xl lg:px-16 md:px-12 mx-auto px-8 xl:px-24 pt-24 pb-12"
+  >
+    <div class="xl:gap-8 grid">
+      <div class="flex flex-row flex-wrap md:flex-nowrap text-white gap-8">
+        <a
+          title="Startseite"
+          aria-label="Startseite"
+          href="/"
+          class="text-2xl text-white font-semibold tracking-tight inline-flex gap-2 items-center grayscale-100 opacity-90 brightness-150 hover:brightness-100 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+        >
+          <img 
+            src="/logos/wemake.svg" 
+            alt="WeMake AI Logo" 
+            class="size-8"
+          />
+          WeMake AI <span class="text-base font-light">by Sakwiset</span>
+        </a>
+        <a
+        title="Stripe Climate"
+        aria-label="Stripe Climate"
+        href="https://climate.stripe.com/vgZqi8"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-md text-white font-light tracking-tight inline-flex gap-2 items-center grayscale-100 opacity-90 brightness-150 hover:brightness-100 hover:grayscale-0 hover:opacity-100 transition-all duration-300">
+        <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+          <linearGradient id="StripeClimate-gradient-a" gradientUnits="userSpaceOnUse" x1="16" y1="20.6293" x2="16" y2="7.8394" gradientTransform="matrix(1 0 0 -1 0 34)">
+            <stop offset="0" stop-color="#00d924"/>
+            <stop offset="1" stop-color="#00cb1b"/>
+          </linearGradient>
+          <path d="M0 10.82h32c0 8.84-7.16 16-16 16s-16-7.16-16-16z" fill="url(#StripeClimate-gradient-a)"/>
+          <linearGradient id="StripeClimate-gradient-b" gradientUnits="userSpaceOnUse" x1="24" y1="28.6289" x2="24" y2="17.2443" gradientTransform="matrix(1 0 0 -1 0 34)">
+            <stop offset=".1562" stop-color="#009c00"/>
+            <stop offset="1" stop-color="#00be20"/>
+          </linearGradient>
+          <path d="M32 10.82c0 2.21-1.49 4.65-5.41 4.65-3.42 0-7.27-2.37-10.59-4.65 3.52-2.43 7.39-5.63 10.59-5.63C29.86 5.18 32 8.17 32 10.82z" fill="url(#StripeClimate-gradient-b)"/>
+          <linearGradient id="StripeClimate-gradient-c" gradientUnits="userSpaceOnUse" x1="8" y1="16.7494" x2="8" y2="29.1239" gradientTransform="matrix(1 0 0 -1 0 34)">
+            <stop offset="0" stop-color="#ffe37d"/>
+            <stop offset="1" stop-color="#ffc900"/>
+          </linearGradient>
+          <path d="M0 10.82c0 2.21 1.49 4.65 5.41 4.65 3.42 0 7.27-2.37 10.59-4.65-3.52-2.43-7.39-5.64-10.59-5.64C2.14 5.18 0 8.17 0 10.82z" fill="url(#StripeClimate-gradient-c)"/>
+        </svg>Mitglied von Stripe Climate</a>
+      </div>
+      <div
+        class="mt-12 grid gap-8 grid-cols-2 md:grid-cols-2 lg:mt-24 lg:col-span-3"
+      >
+        <div class="gap-8 grid md:grid-cols-2">
+          {
+            footerSections.slice(0, 2).map((section) => (
+              <div>
+                <h3 class="text-white font-normal text-xl">{section.title}</h3>
+                <ul class="mt-4 space-y-2" role="list">
+                  {section.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="text-white/60 hover:text-white font-normal text-sm"
+                        title="link to your page"
+                        aria-label="your label"
+                        {...(link.href.startsWith('https://') ? {
+                          target: "_blank",
+                          rel: "noopener noreferrer"
+                        } : {})}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+        <div class="gap-8 grid md:grid-cols-2">
+          {
+            footerSections.slice(2, 4).map((section) => (
+              <div>
+                <h3 class="text-white font-normal text-xl">{section.title}</h3>
+                <ul class="mt-4 space-y-2" role="list">
+                  {section.links.map((link) => (
+                    <li>
+                      <a
+                        href={link.href}
+                        class="text-white/60 hover:text-white font-normal text-sm"
+                        title="link to your page"
+                        aria-label="your label"
+                        {...(link.href.startsWith('https://') ? {
+                          target: "_blank",
+                          rel: "noopener noreferrer"
+                        } : {})}
+                      >
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+    <div class="col-span-full md:col-span-1 max-w-xl mt-12 lg:mt-24">
+      <div
+        class="flex flex-col col-span-full md:flex-row justify-center gap-6 lg:ml-auto"
+      >
+        <a
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-full"
+          title="Vertriebsteam kontaktieren"
+          aria-label="Vertriebsteam kontaktieren"
+          href="/contact"
+        >
+          Vertriebsteam kontaktieren
+        </a><a
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-2 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-transparent border-white border hover:border-blue-500 w-full"
+          title="Anmelden"
+          aria-label="Anmelden"
+          href="/login"
+        >
+          <span>Anmelden</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="items-center max-w-7xl lg:px-16 md:px-12 mx-auto px-8 xl:px-24 ¨">
+    <div
+      class="sm:flex sm:items-center sm:justify-between border-t py-12 border-white/10"
+    >
+      <h3 class="text-xs leading-6 text-white/30">
+        © {new Date().getFullYear()} WeMake. Alle Rechte vorbehalten.
+      </h3>
+      <div class="mt-3 flex items-center sm:ml-4 sm:mt-0 gap-4">
+          <a
+            class="text-white/40 hover:text-white font-normal text-xs"
+            title="Vertrag kündigen"
+            aria-label="Vertrag kündigen"
+            target="_blank"
+            rel="noopener noreferrer"
+            href="https://billing.wemake.cx/p/login/14k14gcHy75I2GYcMM">Vertrag kündigen</a
+          >
+
+          <a
+            class="text-white/40 hover:text-white font-normal text-xs"
+            title="Datenschutz"
+            aria-label="Datenschutz"
+            href="/legal/privacy">Datenschutz</a
+          >
+
+          <a
+            class="text-white/40 hover:text-white font-normal text-xs"
+            title="Impressum"
+            aria-label="Impressum"
+            href="/legal/imprint">Impressum</a
+          >
+
+          <a
+            class="text-white/40 hover:text-white font-normal text-xs"
+            title="Cookie-Einstellungen"
+            aria-label="Cookie-Einstellungen"
+            href="/cookie-settings">Cookie-Einstellungen</a
+          >
+
+          <span class="text-blue-500">⏤</span>
+
+          <a
+            title="Instagram"
+            aria-label="Instagram"
+            href="https://instagram.com/wemake.cx"
+            class="text-slate-500 hover:text-slate-400"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="sr-only">Instagram</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-instagram"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M4 4m0 4a4 4 0 0 1 4 -4h8a4 4 0 0 1 4 4v8a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"
+              ></path>
+              <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+              <path d="M16.5 7.5l0 .01"></path>
+            </svg>
+          </a>
+          <a
+            title="GitHub"
+            aria-label="GitHub"
+            href="https://github.com/WeMake-AI"
+            class="text-slate-500 hover:text-slate-400"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="sr-only">GitHub</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="icon icon-tabler icon-tabler-brand-github"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              stroke-width="2"
+              stroke="currentColor"
+              fill="none"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path
+                d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5"
+              ></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>

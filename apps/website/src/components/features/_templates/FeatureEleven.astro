@@ -1,0 +1,103 @@
+---
+const featuresList = [
+  {
+    title: "Engage with our data",
+    description: "Debt bills lucrative capitalization municipal bonds.",
+    features: [
+      "70+ Sections",
+      "40+ Ready demo pages",
+      "Well thought out layouts",
+    ],
+  },
+  {
+    title: "Mark with our data",
+    description: "Debt bills lucrative capitalization municipal bonds.",
+    features: [
+      "70+ Sections",
+      "40+ Ready demo pages",
+      "Well thought out layouts",
+    ],
+  },
+  {
+    title: "Engage with our data",
+    description: "Debt bills lucrative capitalization municipal bonds.",
+    features: [
+      "70+ Sections",
+      "40+ Ready demo pages",
+      "Well thought out layouts",
+    ],
+  },
+  {
+    title: "Mark with our data",
+    description: "Debt bills lucrative capitalization municipal bonds.",
+    features: [
+      "70+ Sections",
+      "40+ Ready demo pages",
+      "Well thought out layouts",
+    ],
+  },
+];
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div class="max-w-xl">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >always up</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Creating a contemporary platform for sending emails
+      </h2>
+      <div class="max-w-xl mt-6">
+        <p class="text-slate-500">
+          The internet has significantly evolved over the past decade, yet email
+          seems to have remained unchanged. Why should this be the case? It
+          doesn't need to be. Our goal is to transform this. We aim to rethink
+          the concept of email.
+        </p>
+      </div>
+    </div>
+    <ul
+      role="list"
+      class="grid grid-cols-2 lg:grid-cols-2 gap-4 list-none lg:gap-24 mt-6 lg:mt-24"
+    >
+      {
+        featuresList.map((data) => (
+          <li>
+            <p class="font-semibold text-blue-950 text-2xl">{data.title}</p>
+            <div class="mt-2 text-slate-500 text-sm">{data.description}</div>
+            <ul
+              role="list"
+              class="order-last flex flex-col gap-y-2 mt-5 text-sm text-slate-500"
+            >
+              {data.features.map((feature) => (
+                <li class="flex items-start">
+                  —<span class="ml-4">{feature}</span>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+<section
+  class="bg-center bg-cover bg-dribbbleShot bg-slate-800 h-[50vh]"
+  style="background-image:url(https://images.unsplash.com/photo-1556761175-b413da4baf72?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80)"
+>
+  <div class="relative mx-auto bg-opacity-90 lg:px-32 overflow-hidden px-5">
+    <div class="py-32">
+      <div
+        class="lg:mx-auto lg:gap-24 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:max-w-7xl"
+      >
+        <div
+          class="mx-auto max-w-xl lg:max-w-none lg:mx-0 lg:py-16 px-4 sm:px-6"
+        >
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

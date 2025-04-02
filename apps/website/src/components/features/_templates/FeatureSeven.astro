@@ -1,0 +1,73 @@
+---
+// Define your items as an array of objects
+const features = [
+  {
+    title: "Clever layouts",
+    description:
+      "Debt bills lucrative capitalization municipal bonds government 401k bear bull credit corporate bonds called NYSE finance. Managed prices bondholders federal risk NASDAQ hedge fund expenses municipal bonds management.",
+    imageUrl: "/images/creditcard.png",
+  },
+  {
+    title: "100% responsive",
+    description:
+      "Debt bills lucrative capitalization municipal bonds government 401k bear bull credit corporate bonds called NYSE finance. Managed prices bondholders federal risk NASDAQ hedge fund expenses municipal bonds management.",
+    imageUrl: "/images/creditcardTwo.png",
+  },
+  // Add more items as needed
+  {
+    title: "100% responsive",
+    description:
+      "Debt bills lucrative capitalization municipal bonds government 401k bear bull credit corporate bonds called NYSE finance. Managed prices bondholders federal risk NASDAQ hedge fund expenses municipal bonds management.",
+    imageUrl: "/images/creditcardThree.png",
+  },
+  {
+    title: "100% responsive",
+    description:
+      "Debt bills lucrative capitalization municipal bonds government 401k bear bull credit corporate bonds called NYSE finance. Managed prices bondholders federal risk NASDAQ hedge fund expenses municipal bonds management.",
+    imageUrl: "/images/creditcardFour.png",
+  },
+];
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div class="max-w-xl">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >banking</span
+      >
+
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Email for developers
+      </h2>
+      <div class="max-w-xl mt-6">
+        <p class="text-slate-500">
+          Secure access to users’ financial data enables you to streamline
+          common processes, such as onboarding and creditcard, and build new
+          products to help users manage their finances. B
+        </p>
+      </div>
+    </div>
+    <ul
+      role="list"
+      class="grid grid-cols-2 lg:grid-cols-2 gap-4 list-none lg:gap-24 mt-6 lg:mt-24"
+    >
+      {
+        features.map((item) => (
+          <li>
+            <div>
+              <p class="font-semibold text-blue-950 text-2xl">{item.title}</p>
+            </div>
+            <div class="mt-2 text-slate-500">{item.description}</div>
+            <img
+              src={item.imageUrl}
+              alt="thumbnail"
+              class="shadow-xl rounded-4xl mt-12"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,90 @@
+---
+// Define the features as an array of objects
+const features = [
+  {
+    title: "Individuelle KI-Strategieberatung",
+    description:
+      "Wir entwickeln maßgeschneiderte KI-Strategien, die perfekt auf Ihre Unternehmensziele und -bedürfnisse zugeschnitten sind.",
+  },
+  {
+    title: "ZeroTrust Sicherheitsarchitektur",
+    description:
+      "Wir implementieren modernste Sicherheitsprotokolle, um Ihre Daten und Systeme in der Ära von Remote-Arbeit und Cloud-basierten Lösungen zu schützen.",
+  },
+  {
+    title: "Ethische KI-Entwicklung",
+    description:
+      "Wir setzen auf verantwortungsvolle KI, die den Menschen in den Mittelpunkt stellt und positive gesellschaftliche Auswirkungen hat.",
+  },
+  {
+    title: "Nachhaltige KI-Lösungen",
+    description:
+      "Wir entwickeln KI-Systeme, die nicht nur leistungsstark, sondern auch ressourcenschonend und langfristig wertschöpfend sind.",
+  },
+];
+---
+
+<section>
+  <div class="lg:p-8">
+    <div class="bg-blue-1000 max-w-7xl mx-auto lg:rounded-3xl">
+      <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+        <div class="grid grid-cols-1 gap-12 lg:gap-24 items-end md:grid-cols-2">
+          <div>
+            <span
+              class="text-base font-medium tracking-wide uppercase text-white"
+              >Starte durch</span
+            >
+
+            <h2
+              class="text-white font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+            >
+              Bereit für die KI-Transformation?
+            </h2>
+            <p class="text-slate-400 mt-5">
+              Kontaktiere uns noch heute für eine kostenlose Erstberatung und entdecke, wie WeMake dein Unternehmen mit maßgeschneiderter KI-Expertise in die Zukunft führen kann.
+            </p>
+            <div class="mt-10 flex flex-col lg:flex-row gap-6">
+              <a
+                class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+                title="Kostenlose Erstberatung"
+                aria-label="Kostenlose Erstberatung"
+                href="/contact"
+              >
+                Kostenlose Erstberatung
+              </a>
+              <a
+                title="Integrationen"
+                aria-label="Integrationen"
+                href="/integrations"
+                class="text-white justify-center hover:text-blue-500 inline-flex items-center group"
+              >
+                Unsere Integrationen
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="size-4 ml-3 group-hover:translate-x-2 transition duration-500 ease-in-out transform"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                    clip-rule="evenodd"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+          <div class="gap-6 gap-y-14 lg:gap-12 grid grid-cols-2 lg:mt-0 mt-12">
+            {
+              features.map((article) => (
+                <div class="space-y-3">
+                  <p class="font-semibold text-white">{article.title}</p>
+                  <p class="text-sm text-slate-400">{article.description}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

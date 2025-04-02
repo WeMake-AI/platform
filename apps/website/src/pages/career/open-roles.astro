@@ -1,0 +1,67 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("jobs");
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Entries from "@/components/career/Entries.astro";
+import CtaCommunity from "@/components/cta/CtaCommunity.astro";
+---
+
+<BaseLayout>
+  <section class="bg-white">
+    <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl lg:text-balance"
+      >
+        Werde Teil von WeMake AI. <br /> Gestalte die KI-Revolution. <br /> Mit Sinn und Verantwortung.
+      </h2>
+
+      <div class="mt-12">
+        <div class="mt-8 flow-root">
+          <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div
+              class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8"
+            >
+              <table class="min-w-full">
+                <thead>
+                  <tr>
+                    <th
+                      scope="col"
+                      class="py-3.5 text-left text-sm font-slate-500">Position</th
+                    >
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-sm font-semibold text-slate-500"
+                      >Team</th
+                    >
+                    <th
+                      scope="col"
+                      class="px-3 py-3.5 text-left text-sm font-semibold text-slate-500"
+                      >Standort</th
+                    >
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-slate-200">
+                  {
+                    allPosts
+                      .slice()
+                      .map((post) => (
+                        <Entries
+                          url={"/career/" + post.slug}
+                          position={post.data.position}
+                          location={post.data.location}
+                          team={post.data.team}
+                          alt={post.data.position}
+                          flag={post.data.flag.url}
+                        />
+                      ))
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <CtaCommunity />
+</BaseLayout>

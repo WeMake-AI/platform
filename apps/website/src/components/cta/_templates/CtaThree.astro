@@ -1,0 +1,103 @@
+---
+const featuresOne = [
+  {
+    title: "Email",
+    description:
+      "Optimize your email marketing strategies with tools designed for every type of campaign, enhancing engagement and conversion rates.",
+  },
+  {
+    title: "Integrations",
+    description:
+      "Streamline your workflow with prebuilt email integrations, connecting your marketing efforts with ease.",
+  },
+  {
+    title: "Campaigns",
+    description:
+      "Optimize your email marketing strategies with tools designed for every type of campaign, enhancing engagement and conversion rates.",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >join us in the future</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Frequent questions and answers
+      </h2>
+      <div class="max-w-xl mt-6">
+        <p class="text-slate-500">
+          Debt bills lucrative capitalization municipal bonds government 401k
+          bear bull credit corporate bonds called NYSE finance. Managed prices
+          bondholders federal risk NASDAQ hedge fund expenses municipal bonds
+          management.
+        </p>
+      </div>
+      <div class="mt-10">
+        <a
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+          title="link to your page"
+          aria-label="your label"
+          href="/system/overview"
+        >
+          See our job board
+        </a>
+      </div>
+    </div>
+    <div
+      class="gap-x-2 gap-y-14 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 mt-12"
+    >
+      {
+        featuresOne.map((item, index) => (
+          <>
+            <div class="space-y-3">
+              <div class="lg:inline-flex lg:items-center lg:gap-3">
+                <div class="flex items-center justify-center size-8 text-blue-500 rounded-full bg-slate-100">
+                  {index + 1}
+                </div>
+                <p class="mt-5 font-semibold text-blue-950 lg:mt-0 ">
+                  {item.title}
+                </p>
+              </div>
+              <p class="text-sm text-slate-500  lg:text-pretty">
+                {item.description}
+              </p>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+<section class="bg-slate-50">
+  <div
+    class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-12 items-center"
+  >
+    <div>
+      <p class="text-blue-950 font-semibold">
+        Help us build economic infrastructure for the internet
+      </p>
+      <p class="text-slate-500 text-sm mt-6 lg:text-balance">
+        We embrace diverse perspectives, ideas, and backgrounds at Spaziobianco.
+        We’re committed to providing equal employment opportunities for all
+        applicants and employees. Spaziobianco doesn’t discriminate on the basis
+        of any protected characteristic, including race, color, ancestry,
+        national origin, religion (including religious dress), creed, age,
+        disability (mental and physical), sex, gender (including pregnancy,
+        childbirth, breastfeeding, or related medical conditions), sexual
+        orientation, gender identity, gender expression, medical condition,
+        genetic information, family care or medical leave status, marital
+        status, domestic partner status, military and veteran status (including
+        military spouse status).
+        <br />
+        <br />
+        Or any other characteristic protected by US federal, state or local laws,
+        or the laws of the country or jurisdiction where you work.
+      </p>
+    </div>
+  </div>
+</section>

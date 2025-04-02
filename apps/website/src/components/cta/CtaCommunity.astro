@@ -1,0 +1,114 @@
+---
+const featuresOne = [
+  {
+    title: "Exklusive Einblicke",
+    description:
+      "Erhalte Zugang zu Vorabversionen, Entwickler-Updates und direkten Gesprächen mit dem WeMake AI Team.",
+  },
+  {
+    title: "KI-Lerngemeinschaft",
+    description:
+      "Tausche dich mit anderen KI-Enthusiasten aus, teile Wissen und lerne von den Besten.",
+  },
+  {
+    title: "Direkter Einfluss",
+    description:
+      "Deine Stimme zählt! Gib Feedback, gestalte die Zukunft von WeMake mit und hilf uns, ethische KI-Lösungen zu entwickeln.",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >Werde Teil der WeMake-Community</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Gemeinsam die Zukunft der KI gestalten.
+      </h2>
+      <div class="max-w-xl mt-6">
+        <p class="text-slate-500">
+          Tritt unserer Discord-Community bei und werde Teil einer Bewegung, die KI
+          ethisch, verantwortungsvoll und zum Wohle aller einsetzt. Profitiere
+          von exklusiven Inhalten, direktem Austausch mit dem Team und der
+          Möglichkeit, die Zukunft von WeMake aktiv mitzugestalten.
+        </p>
+      </div>
+      <div class="mt-10">
+        <a
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+          title="Discord beitreten"
+          aria-label="Discord beitreten"
+          href="https://discord.gg/wemake"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-brand-discord"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <path
+              d="M8.632 9.065c-.904 -.301 -1.808 -.452 -2.712 -.452c-1.808 0 -3.163 .603 -4.067 1.808c1.507 2.109 3.315 3.617 5.724 3.918c.904 .301 1.808 .452 2.712 .452c1.808 0 3.163 -.603 4.067 -1.808c-1.507 -2.11 -3.315 -3.617 -5.724 -3.918z"
+            ></path>
+            <path d="M15.368 9.065c.904 -.301 1.808 -.452 2.712 -.452c1.808 0 3.163 .603 4.067 1.808c-1.507 2.109 -3.315 3.617 -5.724 3.918c-.904 .301 -1.808 .452 -2.712 .452c-1.808 0 -3.163 -.603 -4.067 -1.808c1.507 -2.11 3.315 -3.617 5.724 -3.918z"
+            ></path>
+            <path
+              d="M7.5 16.874c3.346 1.34 6.654 1.34 10 0"
+            ></path>
+            <path d="M15 11.5c0 1.5 -.75 3 -1.5 3"></path>
+            <path d="M9 11.5c0 1.5 .75 3 1.5 3"></path>
+          </svg>
+          Discord beitreten
+        </a>
+      </div>
+    </div>
+    <div
+      class="gap-x-2 gap-y-14 lg:gap-12 grid grid-cols-1 lg:grid-cols-3 mt-12"
+    >
+      {
+        featuresOne.map((item) => (
+          <>
+            <div class="space-y-3">
+              <div class="lg:inline-flex lg:items-center lg:gap-3">
+                <div class="flex items-center justify-center size-8 text-blue-500 rounded-full bg-slate-100">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-bulb" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12h1m8 -9v1m8 8h1m-15.4 -6.4l.7 .7m12.1 -.7l-.7 .7" /><path d="M9 16a5 5 0 1 1 6 0a3.5 3.5 0 0 0 -1 3a2 2 0 0 1 -4 0a3.5 3.5 0 0 0 -1 -3" /><path d="M9.7 17l4.6 0" /></svg>
+
+                </div>
+                <p class="mt-5 font-semibold text-blue-950 lg:mt-0 ">
+                  {item.title}
+                </p>
+              </div>
+              <p class="text-sm text-slate-500  lg:text-pretty">
+                {item.description}
+              </p>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</section>
+<section class="bg-slate-50">
+  <div
+    class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-12 items-center"
+  >
+    <div>
+      <p class="text-blue-950 font-semibold">
+        Werde Teil der WeMake-Pioniere.
+      </p>
+      <p class="text-slate-500 text-sm mt-6 lg:text-balance">
+      Unsere Discord-Community ist mehr als nur ein Chatroom. Es ist ein Ort des Austauschs, der Inspiration und der gemeinsamen Gestaltung. Hier triffst du Gleichgesinnte, kannst direkt mit dem WeMake AI Team interagieren und die Zukunft der KI aktiv mitgestalten. Egal, ob du Entwickler, Unternehmer, Student oder einfach nur KI-begeistert bist – bei uns bist du willkommen!
+      </p>
+    </div>
+  </div>
+</section>

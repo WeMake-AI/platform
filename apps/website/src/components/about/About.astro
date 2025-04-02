@@ -1,0 +1,54 @@
+---
+interface Props {
+  overline: string;
+  title: string;
+  description: string;
+  videoSrc?: string;
+}
+
+const { 
+  overline = "About us", 
+  title = "Learn more about us", 
+  description = "WeMake builds AI infrastructure that ambitious companies use to launch their boldest products. Our customers range from hours-old startups to complex global businesses. Collectively, they are building the AI infrastructure that will power the future.",
+  videoSrc = "https://r2.wemake.cx/gradientA.mp4"
+} = Astro.props;
+---
+
+<section>
+  <div
+    class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 mt-24 z-50 items-center"
+  >
+    <div class="lg:pr-24 md:pr-12 pb-12 lg:pb-0 max-w-xl">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >{overline}</span
+      >
+      <h2
+        class="text-blue-950 font-semibold mt-6 text-4xl lg:text-7xl tracking-tight"
+      >
+        {title}
+      </h2>
+      <p class="text-slate-500 mt-5 lg:text-balance">
+        {description}
+      </p>
+    </div>
+  </div>
+
+  <section>
+    <div
+      class="h-64 justify-center lg:px-0 max-h-full md:px-12 overflow-hidden relativ -skew-y-[16deg] transform mb-24"
+    >
+      <div class="bg-white block lg:flex-1 lg:relative sm:contents">
+        <div class="bg-white absolute h-full inset-0 object-cover w-full">
+          <video
+            autoplay=""
+            class="bg-white absolute max-w-none min-h-full min-w-full w-auto z-10"
+            loop=""
+            muted=""
+            ><source src={videoSrc} type="video/mp4" />Your browser
+            does not support the video tag.</video
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,53 @@
+---
+import { getCollection } from "astro:content";
+const allPosts = await getCollection("helpdesk");
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import HelpDeskEntries from "@/components/helpdesk/Entries.astro";
+---
+
+<BaseLayout>
+  <section>
+    <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+      <div class="max-w-3xl">
+        <p class="text-blue-950 font-semibold mt-6 text-4xl tracking-tight">
+          Wie können wir Ihnen helfen?
+        </p>
+        <label for="search" class="sr-only">Schnellsuche</label>
+        <div class="relative flex items-center mt-12 max-w-xl">
+          <input
+            type="text"
+            name="search"
+            id="search"
+            class="pr-12 w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+          />
+          <div class="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+            <kbd
+              class="inline-flex items-center px-2 font-sans text-sm font-medium text-blue-950"
+              >⌘K</kbd
+            >
+          </div>
+        </div>
+        <div class="mt-24">
+          <div>
+            <p class="text-blue-950 font-medium">Beliebte Artikel</p>
+          </div>
+          <ul role="list" class="grid grid-cols-1 gap-12 list-none mt-6">
+            {
+              allPosts
+                .slice()
+                .map((post) => (
+                  <HelpDeskEntries
+                    url={"/helpdesk/" + post.slug}
+                    page={post.data.page}
+                    description={post.data.description}
+                    alt={post.data.page}
+                    icon={post.data.icon.url}
+                  />
+                ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

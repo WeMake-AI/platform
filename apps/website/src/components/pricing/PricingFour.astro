@@ -1,0 +1,179 @@
+---
+const pricingPlans = [
+  {
+    name: "Hobby",
+    monthlyPrice: "15",
+    annualPrice: "8",
+    description:
+      "This plan suits individual users and hobbyists needing basic  support",
+    cardBgClass: "bg-slate-50",
+    descriptionColor: "text-slate-500",
+    buttonClass: "bg-blue-100 hover:bg-blue-50 text-blue-600",
+    features: ["5 mb/PDF", "75 pages/PDF", "10 messages/Day", "Up to 3 PDFs"],
+    unavailableFeatures: ["Gpt-3.5-turbo model", "Test mode", "Doc summary"],
+  },
+  {
+    name: "Pro",
+    monthlyPrice: "25",
+    annualPrice: "20",
+    description: "This plan is tailored for small businesses and startups",
+    cardBgClass: "bg-white",
+    descriptionColor: "text-slate-500",
+    buttonClass: "bg-blue-500 hover:bg-blue-600 text-white",
+    features: [
+      "10 mb/PDF",
+      "150 pages/PDF",
+      "25 messages/Day",
+      "Up to 5 PDFs",
+      "Gpt-3.5-turbo model",
+    ],
+    unavailableFeatures: ["Test mode", "Doc summary"],
+  },
+];
+---
+
+<section x-data="{annual: false}">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div
+      class="grid items-start grid-cols-1 mx-auto lg:grid-cols-3 gap-4 mt-12 p-8 bg-slate-50 rounded-3xl h-full relative overflow-hidden"
+    >
+      <div
+        class="flex flex-col justify-between flex-1 h-full md:text-center lg:text-left md:text-balance md:w-1/2 mx-auto lg:mx-0 lg:w-auto"
+      >
+        <div>
+          <span
+            class="text-sm uppercase font-medium tracking-wide text-blue-600"
+            >pricing</span
+          >
+          <h2
+            class="text-blue-600 font-semibold tracking-tight mt-6 text-3xl lg:text-5xl text-balance"
+          >
+            Always know what you'll pay.
+          </h2>
+        </div>
+        <div class="max-w-lg mt-3 space-y-3 relative">
+          <p class="text-base text-slate-600 text-balance">
+            Instant bank account verifications Obtain bank names and tokenized
+            account numbers to connect a user’s bank account and verify that
+            it's open.
+          </p>
+          <div class="md:max-w-xs mt-12 mx-auto lg:mx-o">
+            <div
+              class="inline-flex w-full border rounded-full mt-6 overflow-hidden bg-white p-0.5 z-0 border-slate-200"
+            >
+              <button
+                class="text-black font-medium border rounded-full transition w-full py-2 block border-transparent px-8 text-xs"
+                @click="annual = false"
+                :class="annual == false ? 'bg-slate-100 border text-black ' : ''"
+                type="button">Monthly</button
+              >
+              <button
+                class="text-black font-medium border rounded-full transition w-full py-2 block border-transparent px-8 text-xs"
+                @click="annual = true"
+                :class="annual == true ? 'bg-slate-100 border text-black' : ''"
+                type="button">Annual</button
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="grid md:grid-cols-2 lg:col-span-2 gap-4 mt-3 lg:mt-0">
+        {
+          pricingPlans.map((plan) => (
+            <section>
+              <div
+                class={` ${plan.cardBgClass}  flex flex-col  justify-between w-full  p-8 rounded-3xl`}
+              >
+                <div>
+                  <div class="space-y-4">
+                    <div class="flex gap-1 items-end ">
+                      <p class={` text-blue-950`}>
+                        <span class="text-5xl font-light tracking-tight    ">
+                          <span x-show="!annual">${plan.monthlyPrice}</span>
+                          <span x-show="annual">${plan.annualPrice}</span>
+                        </span>
+                      </p>
+                    </div>
+                    <span
+                      class={`text-sm font-medium block ${plan.descriptionColor}`}
+                    >
+                      Monthly
+                      <span x-show="annual" style="display: none;">
+                        (billed annually)
+                      </span>
+                    </span>
+                    <p class={`text-lg   text-blue-950`}>{plan.name}</p>
+                    <p
+                      class={`text-sm lg:text-pretty ${plan.descriptionColor}`}
+                    >
+                      {plan.description}
+                    </p>
+                  </div>
+                </div>
+                <div class="flex mt-6">
+                  <button
+                    type="button"
+                    title={plan.name}
+                    aria-label="get started"
+                    class={`inline-flex items-center justify-center px-6 py-3.5 rounded-full w-full font-medium ${plan.buttonClass}`}
+                  >
+                    Get started
+                  </button>
+                </div>
+                <ul
+                  class={`flex flex-col order-last mt-8 text-sm ${plan.descriptionColor} gap-y-3`}
+                >
+                  {plan.features.map((feature) => (
+                    <li class="inline-flex items-center gap-2">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-circle-check"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M9 12l2 2l4 -4" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                  {plan.unavailableFeatures.map((feature) => (
+                    <li
+                      class={`inline-flex items-center gap-2 ${plan.descriptionColor} line-through opacity-50`}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="icon icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z" />
+                        <path d="M9 8l6 8" />
+                        <path d="M15 8l-6 8" />
+                      </svg>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </section>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

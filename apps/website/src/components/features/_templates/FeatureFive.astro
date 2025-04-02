@@ -1,0 +1,95 @@
+---
+// Define your list items
+const features = [
+  {
+    title: "Tools for all email campaigns",
+    description:
+      "Optimize your email marketing strategies with tools designed for every type of campaign, enhancing engagement and conversion rates.",
+  },
+  {
+    title: "Ready-to-go email integrations",
+    description:
+      "Streamline your workflow with prebuilt email integrations, connecting your marketing efforts with ease.",
+  },
+  {
+    title: "Tools for all email campaigns",
+    description:
+      "Optimize your email marketing strategies with tools designed for every type of campaign, enhancing engagement and conversion rates.",
+  },
+  {
+    title: "Use Shiki for email templates",
+    description:
+      "Elevate your email designs using Shiki, ensuring your messages stand out with professional-grade templates.",
+  },
+  {
+    title: "Advanced analytics ",
+    description:
+      "Gain deep insights into your email campaigns' performance with advanced analytics, helping you make data-driven decisions.",
+  },
+  {
+    title: "Seamless automation ",
+    description:
+      "Automate your email sequences for efficient communication, ensuring timely and relevant interactions with your audience.",
+  },
+  {
+    title: "Personalization at scale",
+    description:
+      "Tailor each email to the recipient's preferences and behavior, scaling personalization to enhance user engagement.",
+  },
+  {
+    title: "Security measures",
+    description:
+      "Protect your email communications with comprehensive security protocols, safeguarding your data and your users' privacy.",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 lg:flex py-24">
+    <div class="lg:w-1/2 lg:pr-12">
+      <div class="lg:sticker lg:sticky pb-16 pt-8 top-0">
+        <div class="lg:pl-24 md:pl-12">
+          <span
+            class="text-sm uppercase font-medium tracking-wide text-blue-600"
+            >Let's go</span
+          >
+          <h2
+            class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+          >
+            We create the next wave of technology.
+          </h2>
+          <p class="text-slate-500 mt-5">
+            We help startups like yours grow revenue and improve customer
+            loyalty with beautifully designed templates.
+          </p>
+          <p class="text-slate-500 mt-5">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
+            varius enim in eros elementum tristique. Duis cursus, mi quis
+            viverra ornare, eros dolor interdum.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="lg:w-1/2 lg:order-first">
+      <div class="flex-shrink-0">
+        <ul
+          role="list"
+          class="grid grid-cols-1 gap-12 lg:gap-24 list-none mt-24"
+        >
+          {
+            features.map((item) => (
+              <li>
+                <div>
+                  <p class="text-blue-950 font-semibold tracking-tight text-3xl">
+                    {item.title}
+                  </p>
+                </div>
+                <div class="mt-2 text-slate-500">{item.description}</div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

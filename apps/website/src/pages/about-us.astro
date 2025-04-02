@@ -1,0 +1,68 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import About from "@/components/about/About.astro";
+import FeatureFour from "@/components/features/FeatureFour.astro";
+import CtaCommunity from "@/components/cta/CtaCommunity.astro";
+
+const aboutProps = {
+  overline: "Über WeMake AI",
+  title: "Wir gestalten die Zukunft der Arbeit mit ethischer KI.",
+  description: "WeMake AI ist mehr als ein Beratungsunternehmen. Wir sind eine Bewegung, die Unternehmen und Menschen befähigt, das volle Potenzial Künstlicher Intelligenz auszuschöpfen – verantwortungsvoll, nachhaltig und zum Wohle aller.",
+  videoSrc: "https://r2.wemake.cx/gradientA.mp4"
+};
+
+const FeatureFourProps = {
+  overline: "Unsere Prinzipien",
+  title: "Mehr als Algorithmen: Werte, die uns leiten.",
+  descriptionOne: "Wir entwickeln KI-Lösungen, die nicht nur intelligent, sondern auch *menschlich* sind.  Unsere Arbeit basiert auf einem Fundament aus Ethik, Transparenz und Nachhaltigkeit.",
+  descriptionTwo: "Wir glauben an eine Zukunft, in der KI die Arbeitswelt bereichert, menschliche Potenziale freisetzt und einen positiven Beitrag zur Gesellschaft leistet.",
+  features: [
+    {
+      title: "Mensch im Mittelpunkt",
+      description:
+        "Wir entwickeln KI, die den Menschen unterstützt, befähigt und seine Arbeit wertvoller macht – nicht ersetzt.",
+    },
+    {
+      title: "Radikale Transparenz",
+      description:
+        "Wir legen Wert auf offene Kommunikation, nachvollziehbare Prozesse und erklärbare KI-Entscheidungen (XAI).",
+    },
+    {
+      title: "Ethische Verantwortung",
+      description:
+        "Unser Handeln orientiert sich an strengen ethischen Richtlinien. Datenschutz, Fairness und Nachhaltigkeit sind für uns selbstverständlich.",
+    },
+    {
+      title: "Partnerschaftliche Zusammenarbeit",
+      description:
+        "Wir arbeiten eng mit unseren Kunden zusammen, verstehen ihre Bedürfnisse und entwickeln maßgeschneiderte Lösungen.",
+    },
+    {
+      title: "Kontinuierliche Innovation",
+      description:
+        "Wir sind Pioniere der KI-Entwicklung und erforschen ständig neue Wege, um Technologie zum Wohle aller einzusetzen.",
+    },
+    {
+      title: "Nachhaltige Wirkung",
+      description:
+        "Wir streben nach Lösungen, die nicht nur kurzfristige Erfolge, sondern langfristigen, positiven Impact generieren.",
+    },
+    {
+      title: "Exzellenz & Präzision",
+      description: "Wir setzen höchste Maßstäbe an die Qualität unserer Arbeit und streben nach Perfektion in jedem Projekt."
+    },
+    {
+      title: "ZeroTrust Sicherheit",
+      description: "Wir integrieren modernste Sicherheitsprotokolle in jede Lösung, um Ihre Daten und Ihre Zukunft zu schützen."
+    },
+  ],
+};
+
+const pageTitle = "Über uns";
+const pageDescription = "WeMake AI ist mehr als ein Beratungsunternehmen. Wir sind eine Bewegung, die Unternehmen und Menschen befähigt, das volle Potenzial Künstlicher Intelligenz auszuschöpfen.";
+---
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <About {...aboutProps} />
+  <FeatureFour {...FeatureFourProps} />
+  <CtaCommunity />
+</BaseLayout>

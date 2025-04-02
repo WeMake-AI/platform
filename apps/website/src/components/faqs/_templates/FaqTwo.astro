@@ -1,0 +1,83 @@
+---
+// Define the FAQ data
+const faqs = [
+  {
+    question: "Can I use spaziobianco for my site?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed. management district stocks. Potential funds consulting expenses.",
+  },
+  {
+    question: "Will I get updates?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How much do disputes cost?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How do refunds work?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "How long do payouts take?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  {
+    question: "Is there a fee to use Google Pay?",
+    answer:
+      "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+  },
+  // Add more FAQs as needed
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <h2 class="inline-flex items-center text-blue-600">
+        <span class="text-base font-medium tracking-tight">FAQ</span>
+      </h2>
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Frequent questions
+        <span class="lg:block"> and answers</span>
+      </h2>
+
+      <div
+        class="mt-12 bg-slate-50 rounded-3xl p-4 lg:p-10 divide-y divide-slate-200"
+      >
+        {
+          faqs.map((faq) => (
+            <>
+              <details class="group cursor-pointer">
+                <summary class="flex items-center justify-between w-full py-4  text-left select-none font-semibold text-blue-950 hover:text-blue-600">
+                  {faq.question}
+                  <svg
+                    class="size-5  ease-out text-accent-500 duration-300 transform group-open:-rotate-45"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"
+                    />
+                  </svg>
+                </summary>
+                <div class="py-4 pt-2 ext-sm text-slate-500">{faq.answer}</div>
+              </details>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

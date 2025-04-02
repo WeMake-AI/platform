@@ -1,0 +1,286 @@
+---
+interface PropSection {
+  title: string;
+  description: string;
+}
+
+interface Props {
+  // Hero section
+  heroTitle: string;
+  heroDescription: string;
+  heroCtaText: string;
+  heroCtaLink: string;
+  
+  // Middle section
+  middleHeading: string;
+  middleColumnOneText: string;
+  middleColumnTwoText: string;
+  
+  // About section
+  aboutTitle: string; 
+  aboutDescription: string;
+  aboutQuote: string;
+  aboutCtaText: string;
+  aboutCtaLink: string;
+  aboutImageUrl: string;
+  
+  // CTA section
+  ctaTitle: string;
+  ctaDescription: string;
+  ctaButtonText: string;
+  ctaButtonLink: string;
+  
+  // Featured sections
+  sections: PropSection[];
+}
+
+const {
+  heroTitle = "Building the future",
+  heroDescription = "WeMake creates the financial foundation that enables ambitious companies to launch their most innovative products. Our customers range from newly established startups to large-scale international businesses",
+  heroCtaText = "See all open roles",
+  heroCtaLink = "/career/open-roles",
+  
+  middleHeading = "Who would you like to assist or work for in your professional life?",
+  middleColumnOneText = "Our customers span across various industries and countries, and they are involved in a wide range of activities, such as feeding communities, providing healthcare, and facilitating transportation.",
+  middleColumnTwoText = "These customers are involved in everything from selling goods from their homes to managing large global enterprises. Ultimately, they rely on the infrastructure we build to carry out their activities effectively.",
+  
+  aboutTitle = "What matters to us is what we enable for others",
+  aboutDescription = "Our customers span across various industries and countries, and they are involved in a wide range of activities, such as feeding communities, providing healthcare, and facilitating transportation. They operate diverse establishments, including shops, gyms, and churches, and they also develop tools to assist others in running these establishments.",
+  aboutQuote = "The pace of change and velocity of the product force you to pick up new skills, experiment with new tactics, and walk in a variety of users' shoes.",
+  aboutCtaText = "See open roles",
+  aboutCtaLink = "/career/open-roles",
+  aboutImageUrl = "https://images.unsplash.com/photo-1590650153855-d9e808231d41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
+  
+  ctaTitle = "We want to talk to you",
+  ctaDescription = "It's evident that you have a purpose for visiting this page. We encourage you to take the next step and have a conversation with us to determine whether any of our available roles would be a good fit for you. We are continuously looking to employ skilled individuals like yourself, and we hope that you will be our next hire.",
+  ctaButtonText = "See open roles",
+  ctaButtonLink = "/career/open-roles",
+  
+  sections = [
+    {
+      title: "Life at WeMake",
+      description:
+        "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+    },
+    {
+      title: "University recruiting",
+      description:
+        "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+    },
+    {
+      title: "Operating principles",
+      description:
+        "Upswing securities passively index inverse bondholders capitalization financial health Moody's debt managed.",
+    },
+  ],
+} = Astro.props;
+---
+
+<section class="relative overflow-hidden border-b border-slate-200">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24 lg:py-44">
+    <div class="items-start gap-12 grid grid-cols-1 md:grid-cols-2">
+      <div>
+        <div class="lg:pr-24 md:pr-12">
+          <h2
+            class="text-blue-950 font-semibold text-4xl lg:text-5xl tracking-tight"
+          >
+            {heroTitle}
+          </h2>
+          <p class="text-slate-500 mt-5 lg:text-balance">
+            {heroDescription}
+          </p>
+        </div>
+        <div class="mt-10">
+          <a
+            class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+            title="Open Roles"
+            aria-label="Open Roles"
+            href={heroCtaLink}
+          >
+            {heroCtaText}
+          </a>
+        </div>
+      </div>
+      <div class="lg:mt-0 lg:ml-auto">
+        <div
+          class="absolute transform sm:left-1/2 sm:top-0 sm:translate-x-8 lg:left-1/2 lg:top-1/2 lg:-translate-y-1/2 lg:translate-x-8"
+        >
+          <div class="flex items-center space-x-6 lg:space-x-8">
+            <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+              <div class="h-full w-44 osm:opacity-0 lg:opacity-100">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1661774976505-b0cf6ef31016?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+              <div class="h-full w-44">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1661775434014-9c0e8d71de03?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+            </div>
+            <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+              <div class="h-full w-44">
+                <img
+                  src="https://images.unsplash.com/photo-1485217988980-11786ced9454?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+              <div class="h-full w-44">
+                <img
+                  src="https://images.unsplash.com/photo-1600275669439-14e40452d20b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8b2ZmaWNlfGVufDB8MXwwfHw%3D&auto=format&fit=crop&w=800&q=60"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+              <div class="h-full w-44">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1661284806850-b709cb1262b7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+            </div>
+            <div class="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
+              <div class="h-full w-44">
+                <img
+                  src="https://plus.unsplash.com/premium_photo-1661771825670-1720428a80ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2071&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+              <div class="h-full w-44">
+                <img
+                  src="https://images.unsplash.com/photo-1657819466043-2a4ae992f03f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2832&q=80"
+                  alt="thumbnail"
+                  class="drop-shadow-2xl rounded-2xl"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl lg:text-balance"
+      >
+        {middleHeading}
+      </h2>
+      <div class="mx-auto text-left mt-12">
+        <div class="lg:gap-12 grid grid-cols-1 lg:grid-cols-2 lg:text-balance">
+          <p class="text-slate-500">
+            {middleColumnOneText}
+          </p>
+          <p class="text-slate-500">
+            {middleColumnTwoText}
+          </p>
+        </div>
+        <div class="lg:gap-12 grid grid-cols-1 lg:grid-cols-2 mt-24">
+          <div>
+            <h2
+              class="text-blue-950 font-semibold tracking-tight mt-6 text-3xl lg:text-balance"
+            >
+              {aboutTitle}
+            </h2>
+            <p class="text-slate-500 mt-4">
+              {aboutDescription}
+            </p>
+            <blockquote
+              class="text-slate-500 border-l-4 pl-4 mt-8 border-blue-600"
+            >
+              <p class="font-medium">
+                {aboutQuote}
+              </p>
+            </blockquote>
+            <div class="mt-12">
+              <a
+                title="Open Roles"
+                aria-label="Open Roles"
+                href={aboutCtaLink}
+                class="text-blue-600 font-semibold hover:text-blue-950 text-sm inline-flex items-center group"
+              >
+                {aboutCtaText} &nbsp; &rarr;
+              </a>
+            </div>
+          </div>
+          <div
+            class="relative overflow-hidden rounded-2xl p-8 shadow-xl lg:py-12 h-full"
+          >
+            <div class="absolute inset-0">
+              <img
+                src={aboutImageUrl}
+                alt=""
+                class="h-full w-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <h2 class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl">
+      {ctaTitle}
+    </h2>
+    <p class="text-slate-500 lg:text-balance mt-5">
+      {ctaDescription}
+    </p>
+
+    <div class="mt-10">
+      <a
+        class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+        title="Open Roles"
+        aria-label="Open Roles"
+        href={ctaButtonLink}
+      >
+        {ctaButtonText}
+      </a>
+    </div>
+
+    <div
+      class="gap-x-2 gap-y-14 lg:gap-12 grid grid-cols-1 lg:grid-cols-4 mt-12"
+    >
+      {
+        sections.map((section) => (
+          <div>
+            <div class="space-y-3">
+              <div class="lg:inline-flex lg:items-center lg:gap-3">
+                <div class="flex items-center justify-center size-8 text-blue-500 rounded-full bg-slate-100">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="size-5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M21 7.5l-2.25-1.313M21 7.5v2.25m0-2.25l-2.25 1.313M3 7.5l2.25-1.313M3 7.5l2.25 1.313M3 7.5v2.25m9 3l2.25-1.313M12 12.75l-2.25-1.313M12 12.75V15m0 6.75l2.25-1.313M12 21.75V19.5m0 2.25l-2.25-1.313m0-16.875L12 2.25l2.25 1.313M21 14.25v2.25l-2.25 1.313m-13.5 0L3 16.5v-2.25"
+                    />
+                  </svg>
+                </div>
+                <p class="mt-5 font-semibold text-blue-950 lg:mt-0">
+                  {section.title}
+                </p>
+              </div>
+              <p class="text-sm text-slate-500 mt-5">{section.description}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

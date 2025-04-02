@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import CareerComponent from "@/components/career/Career.astro";
+
+const careerProps = {
+  // Hero section
+  heroTitle: "Gestalte die Zukunft der Arbeit. Mit uns.",
+  heroDescription: "Wir bei WeMake AI entwickeln ethische KI-Lösungen, die Unternehmen und Menschen befähigen. Werde Teil eines Teams, das Innovation, Verantwortung und positive Wirkung verbindet.",
+  heroCtaText: "Offene Positionen entdecken",
+  heroCtaLink: "/career/open-roles",
+
+  // Middle section
+  middleHeading: "Für wen möchtest du arbeiten? Für die Zukunft.",
+  middleColumnOneText: "Unsere Kunden sind Visionäre, Innovatoren und Gestalter. Sie kommen aus den unterschiedlichsten Branchen – vom aufstrebenden Startup bis zum etablierten Mittelständler – und nutzen KI, um ihre Prozesse zu optimieren, neue Geschäftsmodelle zu entwickeln und die Welt von morgen zu gestalten.",
+  middleColumnTwoText: "Bei WeMake baust du nicht nur Code, sondern eine bessere Zukunft. Du unterstützt Unternehmen dabei, effizienter, nachhaltiger und menschlicher zu werden. Du bist Teil einer Bewegung, die Technologie zum Wohle aller einsetzt.",
+
+  // About section
+  aboutTitle: "Unser Antrieb: Sinnvolle Arbeit. Positive Wirkung.",
+  aboutDescription: "Wir glauben an eine Arbeitswelt, in der Technologie den Menschen dient – und nicht umgekehrt.  Wir entwickeln KI-Lösungen, die Mitarbeiter entlasten, Kreativität fördern und Unternehmen helfen, ihre Ziele ethisch und nachhaltig zu erreichen.",
+  aboutQuote: "Bei WeMake zu arbeiten bedeutet, jeden Tag etwas zu bewegen. Die Dynamik, die Herausforderungen und die Möglichkeit, die Zukunft der Arbeit aktiv mitzugestalten, sind unglaublich motivierend.", //More authentic and specific
+  aboutCtaText: "Offene Stellen ansehen",
+  aboutCtaLink: "/career/open-roles",
+  aboutImageUrl: "https://images.unsplash.com/photo-1590650153855-d9e808231d41?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80", // Keep, but consider a more WeMake-specific image
+
+  // CTA section
+  ctaTitle: "Wir suchen dich.",
+  ctaDescription: "Du bist talentiert, motiviert und teilst unsere Vision einer ethischen KI-Zukunft? Dann sollten wir uns unterhalten. Entdecke unsere offenen Positionen und werde Teil des WeMake AI Teams.",
+  ctaButtonText: "Jetzt bewerben", // More direct call to action
+  ctaButtonLink: "/career/open-roles",
+
+  // Featured sections
+  sections: [
+    {
+      title: "Leben bei WeMake AI",
+      description:
+        "Erfahre mehr über unsere Kultur, unsere Werte und wie wir zusammenarbeiten, um die Zukunft der Arbeit zu gestalten.", // Updated
+    },
+    {
+      title: "Deine Entwicklung", // Changed to focus on personal growth.
+      description:
+        "Wir investieren in dich. Entdecke unsere Programme für kontinuierliches Lernen, Mentoring und persönliche Weiterentwicklung.", // Updated
+    },
+    {
+      title: "Unsere Arbeitsweise", // More specific than "Operating principles"
+      description:
+        "Wir arbeiten remote-first, agil und ergebnisorientiert.  Entdecke unsere Tools, Prozesse und wie wir Zusammenarbeit leben.", // Updated
+    },
+    // Add more sections as needed
+  ],
+};
+
+const pageTitle = "Karriere bei WeMake AI";
+const pageDescription = "Gestalte die Zukunft der Arbeit mit uns. Entdecke offene Stellen und werde Teil eines Teams, das Innovation, Verantwortung und positive Wirkung verbindet.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <CareerComponent {...careerProps} />
+</BaseLayout>
