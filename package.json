@@ -2,10 +2,18 @@
   "name": "monolith",
   "type": "module",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
+    "website:dev": "bun run --cwd apps/website dev",
+    "website:check": "bun run --cwd apps/website check",
+    "website:build": "bun run --cwd apps/website build",
+    "website:preview": "bun website:build && bun run --cwd apps/website wrangler pages dev",
     "format": "prettier --write ."
   },
   "devDependencies": {
-    "prettier": "^3.5.3"
+    "prettier": "^3.5.3",
+    "wrangler": "^4.6.0"
   }
 }
