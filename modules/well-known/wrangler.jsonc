@@ -8,33 +8,33 @@
 	"main": "src/index.ts",
 	"compatibility_date": "2025-04-02",
 	"routes": [
-    {
-      "pattern": "cse.wemake.cx",
-      "custom_domain": true
-    },
 		{
-      "pattern": "mta-sts.wemake.cx",
-      "custom_domain": true
-    },
+			"pattern": "cse.wemake.cx",
+			"custom_domain": true,
+		},
 		{
-      "pattern": "mta-sts.florentin.dev",
-      "custom_domain": true
-    },
+			"pattern": "mta-sts.wemake.cx",
+			"custom_domain": true,
+		},
 		{
-      "pattern": "mta-sts.viraly.me",
-      "custom_domain": true
-    },
+			"pattern": "mta-sts.florentin.dev",
+			"custom_domain": true,
+		},
 		{
-      "pattern": "mta-sts.zerotrust.email",
-      "custom_domain": true
-    },
+			"pattern": "mta-sts.viraly.me",
+			"custom_domain": true,
+		},
 		{
-      "pattern": "mta-sts.zerotrust.pw",
-      "custom_domain": true
-    }
-  ],
+			"pattern": "mta-sts.zerotrust.email",
+			"custom_domain": true,
+		},
+		{
+			"pattern": "mta-sts.zerotrust.pw",
+			"custom_domain": true,
+		},
+	],
 	"observability": {
-		"enabled": true
+		"enabled": true,
 	},
 	/**
 	 * Smart Placement
@@ -63,9 +63,9 @@
 	 * Static Assets
 	 * https://developers.cloudflare.com/workers/static-assets/binding/
 	 */
-	"assets": { 
-		"directory": "./src", 
-		"binding": "ASSETS" 
+	"assets": {
+		"directory": "./src",
+		"binding": "ASSETS",
 	},
 
 	/**

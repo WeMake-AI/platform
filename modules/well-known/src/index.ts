@@ -13,8 +13,8 @@
 
 /**
  * Cloudflare Worker for handling .well-known requests
- * 
- * This worker dynamically routes requests to subdomain/.well-known/* paths 
+ *
+ * This worker dynamically routes requests to subdomain/.well-known/* paths
  * to the corresponding files in the /src directory structure.
  */
 
@@ -22,37 +22,37 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
 		const url = new URL(request.url);
 		const path = url.pathname;
-		
+
 		// Only process .well-known paths
 		if (!path.startsWith('/.well-known/')) {
 			return new Response('Not Found', { status: 404 });
 		}
-		
+
 		// Extract the subdomain from hostname
 		const hostname = url.hostname;
 		const subdomainMatch = hostname.match(/^([^.]+)\./);
-		
+
 		if (!subdomainMatch) {
 			return new Response('Invalid subdomain', { status: 400 });
 		}
-		
+
 		const subdomain = subdomainMatch[1];
-		
+
 		// Extract the filename from the path (remove /.well-known/ prefix)
 		const filename = path.substring('/.well-known/'.length);
-		
+
 		if (!filename) {
 			return new Response('Invalid path', { status: 400 });
 		}
-		
+
 		// Create the asset path to look up in the /src directory
 		const assetPath = `/${subdomain}/${filename}`;
-		
+
 		try {
 			// Try to fetch the file from ASSETS
 			// This uses the directory structure we set up in wrangler.jsonc
 			const asset = await env.ASSETS.fetch(new Request(`http://placeholder${assetPath}`));
-			
+
 			// If file found, return it with appropriate content type
 			if (asset.ok) {
 				// Get content type or set a default based on file extension
@@ -60,19 +60,19 @@ export default {
 				if (!contentType) {
 					contentType = determineContentType(filename);
 				}
-				
+
 				// Create a new response with the content and correct headers
 				const content = await asset.text();
 				return new Response(content, {
 					headers: {
-						'Content-Type': contentType
-					}
+						'Content-Type': contentType,
+					},
 				});
 			}
 		} catch (error) {
 			console.error(`Error loading file: ${assetPath}`, error);
 		}
-		
+
 		// File not found
 		return new Response('File Not Found', { status: 404 });
 	},
