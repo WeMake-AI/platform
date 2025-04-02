@@ -1,5 +1,5 @@
 {
-  "name": "frontpage",
+  "name": "website",
   "private": true,
   "scripts": {
     "dev": "astro dev",
