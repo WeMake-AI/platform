@@ -1,0 +1,17 @@
+{
+  "name": "Google Identity",
+  "client_id": "872543332510-d5rrph98bro88fc078petnofodijp1b9.apps.googleusercontent.com",
+  "discovery_uri": "https://accounts.google.com/.well-known/openid-configuration",
+  "grant_type": "implicit",
+  "applications": {
+    "drivefs": { "client_id": "<client-id-for-drivefs>" },
+    "drive-android": { "client_id": "<client-id-for-drive-android>" },
+    "drive-ios": { "client_id": "<client-id-for-drive-ios>" },
+    "calendar-android": { "client_id": "<client-id-for-calendar-android>" },
+    "calendar-ios": { "client_id": "<client-id-for-calendar-ios>" },
+    "gmail-android": { "client_id": "<client-id-for-gmail-android>" },
+    "gmail-ios": { "client_id": "<client-id-for-gmail-ios>" },
+    "meet-android": { "client_id": "<client-id-for-meet-android>" },
+    "meet-ios": { "client_id": "<client-id-for-meet-ios>" }
+  }
+}
