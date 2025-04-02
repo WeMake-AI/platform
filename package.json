@@ -7,9 +7,9 @@
   ],
   "scripts": {
     "website:dev": "bun run --cwd apps/website dev",
-    "website:check": "bun run --cwd apps/website check",
     "website:build": "bun run --cwd apps/website build",
     "website:preview": "bun website:build && bun run --cwd apps/website wrangler pages dev",
+    "website:check": "bun run --cwd apps/website check",
     "format": "prettier --write ."
   },
   "devDependencies": {
