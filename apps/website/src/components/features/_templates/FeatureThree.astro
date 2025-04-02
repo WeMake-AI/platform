@@ -1,0 +1,176 @@
+---
+import { Code } from "astro/components";
+const features = [
+  {
+    title: " Email templates",
+    description:
+      "Email marketing, newsletters, and more, all with a single click.",
+  },
+  {
+    title: "Font  customization",
+    description: "Create your own custom templates to suit your needs.",
+  },
+];
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-36">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 items-start">
+      <div>
+        <span class="text-sm font-medium tracking-wide text-blue-600 uppercase"
+          >Fonts</span
+        >
+        <h2
+          class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+        >
+          Customizable templates
+        </h2>
+        <p class="text-slate-500 mt-5">
+          Email templates are designed to be customizable and easy to use. You
+          can also style them with VSCode themes.
+          <br />
+          <br />
+          You can also use the templates use any font you want, and change the colors
+          to your brand, or even use your own logo.
+        </p>
+        <ul role="list" class="grid grid-cols-2 gap-4 list-none lg:gap-6 mt-12">
+          {
+            features.map((feature) => (
+              <li>
+                <p class="font-semibold text-blue-950 text-base">
+                  {feature.title}
+                </p>
+                <div class="mt-2 text-slate-500 text-sm">
+                  {feature.description}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div class="lg:mt-0 mt-12 h-full lg:order-first">
+        <!-- Include these scripts somewhere on the page: -->
+        <div class="lg:mt-0 mt-12 h-full">
+          <div
+            x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative lg:rounded-3xl"
+          >
+            <div
+              x-ref="tabButtons"
+              class="relative inline-grid items-center justify-center w-full h-10 grid-cols-2 p-1 bg-slate-100 rounded-full select-none"
+            >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-full cursor-pointer whitespace-nowrap"
+                >Account</button
+              >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap"
+                >Password</button
+              >
+              <div
+                x-ref="tabMarker"
+                class="absolute left-0 z-10 w-1/2 h-full duration-300 ease-out"
+                x-cloak
+              >
+                <div class="w-full h-full bg-white rounded-full shadow-sm">
+                </div>
+              </div>
+            </div>
+            <div
+              class="relative w-full mt-2 content p-4 bg-blue-1000 rounded-3xl"
+            >
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section
+                  class="text-xs font-mono shadow-3xl mt-4 rounded-2xl overflowhidden h-full"
+                >
+                  <Code
+                    code={`import { defineConfig } from 'astro/config';
+import compress from "astro-compress";
+import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
+import image from "@astrojs/image";
+import image from "@astrojs/image";
+import compress from "astro-compress";
+import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
+import tailwind from "@astrojs/tailwind";
+import image from "@astrojs/image";
+import compress from "astro-compress";
+import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
+// https://astro.build/config
+export default defineConfig({
+   site: 'https://lexingtonthemes.com',
+  integrations: [tailwind(), image(), sitemap()]
+});}'`}
+                    lang="js"
+                    theme="css-variables"
+                  />
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section
+                  class="text-xs font-mono mt-4 rounded-3xl hadow-2xl overflow-hidden h-full p-4"
+                >
+                  <Code
+                    code={`import { defineConfig } from 'astro/config';
+import tailwind from "@astrojs/tailwind";
+import image from "@astrojs/image";
+import compress from "astro-compress";
+import partytown from "@astrojs/mdx";
+import sitemap from "@astrojs/sitemap";
+import image from "@astrojs/image";
+import compress from "astro-vue";
+import partytown from "@astrojs/partytown";
+import sitemap from "@astrojs/sitemap";
+// https://astro.build/config
+export default defineConfig({
+   site: 'https://lexingtonthemes.com',
+  integrations: [tailwind(),  sitemap()]
+});}'`}
+                    lang="js"
+                    theme="css-variables"
+                  />
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

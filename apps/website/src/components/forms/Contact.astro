@@ -1,0 +1,270 @@
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div class="grid grid-cols-1 items-end md:grid-cols-2">
+      <div class="lg:pr-24 md:pr-12">
+        <h2 class="inline-flex items-center text-blue-600">
+          <span class="text-base font-medium tracking-tight">Kontakt</span>
+        </h2>
+        <h2
+          class="text-blue-950 font-semibold mt-6 text-4xl lg:text-6xl tracking-tight"
+        >
+          Sprechen Sie mit unserem Vertriebsteam
+        </h2>
+        <p class="text-slate-500 mt-5">
+          Lassen Sie uns gemeinsam herausfinden, wie 💙 WeMake Ihr Unternehmen mit maßgeschneiderter KI-Beratung unterstützen kann.
+        </p>
+
+        <ul role="list" class="list-none mt-12">
+          <li>
+            <div>
+              <p class="mt-5 font-semibold text-blue-950">
+                Was Sie von uns erwarten können:
+              </p>
+            </div>
+            <div class="mt-5">
+              <ul
+                role="list"
+                class="order-last flex flex-col gap-y-2 text-sm text-slate-500"
+              >
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4"> Individuelle Beratung</span>
+                </li>
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4"> Transparente Kommunikation</span>
+                </li>
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4"> Ethische und nachhaltige KI-Lösungen</span>
+                </li>
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4">Klare Handlungsempfehlungen</span>
+                </li>
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4">Partnerschaftliche Zusammenarbeit</span>
+                </li>
+                <li class="flex items-start">
+                  —
+                  <span class="ml-4"> Langfristige Wertschöpfung</span>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <form
+        id="contact-form"
+        class="lg:mt-0 mt-12 md:pl-12 md:border-l lg:pl-24 border-slate-200"
+        action="/api/contact"
+        method="POST"
+      >
+        <div id="form-success" class="hidden bg-green-50 text-green-700 p-4 mb-6 rounded-xl">
+          <p class="font-medium">Vielen Dank für Ihre Anfrage!</p>
+          <p>Wir werden uns in Kürze bei Ihnen melden.</p>
+        </div>
+        
+        <div id="form-error" class="hidden bg-red-50 text-red-700 p-4 mb-6 rounded-xl">
+          <p class="font-medium">Es ist ein Fehler aufgetreten</p>
+          <p id="error-message">Bitte versuchen Sie es später noch einmal.</p>
+        </div>
+
+        {/* CSRF Token - Generated on the server side */}
+        <input 
+          type="hidden" 
+          name="csrf_token" 
+          id="csrf_token" 
+          value={`${Math.random().toString(36).substring(2, 15)}-${Date.now()}`} 
+        />
+        
+        {/* Honeypot field - hidden from users but visible to bots */}
+        <div class="hidden" aria-hidden="true">
+          <label for="_honeypot">Leave this field empty</label>
+          <input type="text" name="_honeypot" id="_honeypot" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="space-y-2">
+          <div>
+            <label for="full_name" class="block text-sm font-medium text-blue-950 mb-1">Vollständiger Name <span class="text-red-500">*</span></label>
+            <input
+              type="text"
+              id="full_name"
+              name="full_name"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Vollständiger Name"
+              required
+              maxlength="100"
+              pattern="[A-Za-z0-9\s\-\.ÄäÖöÜüß]+"
+              title="Bitte geben Sie Ihren vollständigen Namen ein (nur Buchstaben, Zahlen, Leerzeichen und Bindestriche sind erlaubt)"
+            />
+          </div>
+
+          <div>
+            <label for="work_email" class="block text-sm font-medium text-blue-950 mb-1">Geschäftliche E-Mail-Adresse <span class="text-red-500">*</span></label>
+            <input
+              type="email"
+              id="work_email"
+              name="work_email"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Geschäftliche E-Mail"
+              required
+              pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}"
+              title="Bitte geben Sie eine gültige E-Mail-Adresse ein"
+            />
+          </div>
+
+          <div>
+            <label for="work_phone" class="block text-sm font-medium text-blue-950 mb-1">Geschäftliche Telefonnummer</label>
+            <input
+              type="tel"
+              id="work_phone"
+              name="work_phone"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Geschäftliche Telefonnummer"
+              pattern="[\d\+\-\(\)\s]+"
+              title="Bitte geben Sie eine gültige Telefonnummer ein (nur Ziffern, +, -, (, ) und Leerzeichen sind erlaubt)"
+            />
+          </div>
+
+          <div>
+            <label for="company" class="block text-sm font-medium text-blue-950 mb-1">Unternehmen</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Unternehmen"
+              maxlength="100"
+            />
+          </div>
+
+          <div>
+            <label for="project_details" class="block text-sm font-medium text-blue-950 mb-1">Projekt Details <span class="text-red-500">*</span></label>
+            <textarea
+              id="project_details"
+              name="project_details"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Erzählen Sie uns mehr über Ihr Projekt oder Ihre Anfrage."
+              rows="4"
+              required
+              maxlength="2000"></textarea>
+            <div class="text-xs text-slate-500 mt-1">
+              <span id="char-count">0</span>/2000 Zeichen
+            </div>
+          </div>
+
+          <div class="col-span-full pt-4">
+            <button
+              id="submit-button"
+              class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-full"
+              type="submit"
+            >
+              Anfrage senden
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script to handle form submission
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('contact-form') as HTMLFormElement;
+    const successDiv = document.getElementById('form-success') as HTMLDivElement;
+    const errorDiv = document.getElementById('form-error') as HTMLDivElement;
+    const errorMessage = document.getElementById('error-message') as HTMLParagraphElement;
+    const submitButton = document.getElementById('submit-button') as HTMLButtonElement;
+    const projectDetails = document.getElementById('project_details') as HTMLTextAreaElement;
+    const charCount = document.getElementById('char-count') as HTMLSpanElement;
+    
+    // Character counter for project details
+    if (projectDetails && charCount) {
+      projectDetails.addEventListener('input', () => {
+        const count = projectDetails.value.length;
+        charCount.textContent = count.toString();
+        
+        // Visual feedback if approaching limit
+        if (count > 1900) {
+          charCount.classList.add('text-amber-600');
+        } else if (count > 1800) {
+          charCount.classList.add('text-amber-500');
+          charCount.classList.remove('text-amber-600');
+        } else {
+          charCount.classList.remove('text-amber-500', 'text-amber-600');
+        }
+      });
+    }
+
+    // Client-side validation of email
+    const emailInput = document.getElementById('work_email') as HTMLInputElement;
+    if (emailInput) {
+      emailInput.addEventListener('blur', () => {
+        const email = emailInput.value;
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        
+        if (email && !emailRegex.test(email)) {
+          emailInput.setCustomValidity('Bitte geben Sie eine gültige E-Mail-Adresse ein');
+        } else {
+          emailInput.setCustomValidity('');
+        }
+      });
+    }
+
+    if (form) {
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Disable the submit button and show loading state
+        submitButton.disabled = true;
+        submitButton.innerText = 'Wird gesendet...';
+        
+        // Hide any previous messages
+        successDiv.classList.add('hidden');
+        errorDiv.classList.add('hidden');
+        
+        try {
+          // Submit the form using fetch
+          const formData = new FormData(form);
+          
+          // Add timestamp to help prevent replay attacks
+          formData.set('timestamp', Date.now().toString());
+          
+          const response = await fetch('/api/contact', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              // Add Origin header to help with CSRF protection
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+          
+          const result = await response.json() as { success: boolean; message: string };
+          
+          // Handle success or error based on response
+          if (response.ok && result.success) {
+            // Show success message and reset form
+            successDiv.classList.remove('hidden');
+            form.reset();
+            charCount.textContent = '0';
+          } else {
+            // Show error message
+            errorDiv.classList.remove('hidden');
+            errorMessage.textContent = result.message || 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.';
+          }
+        } catch (error) {
+          // Handle network errors
+          errorDiv.classList.remove('hidden');
+          errorMessage.textContent = 'Es konnte keine Verbindung zum Server hergestellt werden. Bitte überprüfen Sie Ihre Internetverbindung.';
+        } finally {
+          // Re-enable the submit button
+          submitButton.disabled = false;
+          submitButton.innerText = 'Anfrage senden';
+        }
+      });
+    }
+  });
+</script>

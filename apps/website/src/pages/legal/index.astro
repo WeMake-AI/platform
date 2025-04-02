@@ -1,0 +1,47 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+const legalPages = await getCollection("legal");
+const pageTitle = "Legal Hub";
+const pageDescription = "Access our complete collection of legal documents, terms, and policies. These documents outline our commitments, user agreements, and compliance standards.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <main class="max-w-4xl mx-auto py-12 px-4">
+    <h1 class="text-4xl font-bold text-gray-900 mb-4">{pageTitle}</h1>
+    <p class="text-gray-600 mb-8 text-lg">
+      Access our complete collection of legal documents, terms, and policies. These documents outline our commitments, user agreements, and compliance standards.
+    </p>
+    
+    <div class="space-y-6">
+      {legalPages.map((doc) => (
+        <article class="bg-white rounded-lg shadow-sm p-6 hover:shadow-md transition-shadow">
+          <a href={`/legal/${doc.slug}`} class="block group">
+            <h2 class="text-xl font-semibold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+              {doc.data.page}
+            </h2>
+            <p class="text-gray-600 mb-3 line-clamp-2">
+              {doc.data.description}
+            </p>
+            {doc.data.pubDate && (
+              <p class="text-sm text-gray-500">
+                Zuletzt aktualisiert: {doc.data.pubDate.toLocaleDateString('de-DE', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </p>
+            )}
+          </a>
+        </article>
+      ))}
+    </div>
+
+    {legalPages.length === 0 && (
+      <p class="text-gray-600 text-center py-8">
+        Derzeit sind keine rechtlichen Dokumente verfügbar.
+      </p>
+    )}
+  </main>
+</BaseLayout>

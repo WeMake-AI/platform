@@ -1,0 +1,94 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import CtaCommunity from "@/components/cta/CtaCommunity.astro";
+const { frontmatter } = Astro.props;
+
+// Format date in German style
+function formatGermanDate(date: Date | string) {
+  const postDate = new Date(date);
+  const today = new Date();
+  const diffTime = today.getTime() - postDate.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: diffDays <= 7 ? 'long' : undefined
+  };
+  
+  return new Intl.DateTimeFormat('de-DE', options).format(postDate);
+}
+
+const formattedDate = formatGermanDate(frontmatter.pubDate);
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <section>
+    <div
+      class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 items-start"
+    >
+      <div>
+        <div class="items-center grid grid-cols-1 lg:grid-cols-5 gap-4">
+          <div class="lg:col-span-3">
+            <h2
+              class="text-blue-950 font-semibold text-3xl lg:text-4xl tracking-tight lg:text-balance"
+            >
+              {frontmatter.title}
+            </h2>
+            
+            <p class="text-xl text-slate-500 mt-12 lg:text-balance">
+              {frontmatter.description}
+            </p>
+            <div class="mt-6">
+              <div class="flex items-center">
+                <div>
+                  <img
+                    class="inline-block h-9 w-9 rounded-full"
+                    src={frontmatter.image.url}
+                    alt={frontmatter.image.alt}
+                  />
+                </div>
+                <div class="ml-3">
+                  <p
+                    class="text-sm font-medium text-slate-500 group-hover:text-blue-950"
+                  >
+                    {frontmatter.author}
+                  </p>
+                  <p class="text-xs text-slate-500 uppercase">
+                    {formattedDate}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="lg:col-span-2">
+            {frontmatter.headerImage && (
+              <div class="mt-12">
+                <img
+                  src={frontmatter.headerImage.url}
+                  alt={frontmatter.headerImage.alt || frontmatter.title}
+                  class="h-auto object-scale-down"
+                  style="max-height: 500px;"
+                />
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="px-8 max-w-7xl lg:px-24 mx-auto py-12">
+      <div
+        class="max-w-[40rem] prose-lg hover:prose-a:text-blue-500 prose prose-a:font-semibold prose-a:text-blue-300 prose-blockquote:text-blue-600 prose-h3:text-blue-950 text-slate-500"
+      >
+        <slot />
+      </div>
+    </div>
+  </section>
+  <CtaCommunity />
+</BaseLayout>

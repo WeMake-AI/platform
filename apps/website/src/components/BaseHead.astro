@@ -1,0 +1,79 @@
+---
+import "../styles/global.css";
+import { SEO } from 'astro-seo';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "💙 WeMake AI", 
+  description = "WeMake ist Ihr Partner für KI-Transformation in Deutschland. Wir bieten strategische KI-Beratung, Entwicklung individueller Lösungen und sichere ZeroTrust-Integration. Unser Fokus: Ethische KI, Nachhaltigkeit und messbare Ergebnisse für Ihr Unternehmen."
+} = Astro.props;
+---
+
+<SEO
+  title={title}
+  titleTemplate="%s | WeMake"
+  titleDefault="WeMake"
+  description={description}
+  noindex={false}
+  charset="UTF-8"
+  openGraph={{
+    basic: {
+      title: title,
+      type: "website",
+      image: "/images/og.png",
+    },
+    optional: {
+      description: description,
+      siteName: "WeMake",
+      locale: "de_DE",
+    },
+    image: {
+      type: "image/png",
+      alt: "WeMake - Ihr Partner für KI-Strategieberatung und digitale Transformation in Deutschland",
+    }
+  }}
+/>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<!-- Favicons -->
+<link rel="icon" href="/images/favicons/favicon.ico" sizes="any" />
+<link rel="icon" href="/images/favicons/icon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/images/favicons/apple-touch-icon.png" />
+<link rel="manifest" href="/images/favicons/site.webmanifest" />
+
+<!-- Favicon for IE -->
+<link rel="shortcut icon" href="/images/favicons/favicon.ico" type="image/x-icon" />
+
+<!-- Favicons for different sizes -->
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="48x48" href="/images/favicons/favicon-48x48.png" />
+
+<link rel="sitemap" href="/sitemap-index.xml" />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
+
+<!-- Additional SEO -->
+<meta name="robots" content="index, follow" />
+<meta name="googlebot" content="index, follow" />
+
+<!-- Apple Touch Icon (already included in favicons, but keeping for backwards compatibility) -->
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+<!-- Theme Color for Mobile Browsers -->
+<meta name="theme-color" content="#ffffff" />
+
+<!-- For IE -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+<!---- Alpine integrations -->
+<script src="https://unpkg.com/@alpinejs/focus@3.10.3/dist/cdn.min.js"
+></script>
+<script src="https://unpkg.com/alpinejs@3.10.3/dist/cdn.min.js"></script>

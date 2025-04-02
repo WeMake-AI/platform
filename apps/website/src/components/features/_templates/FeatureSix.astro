@@ -1,0 +1,134 @@
+---
+const topFeatures = [
+  {
+    title: "Prebuilt integrations",
+    description:
+      "Municipal management performance corporate investment grade bonds.",
+  },
+  {
+    title: "Tools for every stack",
+    description:
+      "Corporate bonds debt fiat risk return municipal retirement interest rate.",
+  },
+  {
+    title: "Prebuilt integrations",
+    description:
+      "Municipal management performance corporate investment grade bonds.",
+  },
+  {
+    title: "Tools for every stack",
+    description:
+      "Corporate bonds debt fiat risk return municipal retirement interest rate.",
+  },
+];
+
+const featureList = [
+  {
+    title: "Prebuilt integrations",
+    items: [
+      "Embeddable checkout",
+      "Custom UI toolkit",
+      "Invoice support",
+      "Payment optimization",
+      "Data migration",
+      "Product monetization strategy",
+    ],
+  },
+  {
+    title: "Deployable checkouts",
+    items: [
+      "Embeddable checkout",
+      "Custom UI toolkit",
+      "Invoice support",
+      "Payment optimization",
+      "Data migration",
+      "Product monetization strategy",
+    ],
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div class="max-w-xl">
+      <h2 class="inline-flex items-center text-blue-600">
+        <span class="text-base font-medium tracking-tight">Feature</span>
+      </h2>
+
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        100% responsive emails
+      </h2>
+      <p class="text-slate-500 mt-4 lg:text-balance">
+        We have tested our platform with over 100 email clients and it works on
+        all of them we swear.
+      </p>
+    </div>
+    <ul
+      role="list"
+      class="grid grid-cols-2 lg:grid-cols-4 gap-4 list-none lg:gap-6 mt-12"
+    >
+      {
+        topFeatures.map((item, index) => (
+          <li>
+            <div>
+              <div class="flex items-center justify-center size-8 text-blue-500 rounded-full bg-slate-100">
+                {index + 1}
+              </div>
+              <p class="mt-5 font-semibold text-blue-950">{item.title}</p>
+            </div>
+            <div class="mt-2 text-slate-500 text-sm">{item.description}</div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <div class="grid grid-cols-1 items-start md:grid-cols-2 mt-12 lg:mt-24">
+      <div class="lg:pr-24 md:pr-12">
+        <h2
+          class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+        >
+          Stunning layouts
+        </h2>
+        <p class="text-slate-500 mt-5">
+          Your implementation includes relevant deep dive workshops so we can
+          understand your requirements and create tailored integration guides
+          for your teams to build faster.
+        </p>
+        <ul role="list" class="list-none mt-12">
+          {
+            featureList.map((feature) => (
+              <li>
+                <p class="mt-12 font-semibold text-blue-950 text-2xl">
+                  {feature.title}
+                </p>
+                <div class="mt-5">
+                  <ul
+                    role="list"
+                    class="order-last flex flex-col gap-y-2 text-sm text-slate-500"
+                  >
+                    {feature.items.map((item) => (
+                      <li class="flex items-start gap-2">
+                        <span>⏤</span> {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <div
+        class="lg:mt-0 mt-12 md:pl-12 md:border-l border-slate-200 lg:pl-24 h-full"
+      >
+        <img
+          src="/images/payments.png"
+          alt="thumbnail"
+          class="drop-shadow-2xl"
+        />
+      </div>
+    </div>
+  </div>
+</section>

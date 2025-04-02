@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout>
+  <section>
+    <div
+      class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 flex flex-col text-center lg:h-svh justify-center py-12 lg:py-48 items-center"
+    >
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >404</span
+      >
+
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Seite nicht gefunden.
+      </h2>
+
+      <p class="text-slate-500 mt-5 lg:text-balance mx-auto max-w-xl">
+        Entschuldigung, aber die Seite, die Sie suchen, konnte nicht gefunden
+        werden. Sie können zur Startseite oder <a
+          title="Kontakt"
+          aria-label="Kontakt"
+          href="/contact"
+          class="text-blue-600 hover:text-tangroa-500">uns eine Nachricht</a
+        > schicken, wenn Sie nicht finden, wonach Sie suchen.
+      </p>
+      <div class="mt-10">
+        <a
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+          title="Startseite"
+          aria-label="Startseite"
+          href="/"
+        >
+          Zurück zur Startseite
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

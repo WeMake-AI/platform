@@ -1,0 +1,100 @@
+---
+// src/data/testimonialsData.js
+export const testimonialsData = [
+  {
+    quote:
+      "The service exceeded my expectations. The staff made extra efforts to fulfill my requirements",
+    author: "David Gutierrez",
+    role: "Founder of @nocodegallery",
+    imageUrl:
+      "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+  },
+  {
+    quote:
+      "Their unparalleled attention to detail and dedication to excellence is why I'd vouch for this company.",
+    author: "Alonso",
+    role: "Entrepreneur",
+    imageUrl:
+      "https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+  },
+  {
+    quote:
+      "This team transformed our digital strategy, and the results were phenomenal. Truly a class apart.",
+    author: "Jasmine Lee",
+    role: "Digital Marketing Manager",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+  },
+  {
+    quote:
+      "A game-changer for our online presence. Their expertise and innovative solutions have skyrocketed our engagement rates.",
+    author: "Marcus Antonius",
+    role: "CEO of InnovateTech",
+    imageUrl:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80",
+  },
+  {
+    quote:
+      "Outstanding support and services that propelled our project to success much quicker than anticipated.",
+    author: "Emily R.",
+    role: "Project Manager",
+    imageUrl: "https://alfred.lexingtonthemes.com/avatar1.png",
+  },
+  {
+    quote:
+      "The creativity and innovation in their approach are unmatched. Highly impressed with their work!",
+    author: "Omar Farooq",
+    role: "Tech Startup Founder",
+    imageUrl: "https://alfred.lexingtonthemes.com/avatar3.png",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div class="max-w-xl">
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >testiomonials</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Our customers and their experiences
+      </h2>
+      <p class="mt-12 text-slate-500 text-sm text-balance">
+        Spaziobianco Public rollover performance exchange traded funds junk
+        bonds passively NASDAQ bills upswing retirement corporate market
+        exposure.
+      </p>
+    </div>
+
+    <ul class="grid lg:grid-cols-3 mt-12 gap-x-8 gap-y-12" role="list">
+      {
+        testimonialsData.map((testimonial) => (
+          <li>
+            <div class="flex flex-col justify-between flex-1 gap-6 h-full">
+              <div class="lg:col-span-2 order-last">
+                <p class="text-slate-500">"{testimonial.quote}"</p>
+              </div>
+              <div class="items-center inline-flex gap-3">
+                <div class="flex-shrink-0">
+                  <img
+                    alt={`A picture of ${testimonial.author}`}
+                    class="rounded-full size-10  object-cover"
+                    src={testimonial.imageUrl}
+                  />
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-sm text-black font-medium">
+                    {testimonial.author}
+                  </p>
+                  <p class="text-sm text-slate-500">{testimonial.role}</p>
+                </div>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

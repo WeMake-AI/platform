@@ -1,0 +1,74 @@
+---
+const { title, url, description, pubDate, author, image } = Astro.props;
+
+// Format date in German style
+function formatGermanDate(date: Date | string) {
+  const postDate = new Date(date);
+  const today = new Date();
+  const diffTime = today.getTime() - postDate.getTime();
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    weekday: diffDays <= 7 ? 'long' : undefined
+  };
+  
+  return new Intl.DateTimeFormat('de-DE', options).format(postDate);
+}
+
+const formattedDate = formatGermanDate(pubDate);
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-24 items-center">
+  <div class="lg:col-span-3">
+    <h2
+      class="text-blue-950 font-semibold text-3xl lg:text-5xl lg:text-balance tracking-tight"
+    >
+      {title}
+    </h2>
+    <p class="text-lg text-slate-500 mt-6 lg:text-balance">
+      {description}
+    </p>
+    <p class="mt-6">
+      <a
+        title="link to your page"
+        aria-label="your label"
+        href={url}
+        title={title}
+        class="text-blue-600 hover:text-blue-950 inline-flex items-center group"
+      >
+        Beitrag lesen
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="size-4 ml-3 group-hover:translate-x-2 transition duration-500 ease-in-out transform"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </a>
+    </p>
+  </div>
+  <div class="">
+    <p class="text-xs text-slate-500 uppercase">{formattedDate}</p>
+    <div class="flex items-center mt-6">
+      <div>
+        <img
+          class="inline-block h-9 w-9 rounded-full"
+          src={image}
+          alt={author}
+        />
+      </div>
+      <div class="ml-3">
+        <p class="text-sm font-medium text-slate-500 group-hover:text-blue-950">
+          {author}
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

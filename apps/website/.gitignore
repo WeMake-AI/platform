@@ -1,0 +1,19 @@
+# Astro
+.astro
+dist
+
+# Dependencies
+node_modules
+
+# Environment variables
+.env
+
+# macOS-specific files
+.DS_Store
+
+# Wrangler
+.wrangler
+
+# Playwright
+playwright-report
+test-results

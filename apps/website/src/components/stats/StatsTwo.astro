@@ -1,0 +1,44 @@
+---
+// Define your data
+const stats = [
+  { value: "$70M", description: "Total increase in Lexington" },
+  { value: "3 months faster", description: "Spazio to launch a platform" },
+  { value: "5%", description: "Uplift in Unwrapped payment" },
+  { value: "50 new countries", description: "Ike expansion in one lexington" },
+  { value: "600 Hours", description: "Total saved by automation" },
+  {
+    value: "3 days less",
+    description: "Reduction in average project timeline",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+      >always up and up</span
+    >
+    <h2
+      class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl lg:text-balance"
+    >
+      Developing a new era for email communication
+    </h2>
+    <p class="text-slate-500 mt-6 lg:text-balance">
+      Envisioning the future of email in an ever-changing digital landscape: why
+      settle for outdated methods when innovation awaits?
+    </p>
+
+    <div class="gap-6 grid grid-cols-1 lg:grid-cols-3 mt-12">
+      {
+        stats.map((stat) => (
+          <div>
+            <p class="border-l-4 pl-4 font-semibold border-blue-500 tracking-tight text-blue-950">
+              {stat.value}
+            </p>
+            <p class="mt-2 text-slate-500">{stat.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

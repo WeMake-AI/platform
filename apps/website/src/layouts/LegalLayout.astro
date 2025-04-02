@@ -1,0 +1,80 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { frontmatter } = Astro.props;
+
+// Format date in German style without weekday
+function formatGermanDate(date: Date | string) {
+  const postDate = new Date(date);
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  };
+  return new Intl.DateTimeFormat('de-DE', options).format(postDate);
+}
+
+const formattedDate = formatGermanDate(frontmatter.pubDate);
+---
+
+<BaseLayout title={frontmatter.page} description={frontmatter.description}>
+  <section>
+    <div class="px-8 max-w-7xl lg:px-24 mx-auto py-12">
+      <div
+        class="relative mx-auto py-2 grid grid-cols-1 items-start lg:grid-cols-6 w-full"
+      >
+        <div class="mt-3 lg:mt-0">
+          <p class="text-xl text-blue-950 uppercase font-bold pr-8">
+            {formattedDate}
+          </p>
+        </div>
+        <div class="w-full lg:col-span-5">
+          <p class="text-sm text-slate-500 lg:text-balance">
+            WeMake AI by Sakwiset ist ein Startup aus Hannover, das sich auf die Entwicklung von
+            Software für die Automatisierung von Geschäftsprozessen spezialisiert
+            hat.
+          </p>
+          <p class="font-semibold text-blue-950 mt-12">
+            <a
+              title="Kontakt aufnehmen"
+              aria-label="Kontakt aufnehmen"
+              href="/contact">
+              Kontakt aufnehmen</a
+            >
+            <span class="font-normal">
+              um Fragen zu diesen Vereinbarungen zu klären.</span
+            >
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-blue-500">
+    <div class="px-8 max-w-7xl lg:px-24 py-4 mx-auto">
+      <div
+        class="relative mx-auto gap-3 grid grid-cols-1 lg:grid-cols-6 w-full"
+      >
+        <div class="w-full lg:col-start-2 lg:col-span-5">
+          <p class="uppercase text-white font-bold text-sm">
+            {frontmatter.page}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="bg-slate-50">
+    <div class="px-8 max-w-7xl lg:px-24 py-6 mx-auto">
+      <div
+        class="relative mx-auto gap-3 grid grid-cols-1 lg:grid-cols-6 w-full"
+      >
+        <div
+          class="w-full lg:col-start-2 lg:col-span-5 space-y-12 divide-y divide-slate-400 py-12"
+        >
+          <div class="max-w-[40rem] prose-lg hover:prose-a:text-blue-500 prose prose-a:font-semibold prose-a:text-blue-300 prose-blockquote:text-blue-600 prose-h3:text-blue-950 text-slate-500">
+            <slot />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

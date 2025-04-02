@@ -1,0 +1,212 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/headers/Header.astro";
+import LogoCloud from "@/components/testimonials/LogoCloud.astro";
+import Stats from "@/components/stats/Stats.astro";
+import FeatureOne from "@/components/features/FeatureOne.astro";
+import FeatureThree from "@/components/features/FeatureThree.astro";
+import TestimonialOne from "@/components/testimonials/TestimonialOne.astro";
+import Pricing from "@/components/pricing/Pricing.astro";
+import CtaOne from "@/components/cta/CtaOne.astro";
+import FaqOne from "@/components/faqs/FaqOne.astro";
+
+const headerProps = {
+  overline: "KI-Strategieberatung",
+  title: "Wir katapultieren Ihr Unternehmen in die KI-Zukunft"
+};
+
+const statsProps = {
+  overline: "Was wir bewegen",
+  title: "Zahlen, die überzeugen. Ergebnisse, die begeistern.",
+  stats: [
+    {
+      value: "98%",
+      description: "Weiterempfehlungsrate",
+    },
+    {
+      value: "bis zu 40%",
+      description: "Effizienzsteigerung in Kernprozessen",
+    },
+    {
+      value: "100%",
+      description: "KI-Ethik-Kodex", // Stronger than just "Entwicklung"
+    },
+    {
+      value: "< 6 Wochen", // More impactful than "Durchschnittliche"
+      description: "Erste Ergebnisse sichtbar",
+    },
+  ],
+};
+
+const featureOneProps = {
+  overline: "Ihre Herausforderung. Unsere Leidenschaft.",
+  title: "Von der Idee zur intelligenten Lösung. Wir sind Ihr KI-Navigator.",
+  description: "Wir sind mehr als Berater. Wir sind Partner auf Ihrer KI-Transformationsreise.  Wir verbinden strategische Weitsicht mit tiefem technischen Know-how.",
+  features: [
+    {
+      title: "KI-Potenzial-Entdeckung",
+      items: [
+        "Branchenspezifische KI-Chancen identifizieren",
+        "Verborgene Ineffizienzen aufdecken",
+        "Datengetriebene Entscheidungsgrundlagen schaffen",
+      ],
+    },
+    {
+      title: "Maßgeschneiderte KI-Roadmap",
+      items: [
+        "Entwicklung einer klaren, umsetzbaren Strategie",
+        "Priorisierung von KI-Initiativen mit maximalem ROI",
+        "Langfristige, nachhaltige Implementierung",
+      ],
+    },
+    {
+      title: "ZeroTrust KI-Sicherheitskonzept",
+      items: [
+        "Höchste Sicherheitsstandards, auch remote",
+        "Umfassender Datenschutz & DSGVO-Compliance",
+        "Proaktiver Schutz vor Cyber-Risiken",
+      ],
+    },
+  ],
+};
+
+const featureThreeProps = {
+  overline: "Ihr Wettbewerbsvorteil",
+  title: "Mehr als nur Effizienz. Wir schaffen Zukunftssicherheit.",
+  description: "Mit WeMake's KI-Expertise sichern Sie sich nicht nur operative Vorteile, sondern auch langfristige strategische Differenzierung.",
+  features: [
+      {
+          title: "Gesteigerte Produktivität",
+          description: "Automatisieren Sie Routineaufgaben, setzen Sie Ressourcen frei und beschleunigen Sie Ihre Kernprozesse."
+      },
+      {
+          title: "Verbesserte Entscheidungsfindung",
+          description: "Gewinnen Sie tiefere Einblicke in Ihre Daten und treffen Sie fundierte, datengestützte Entscheidungen."
+      },
+      {
+          title: "Innovation & Neue Geschäftsmodelle",
+          description: "Entdecken Sie ungeahnte Möglichkeiten durch KI-gestützte Innovation und erschließen Sie neue Umsatzquellen."
+      },
+      {
+        title: "Risikominimierung",
+        description: "Identifizieren und mitigieren Sie Risiken proaktiv durch intelligente Analysen und Predictive Modeling."
+      }
+  ]
+};
+
+const testimonialProps = {
+  overline: "Kundenstimmen",
+  title: "Echte Erfolge. Echte Partnerschaften.",
+  quote: "Florentin ist eine wahre Freude. Er ist pünktlich, zuverlässig und verfügt über ein enormes Wissen in seinem Fachbereich. Seine Kommunikation ist unglaublich freundlich und kompetent - ich habe bezüglich Service und Beratung noch nie etwas Besseres erlebt. Ich bin absolut begeistert von der Professionalität und Herzlichkeit, die Florentin ausstrahlt.",
+  author: "Ahrun Tai",
+  role: "Projektmanager",
+  company: "Google",
+};
+
+const pricingProps = {
+  overline: "Investition in Ihre Zukunft",
+  title: "Partnerschaftsmodelle. Flexibel und transparent.",
+  description: "Wir bieten maßgeschneiderte Beratungsleistungen, die sich an Ihren Zielen und Ihrem Budget orientieren. Keine versteckten Kosten, voller Fokus auf Ihren Erfolg.",
+  pricingTiers: [
+    {
+      title: "KI-Potenzial-Workshop",
+      items: [
+        {
+          name: "Individuelles Erstgespräch",
+          description: "Wir definieren Ihre Ziele und prüfen die grundsätzliche Machbarkeit einer KI-Lösung.",
+          price: "Kostenfrei",
+          unit: "",
+        },
+        {
+          name: "Intensiv-Workshop",
+          description: "Gemeinsam identifizieren wir konkrete KI-Anwendungsfälle mit höchstem Potenzial für Ihr Unternehmen.",
+          price: "ab 1.900€", // Slightly increased to enhance perceived value
+          unit: "",
+        },
+        {
+          name: "Strategie-Roadmap",
+          description: "Wir entwickeln eine priorisierte Roadmap mit klaren Handlungsempfehlungen und messbaren Zielen.",
+          price: "ab 3.900€", // Slightly increased
+          unit: "",
+        },
+      ],
+    },
+    {
+      title: "KI-Implementierung",
+      items: [
+        {
+          name: "Proof-of-Concept (PoC)",
+          description: "Wir entwickeln einen funktionsfähigen Prototypen, um die technische Machbarkeit und den Mehrwert zu demonstrieren.",
+          price: "ab 7.500€", // Increased
+          unit: "",
+        },
+        {
+          name: "Minimum Viable Product (MVP)",
+          description: "Wir entwickeln eine erste, einsatzbereite Version Ihrer KI-Lösung mit grundlegenden Funktionen.",
+          price: "ab 15.000€", // Increased
+          unit: "",
+        },
+        {
+          name: "Individuelle KI-Lösung",
+          description: "Wir entwickeln und implementieren eine maßgeschneiderte, skalierbare KI-Lösung, die perfekt auf Ihre Bedürfnisse zugeschnitten ist.",
+          price: "auf Anfrage",
+          unit: "",
+        },
+      ],
+    },
+  ],
+  customPricingTitle: "Enterprise-Partnerschaft",
+  customPricingDescription: "Für Unternehmen mit komplexen Anforderungen und strategischen KI-Ambitionen bieten wir langfristige Partnerschaftsmodelle an.",
+  overlineTwo: "Jede Zusammenarbeit beinhaltet", // Stronger wording
+  featuresTitle: "Ihr Erfolg ist unser Antrieb.",
+  features: [
+    {
+      title: "Dedizierter KI-Stratege", // More specific and impactful
+      benefits: [
+        "Persönliche Betreuung",
+        "Strategische Beratung",
+        "Proaktives Chancenmanagement",
+      ],
+    },
+    {
+      title: "Radikale Transparenz", // Strong, unique selling point
+      benefits: [
+        "Lückenlose Kommunikation",
+        "Verständliche Berichte",
+        "Volle Kontrolle über den Projektfortschritt",
+      ],
+    },
+    {
+      title: "Verpflichtung zu ethischer KI",
+      benefits: [
+        "Verantwortungsvoller Einsatz von KI",
+        "Schutz Ihrer Daten und Ihrer Reputation",
+        "Nachhaltige, zukunftssichere Lösungen",
+      ],
+    },
+    {
+      title: "Flexible & Skalierbare Lösungen",
+      benefits: [
+        "Anpassung an sich ändernde Bedürfnisse",
+        "Nahtlose Integration in bestehende Systeme",
+        "Langfristige Wertschöpfung",
+      ],
+    },
+  ],
+};
+
+const pageTitle = "KI-Strategieberatung für messbaren Unternehmenserfolg";
+const pageDescription = "WeMake AI ist Ihr Partner für KI-Transformation in Deutschland. Wir bieten strategische KI-Beratung, Entwicklung individueller Lösungen und sichere ZeroTrust-Integration.";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <Header {...headerProps} />
+  <LogoCloud />
+  <Stats {...statsProps} />
+  <FeatureOne {...featureOneProps} />
+  <FeatureThree {...featureThreeProps} />
+  <TestimonialOne {...testimonialProps} />
+  <Pricing {...pricingProps} />
+  <CtaOne />
+  <FaqOne />
+</BaseLayout>

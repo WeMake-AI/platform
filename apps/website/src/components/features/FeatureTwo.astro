@@ -1,0 +1,206 @@
+---
+const { overline, title, featureOneTitle, featureOneDescription, featureOneItemOne, featureOneItemOneDescription, featureOneItemTwo, featureOneItemTwoDescription, featureOneDescriptionTwo, featureTwoTitle, featureTwoDescription, featureTwoItemOne, featureTwoItemOneDescription, featureTwoItemTwo, featureTwoItemTwoDescription, featureTwoItemThree, featureTwoItemThreeDescription, featureTwoDescriptionTwo } = Astro.props;
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+        >{overline}</span
+      >
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl lg:text-balance"
+      >
+        {title}
+      </h2>
+    </div>
+    <div class="grid grid-cols-1 items-start md:grid-cols-2 mt-24">
+      <div class="lg:pr-24 md:pr-12">
+        <h2
+          class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+        >
+          {featureOneTitle}
+        </h2>
+        <p class="text-slate-500 mt-5 lg:text-pretty">
+          {featureOneDescription}
+        </p>
+        <ul role="list" class="grid grid-cols-2 gap-4 list-none lg:gap-6 mt-12">
+          <li>
+            <p class="font-semibold text-blue-950 text-base">
+              {featureOneItemOne}
+            </p>
+            <p class="mt-2 text-slate-500 text-sm lg:text-pretty">
+              {featureOneItemOneDescription}
+            </p>
+          </li>
+          <li>
+            <p class="font-semibold text-blue-950 text-base">
+              {featureOneItemTwo}
+            </p>
+            <p class="mt-2 text-slate-500 text-sm lg:text-pretty">
+              {featureOneItemTwoDescription}
+            </p>
+          </li>
+        </ul>
+        <p class="text-slate-500 mt-12">
+          {featureOneDescriptionTwo}
+        </p>
+      </div>
+      <div
+        class="lg:mt-0 mt-12 md:pl-12 md:border-l lg:pl-24 border-slate-200 h-full"
+      >
+        <div class="lg:mt-0 mt-12 h-full">
+          <div
+            x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+            x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+            class="relative lg:rounded-3xl lg:p-10 text-blue-950"
+          >
+            <div
+              x-ref="tabButtons"
+              class="relative inline-grid items-center justify-center w-full h-10 grid-cols-2 p-1 bg-slate-100 rounded-full select-none"
+            >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-full cursor-pointer whitespace-nowrap"
+                >Account</button
+              >
+              <button
+                :id="$id(tabId)"
+                @click="tabButtonClicked($el);"
+                type="button"
+                class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap"
+                >Password</button
+              >
+              <div
+                x-ref="tabMarker"
+                class="absolute left-0 z-10 w-1/2 h-full duration-300 ease-out"
+                x-cloak
+              >
+                <div class="w-full h-full bg-white rounded-full shadow-sm">
+                </div>
+              </div>
+            </div>
+            <div class="relative w-full mt-2 content">
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+              >
+                <!-- Tab Content 1 - Replace with your content -->
+                <section class="mt-4 rounded-2xl h-full drop-shadow-xl">
+                  <img
+                    src="/images/ModalOne.png"
+                    alt="thumbnail"
+                    class="ring-1 ring-slate-300 rounded-2xl"
+                  />
+                </section>
+                <!-- End Tab Content 1 -->
+              </div>
+              <div
+                :id="$id(tabId + '-content')"
+                x-show="tabContentActive($el)"
+                class="relative"
+                x-cloak
+              >
+                <section class="mt-4 rounded-2xl h-full drop-shadow-xl">
+                  <img
+                    src="/images/ModalTwo.png"
+                    alt="thumbnail"
+                    class="ring-1 ring-slate-300 rounded-2xl"
+                  />
+                </section>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="grid grid-cols-1 items-start md:grid-cols-2 mt-12 lg:mt-24">
+      <div class="lg:pl-24 md:pl-12">
+        <h2 class="text-blue-950 font-semibold mt-6 text-3xl">
+          {featureTwoTitle}
+        </h2>
+        <p class="text-slate-500 mt-5 lg:text-pretty">
+          {featureTwoDescription}
+        </p>
+        <ul
+          role="list"
+          class="grid grid-cols-2 gap-4 lg:gap-y-12 list-none lg:gap-6 mt-12"
+        >
+          <li class="col-span-2 mb-6 lg:mb-0">
+            <p class="font-semibold text-blue-950">{featureTwoItemOne}</p>
+            <p class="mt-2 text-slate-500 text-sm lg:text-pretty">
+              {featureTwoItemOneDescription}
+            </p>
+          </li>
+          <li>
+            <p class="font-semibold text-blue-950 text-base">
+              {featureTwoItemTwo}
+            </p>
+            <p class="mt-2 text-slate-500 text-sm">
+              {featureTwoItemTwoDescription}
+            </p>
+          </li>
+          <li>
+            <p class="font-semibold text-blue-950 text-base">
+              {featureTwoItemThree}
+            </p>
+            <p class="mt-2 text-slate-500 text-sm">
+              {featureTwoItemThreeDescription}
+            </p>
+          </li>
+        </ul>
+        <p class="text-slate-500 mt-12 lg:text-pretty">
+          {featureTwoDescriptionTwo}
+        </p>
+        <p class="mt-5">
+          <a
+            title="About WeMake"
+            aria-label="About WeMake"
+            href=""
+            class="text-blue-500 hover:text-blue-600 inline-flex items-center group"
+          >
+            More about WeMake
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="size-4 ml-3 group-hover:translate-x-2 transition duration-500 ease-in-out transform"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                clip-rule="evenodd"></path>
+            </svg>
+          </a>
+        </p>
+      </div>
+      <div
+        class="lg:mt-0 mt-12 md:pr-12 md:border-r lg:pr-24 border-slate-200 h-full lg:order-first"
+      >
+        <img
+          src="/images/payments.png"
+          alt="thumbnail"
+          class="drop-shadow-2xl"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,25 @@
+---
+const logos = [
+  "/logos/googleforstartups.svg",
+  "/logos/notion.svg",
+  "/logos/elevenlabs.png",
+  "/logos/clickup.svg",
+];
+---
+
+<section class="bg-white">
+  <div class="mx-auto max-w-7xl text-center py-24 px-24">
+    <div class="flex flex-nowrap justify-between gap-8">
+      {
+        logos.map((logo, index) => (
+          <img
+
+            class="grayscale opacity-50 size-12 grow object-scale-down"
+            src={logo}
+            alt={`Logo ${index + 1}`}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>

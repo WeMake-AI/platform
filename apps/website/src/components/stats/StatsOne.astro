@@ -1,0 +1,52 @@
+---
+// Define the stats as an array of objects
+const stats = [
+  {
+    value: "$70M",
+    description: "total increase in Lexington",
+  },
+  {
+    value: "3m faster",
+    description: "Spazio to launch a platform",
+  },
+  {
+    value: "5%",
+    description: "uplift in Unwrapped payment",
+  },
+  {
+    value: "5 days",
+    description: "Ike expansion in one lexington",
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+      >cool stats</span
+    >
+
+    <h2
+      class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl lg:text-balance"
+    >
+      Beyond the basics stats for the platform, we have some more interesting
+      stats.
+    </h2>
+
+    <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 mt-12">
+      {
+        stats.map((stat) => (
+          <div>
+            <p class="text-4xl font-medium tracking-tight  lg:text-5xl text-blue-500">
+              {stat.value}
+            </p>
+
+            <p class="text-slate-500 mt-6 border-blue-500">
+              {stat.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

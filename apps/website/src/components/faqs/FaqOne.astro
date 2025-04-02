@@ -1,0 +1,90 @@
+---
+// Define the FAQ data
+const faqs = [
+  {
+    question: "Kann ich WeMake für meine Website/mein Unternehmen nutzen?",
+    answer:
+      "WeMake ist eine KI-Beratungsfirma, die sich auf maßgeschneiderte Lösungen für Unternehmen konzentriert.  Wir bieten strategische Beratung, Entwicklung von Prototypen und MVP's, sowie die sichere Integration von KI-Lösungen, insbesondere mit ZeroTrust-Ansätzen.  Ob WeMake für Ihre spezifischen Bedürfnisse geeignet ist, hängt von Ihren Zielen und Anforderungen ab.  Am besten kontaktieren Sie uns direkt für eine kostenlose Erstberatung.",
+  },
+  {
+    question: "Erhalte ich Updates und Unterstützung?",
+    answer:
+      "Ja, kontinuierliche Unterstützung und regelmäßige Updates sind ein wesentlicher Bestandteil unserer Dienstleistungen. Wir bieten verschiedene Support-Level an, abhängig von Ihrem gewählten Servicepaket.  Dazu gehören technischer Support, strategische Beratung und die Weiterentwicklung Ihrer KI-Lösungen.",
+  },
+  {
+    question: "Wie hoch sind die Kosten für eine KI-Beratung?",
+    answer:
+      "Die Kosten variieren je nach Projektumfang, Komplexität und Ihren spezifischen Anforderungen. Wir bieten verschiedene Preismodelle an, von der kostenlosen Potenzialanalyse über Workshop-Pakete bis hin zu individuellen Enterprise-Lösungen.  Kontaktieren Sie uns für ein maßgeschneidertes Angebot.",
+  },
+  {
+    question: "Wie funktioniert der Beratungsprozess?",
+    answer:
+      "Unser Prozess beginnt mit einer gründlichen Analyse Ihrer aktuellen Situation, Ihrer Daten und Ihrer Ziele.  Darauf aufbauend entwickeln wir eine maßgeschneiderte KI-Strategie und Roadmap.  Wir arbeiten eng mit Ihnen zusammen, um sicherzustellen, dass die Lösung perfekt auf Ihre Bedürfnisse zugeschnitten ist.  Der Prozess umfasst in der Regel die Phasen: Analyse, Strategieentwicklung, Prototyping/MVP-Entwicklung, Implementierung und kontinuierliche Optimierung.",
+  },
+  {
+    question: "Wie lange dauert ein KI-Projekt?",
+    answer:
+      "Die Projektdauer hängt von verschiedenen Faktoren ab, einschließlich der Komplexität der Lösung, der Verfügbarkeit von Daten und der Integrationsanforderungen.  Erste Ergebnisse, wie z.B. eine KI-Roadmap oder einen Prototypen, können oft innerhalb weniger Wochen sichtbar sein.  Komplexere Projekte können mehrere Monate oder länger dauern. Wir legen Wert auf transparente Kommunikation und halten Sie während des gesamten Prozesses auf dem Laufenden.",
+  },
+  {
+    question: "Welche Branchen bedienen Sie?",
+    answer: "Wir haben Erfahrung in einer Vielzahl von Branchen, darunter E-Commerce, Logistik, Fertigung, Gesundheitswesen und Finanzdienstleistungen.  Unsere KI-Experten bringen branchenübergreifendes Know-how mit und können Lösungen für unterschiedliche Geschäftsbereiche entwickeln.",
+  },
+    {
+    question: "Wie stellen Sie die Sicherheit meiner Daten sicher?",
+    answer: "Datensicherheit hat für uns höchste Priorität. Wir implementieren strenge Sicherheitsprotokolle, einschließlich ZeroTrust-Architekturen, um Ihre Daten zu schützen. Wir halten uns an alle relevanten Datenschutzbestimmungen (z. B. DSGVO) und arbeiten transparent, um sicherzustellen, dass Ihre Daten sicher und vertraulich behandelt werden."
+  },
+      {
+    question: "Was unterscheidet WeMake von anderen KI-Beratungsunternehmen?",
+    answer: "WeMake kombiniert tiefes technisches Know-how mit einem starken Fokus auf ethische KI und Nachhaltigkeit. Wir entwickeln KI-Lösungen, die den Menschen in den Mittelpunkt stellen und einen positiven Beitrag zur Gesellschaft leisten. Unsere radikale Transparenz, unser partnerschaftlicher Ansatz und unser Engagement für langfristige Wertschöpfung zeichnen uns aus."
+  },
+  // Add more FAQs as needed
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <div>
+      <h2 class="inline-flex items-center text-blue-600">
+        <span class="text-base font-medium tracking-tight">FAQ</span>
+      </h2>
+      <h2
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        Häufig gestellte Fragen
+        <span class="lg:block"> und Antworten</span>
+      </h2>
+
+      <div
+        class="mt-12 bg-slate-50 rounded-3xl p-4 lg:p-10 divide-y divide-slate-200"
+      >
+        {
+          faqs.map((faq) => (
+            <>
+              <details class="group cursor-pointer">
+                <summary class="flex items-center justify-between w-full py-4  text-left select-none font-semibold text-blue-950 hover:text-blue-600">
+                  {faq.question}
+                  <svg
+                    class="size-5  ease-out text-accent-500 duration-300 transform group-open:-rotate-45"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M12 6v12m6-6H6"
+                    />
+                  </svg>
+                </summary>
+                <div class="py-4 pt-2 ext-sm text-slate-500">{faq.answer}</div>
+              </details>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

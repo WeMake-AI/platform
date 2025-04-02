@@ -1,0 +1,69 @@
+<section>
+  <div class="flex justify-center lg:h-svh items-center">
+    <div class="w-full mx-auto max-w-md md:max-w-sm md:px-0 md:w-96 px-8 py-24">
+      <div class="text-center">
+        <h2 class="text-blue-950 font-semibold text-4xl tracking-tight">
+          Anmelden
+        </h2>
+        <p class="text-slate-500 mt-4 text-balance">
+          Melden Sie sich an, um alle Funktionen zu nutzen.
+        </p>
+      </div>
+      <form class="mt-12">
+        <div class="space-y-6">
+          <div>
+            <label for="email" class="sr-only">Ihre E-Mail-Adresse</label>
+            <input
+              type="email"
+              id="email"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="email@example.com"
+              autocomplete="off"
+              required
+            />
+          </div>
+          <div>
+            <label for="password" class="sr-only">Passwort</label>
+            <input
+              type="password"
+              id="password"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Passwort hier eingeben..."
+              required
+            />
+          </div>
+          <div>
+            <label for="confirm_password" class="sr-only"
+              >Passwort bestätigen</label
+            >
+            <input
+              type="password"
+              id="confirm_password"
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              placeholder="Passwort hier eingeben..."
+              required
+            />
+          </div>
+          <div>
+            <button
+              class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-full"
+              type="submit"
+            >
+              Anmelden
+            </button>
+          </div>
+          <div class="flex justify-between items-center">
+            <a
+              href="/forgot"
+              class="text-blue-600 hover:text-blue-950"
+              title="Passwort vergessen?"
+              aria-label="Passwort vergessen?"
+            >
+              Passwort vergessen?
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

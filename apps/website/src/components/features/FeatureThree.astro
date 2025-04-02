@@ -1,0 +1,337 @@
+---
+const { overline, title, description } = Astro.props;
+---
+
+<section class="bg-blue-1000 transform skew-y-6 -mt-72">
+  <div
+    class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24 lg:pt-42 pb-52 items-center transform -skew-y-6"
+  >
+    <div>
+      <span class="text-sm font-medium text-slate-300 tracking-wide uppercase"
+        >{overline}</span
+      >
+      <h2
+        class="text-white font-semibold tracking-tight lg:text-5xl mt-6 text-3xl"
+      >
+        {title}
+      </h2>
+      <p class="text-slate-300 mt-6">
+        {description}
+      </p>
+    </div>
+
+    <div class="mx-auto text-left mt-12">
+      <div
+        x-data="{
+        tabSelected: 1,
+        tabId: $id('tabs'),
+        tabButtonClicked(tabButton){
+            this.tabSelected = tabButton.id.replace(this.tabId + '-', '');
+            this.tabRepositionMarker(tabButton);
+        },
+        tabRepositionMarker(tabButton){
+            this.$refs.tabMarker.style.width=tabButton.offsetWidth + 'px';
+            this.$refs.tabMarker.style.height=tabButton.offsetHeight + 'px';
+            this.$refs.tabMarker.style.left=tabButton.offsetLeft + 'px';
+        },
+        tabContentActive(tabContent){
+            return this.tabSelected == tabContent.id.replace(this.tabId + '-content-', '');
+        }
+    }"
+        x-init="tabRepositionMarker($refs.tabButtons.firstElementChild);"
+        class="relative text-white"
+      >
+        <div
+          x-ref="tabButtons"
+          class="relative inline-grid items-center justify-center h-10 grid-cols-4 p-1 bg-blue-1000 rounded-full select-none"
+        >
+          <button
+            :id="$id(tabId)"
+            @click="tabButtonClicked($el);"
+            type="button"
+            class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-full cursor-pointer whitespace-nowrap"
+            >Produktivität</button
+          >
+          <button
+            :id="$id(tabId)"
+            @click="tabButtonClicked($el);"
+            type="button"
+            class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap"
+            >Entscheidung</button
+          >
+          <button
+            :id="$id(tabId)"
+            @click="tabButtonClicked($el);"
+            type="button"
+            class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap"
+            >Innovation</button
+          >
+          <button
+            :id="$id(tabId)"
+            @click="tabButtonClicked($el);"
+            type="button"
+            class="relative z-20 inline-flex items-center justify-center w-full h-8 px-3 text-sm font-medium transition-all rounded-md cursor-pointer whitespace-nowrap"
+            >Risiko</button
+          >
+          <div
+            x-ref="tabMarker"
+            class="absolute left-0 z-10 w-1/4 h-full duration-300 ease-out"
+            x-cloak
+          >
+            <div class="w-full h-full bg-blue-1000 rounded-full shadow-sm">
+            </div>
+          </div>
+        </div>
+        <div class="relative w-full mt-2 content">
+          <!-- Productivity Tab -->
+          <div
+            :id="$id(tabId + '-content')"
+            x-show="tabContentActive($el)"
+            class="relative"
+          >
+            <section
+              class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-24 lg:bg-blue-1000 lg:p-10 rounded-3xl"
+            >
+              <div class="flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-white mb-4">Gesteigerte Produktivität</h3>
+                <p class="text-slate-300 mb-6">
+                  Automatisieren Sie Routineaufgaben, setzen Sie Ressourcen frei und beschleunigen Sie Ihre Kernprozesse.
+                </p>
+                <ul class="space-y-3 text-slate-300">
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Bis zu 40% Effizienzsteigerung in Kernprozessen</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Freisetzung wertvoller Ressourcen für strategische Aufgaben</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Reduzierte Durchlaufzeiten und schnellere Time-to-Market</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex items-center justify-center">
+                <svg class="w-full h-auto max-w-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="50" y="50" width="300" height="200" rx="20" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+                  <circle cx="200" cy="150" r="80" fill="#1e3a8a" stroke="#3b82f6" stroke-width="4"/>
+                  <path d="M200 90 L200 150 L250 180" stroke="#60a5fa" stroke-width="6" stroke-linecap="round" fill="none"/>
+                  <circle cx="200" cy="150" r="10" fill="#60a5fa"/>
+                  <path d="M140 220 L260 220" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M120 200 L280 200" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M160 240 L240 240" stroke="#3b82f6" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M300 50 C320 70, 320 100, 340 120" stroke="#60a5fa" stroke-width="3" stroke-dasharray="5,5" fill="none"/>
+                  <path d="M340 120 L360 130" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" fill="none"/>
+                  <circle cx="360" cy="130" r="5" fill="#60a5fa"/>
+                </svg>
+              </div>
+            </section>
+          </div>
+
+          <!-- Decision Making Tab -->
+          <div
+            :id="$id(tabId + '-content')"
+            x-show="tabContentActive($el)"
+            class="relative"
+            x-cloak
+          >
+            <section
+              class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-24 lg:bg-blue-1000 lg:p-10 rounded-3xl"
+            >
+              <div class="flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-white mb-4">Verbesserte Entscheidungsfindung</h3>
+                <p class="text-slate-300 mb-6">
+                  Gewinnen Sie tiefere Einblicke in Ihre Daten und treffen Sie fundierte, datengestützte Entscheidungen.
+                </p>
+                <ul class="space-y-3 text-slate-300">
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Echtzeit-Analytik für zeitkritische Entscheidungen</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Mustererkennungen für verborgene Geschäftschancen</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Ganzheitliche Datenintegration über Silos hinweg</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex items-center justify-center">
+                <svg class="w-full h-auto max-w-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="70" y="50" width="260" height="200" rx="15" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+                  <!-- Graph Elements -->
+                  <path d="M100 200 L100 100 L150 150 L200 90 L250 120 L300 70" stroke="#60a5fa" stroke-width="4" fill="none"/>
+                  <circle cx="100" cy="100" r="6" fill="#2563eb"/>
+                  <circle cx="150" cy="150" r="6" fill="#2563eb"/>
+                  <circle cx="200" cy="90" r="6" fill="#2563eb"/>
+                  <circle cx="250" cy="120" r="6" fill="#2563eb"/>
+                  <circle cx="300" cy="70" r="6" fill="#2563eb"/>
+                  <!-- Background Grid -->
+                  <line x1="100" y1="70" x2="100" y2="200" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="150" y1="70" x2="150" y2="200" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="200" y1="70" x2="200" y2="200" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="250" y1="70" x2="250" y2="200" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="300" y1="70" x2="300" y2="200" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="100" y1="70" x2="300" y2="70" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="100" y1="110" x2="300" y2="110" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="100" y1="150" x2="300" y2="150" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <line x1="100" y1="190" x2="300" y2="190" stroke="#3b82f6" stroke-width="1" stroke-opacity="0.3"/>
+                  <!-- Axis -->
+                  <line x1="100" y1="200" x2="300" y2="200" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="100" y1="70" x2="100" y2="200" stroke="#60a5fa" stroke-width="2"/>
+                  <!-- Data Points -->
+                  <circle cx="320" cy="160" r="30" fill="#1e3a8a" stroke="#3b82f6" stroke-width="2"/>
+                  <text x="320" y="165" text-anchor="middle" fill="#60a5fa" font-size="24" font-weight="bold">KI</text>
+                </svg>
+              </div>
+            </section>
+          </div>
+
+          <!-- Innovation Tab -->
+          <div
+            :id="$id(tabId + '-content')"
+            x-show="tabContentActive($el)"
+            class="relative"
+            x-cloak
+          >
+            <section
+              class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-24 lg:bg-blue-1000 lg:p-10 rounded-3xl"
+            >
+              <div class="flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-white mb-4">Innovation & Neue Geschäftsmodelle</h3>
+                <p class="text-slate-300 mb-6">
+                  Entdecken Sie ungeahnte Möglichkeiten durch KI-gestützte Innovation und erschließen Sie neue Umsatzquellen.
+                </p>
+                <ul class="space-y-3 text-slate-300">
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Identifikation innovativer Geschäftsmodelle</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Beschleunigte Produkt- und Dienstleistungsentwicklung</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Differenzierung durch KI-gestützte Kundenerlebnisse</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex items-center justify-center">
+                <svg class="w-full h-auto max-w-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Brain outline with network -->
+                  <ellipse cx="200" cy="150" rx="120" ry="100" fill="#1e3a8a" stroke="#3b82f6" stroke-width="3"/>
+                  <!-- Brain hemisphere divide -->
+                  <path d="M200 50 C 200 150, 200 150, 200 250" stroke="#60a5fa" stroke-width="3" stroke-dasharray="5,5" fill="none"/>
+                  <!-- Network nodes -->
+                  <circle cx="150" cy="100" r="10" fill="#2563eb"/>
+                  <circle cx="250" cy="100" r="10" fill="#2563eb"/>
+                  <circle cx="180" cy="180" r="10" fill="#2563eb"/>
+                  <circle cx="220" cy="180" r="10" fill="#2563eb"/>
+                  <circle cx="140" cy="150" r="10" fill="#2563eb"/>
+                  <circle cx="260" cy="150" r="10" fill="#2563eb"/>
+                  <!-- Network connections -->
+                  <line x1="150" y1="100" x2="140" y2="150" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="150" y1="100" x2="180" y2="180" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="250" y1="100" x2="260" y2="150" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="250" y1="100" x2="220" y2="180" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="140" y1="150" x2="180" y2="180" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="260" y1="150" x2="220" y2="180" stroke="#60a5fa" stroke-width="2"/>
+                  <line x1="180" y1="180" x2="220" y2="180" stroke="#60a5fa" stroke-width="2"/>
+                  <!-- Lightbulb -->
+                  <path d="M200 50 L200 30 M185 35 L215 35" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
+                  <circle cx="200" cy="20" r="12" fill="#60a5fa"/>
+                  <!-- Light rays -->
+                  <path d="M190 12 L175 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M210 12 L225 5" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M215 22 L235 22" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M185 22 L165 22" stroke="#60a5fa" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+              </div>
+            </section>
+          </div>
+
+          <!-- Risk Management Tab -->
+          <div
+            :id="$id(tabId + '-content')"
+            x-show="tabContentActive($el)"
+            class="relative"
+            x-cloak
+          >
+            <section
+              class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-24 lg:bg-blue-1000 lg:p-10 rounded-3xl"
+            >
+              <div class="flex flex-col justify-center">
+                <h3 class="text-2xl font-bold text-white mb-4">Risikominimierung</h3>
+                <p class="text-slate-300 mb-6">
+                  Identifizieren und mitigieren Sie Risiken proaktiv durch intelligente Analysen und Predictive Modeling.
+                </p>
+                <ul class="space-y-3 text-slate-300">
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Frühwarnsystem für Geschäftsrisiken</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>Predictive Maintenance zur Vermeidung von Ausfällen</span>
+                  </li>
+                  <li class="flex items-start">
+                    <svg class="h-6 w-6 text-blue-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span>ZeroTrust KI-Sicherheitskonzept</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="flex items-center justify-center">
+                <svg class="w-full h-auto max-w-md" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Shield -->
+                  <path d="M200 50 L100 90 L100 170 C100 220, 150 260, 200 280 C250 260, 300 220, 300 170 L300 90 L200 50" fill="#1e3a8a" stroke="#3b82f6" stroke-width="4"/>
+                  <!-- Lock Body -->
+                  <rect x="170" y="120" width="60" height="80" rx="5" fill="#2563eb"/>
+                  <!-- Lock Shackle -->
+                  <path d="M180 120 L180 100 C180 80, 220 80, 220 100 L220 120" fill="none" stroke="#60a5fa" stroke-width="8" stroke-linecap="round"/>
+                  <!-- Checkmark -->
+                  <path d="M175 160 L190 175 L225 140" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                  <!-- Shield Sections -->
+                  <path d="M200 50 L200 280" stroke="#60a5fa" stroke-width="1" stroke-dasharray="5,5"/>
+                  <path d="M100 130 L300 130" stroke="#60a5fa" stroke-width="1" stroke-dasharray="5,5"/>
+                  <path d="M120 200 L280 200" stroke="#60a5fa" stroke-width="1" stroke-dasharray="5,5"/>
+                  <!-- Scanner -->
+                  <path d="M120 90 C130 70, 270 70, 280 90" stroke="#60a5fa" stroke-width="2" fill="none"/>
+                  <path d="M120 90 L280 90" stroke="#60a5fa" stroke-width="2"/>
+                  <path d="M140 70 L140 60 M170 70 L170 60 M200 70 L200 60 M230 70 L230 60" stroke="#60a5fa" stroke-width="2"/>
+                </svg>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

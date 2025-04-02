@@ -1,0 +1,211 @@
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <h2
+      class="text-blue-950 font-semibold mt-6 text-4xl lg:text-6xl tracking-tight"
+    >
+      Cookie settings
+    </h2>
+    <p class="text-slate-500 mt-5">Grab cookies to improve your experience</p>
+
+    <div class="space-y-12 mt-24">
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-center">
+        <div class="lg:col-span-3">
+          <h2
+            class="text-blue-950 font-semibold mt-6 text-4xl tracking-tight lg:mx-auto"
+          >
+            Preferences
+          </h2>
+          <p class="text-base text-slate-500 mt-6">
+            Preference cookies let us save your preferences and recognize you
+            when you return to our Services.
+          </p>
+        </div>
+        <div class="lg:ml-auto">
+          <!-- Toggle -->
+          <div
+            x-data="{ value: false }"
+            class="flex items-center justify-center"
+            x-id="['toggle-label']"
+          >
+            <input type="hidden" name="sendNotifications" :value="value" />
+
+            <!-- Label -->
+            <label
+              @click="$refs.toggle.click(); $refs.toggle.focus()"
+              :id="$id('toggle-label')"
+              class="text-blue-600 font-medium"
+            >
+              Enable
+            </label>
+
+            <!-- Button -->
+            <button
+              x-ref="toggle"
+              @click="value = ! value"
+              type="button"
+              role="switch"
+              :aria-checked="value"
+              :aria-labelledby="$id('toggle-label')"
+              :class="value ? 'bg-blue-500' : 'bg-blue-1000 '"
+              class="relative ml-4 inline-flex w-14 rounded-full py-1 transition"
+            >
+              <span
+                :class="value ? 'translate-x-7' : 'translate-x-1'"
+                class="bg-white h-6 w-6 rounded-full transition shadow-md"
+                aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-center">
+        <div class="lg:col-span-3">
+          <h2
+            class="text-blue-950 font-semibold mt-6 text-4xl tracking-tight lg:mx-auto"
+          >
+            Advertising
+          </h2>
+          <p class="text-base text-slate-500 mt-6">
+            Advertising cookies and similar technologies on Lexingtonallow us to
+            place targeted Lexingtonadvertisements on other sites you visit and
+            measure your engagement with those ads.
+          </p>
+        </div>
+        <div class="lg:ml-auto">
+          <!-- Toggle -->
+          <div
+            x-data="{ value: false }"
+            class="flex items-center justify-center"
+            x-id="['toggle-label']"
+          >
+            <input type="hidden" name="sendNotifications" :value="value" />
+
+            <!-- Label -->
+            <label
+              @click="$refs.toggle.click(); $refs.toggle.focus()"
+              :id="$id('toggle-label')"
+              class="text-blue-600 font-medium"
+            >
+              Enable
+            </label>
+
+            <!-- Button -->
+            <button
+              x-ref="toggle"
+              @click="value = ! value"
+              type="button"
+              role="switch"
+              :aria-checked="value"
+              :aria-labelledby="$id('toggle-label')"
+              :class="value ? 'bg-blue-500' : 'bg-blue-1000 '"
+              class="relative ml-4 inline-flex w-14 rounded-full py-1 transition"
+            >
+              <span
+                :class="value ? 'translate-x-7' : 'translate-x-1'"
+                class="bg-white h-6 w-6 rounded-full transition shadow-md"
+                aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-center">
+        <div class="lg:col-span-3">
+          <h2
+            class="text-blue-950 font-semibold mt-6 text-4xl tracking-tight lg:mx-auto"
+          >
+            Analytics
+          </h2>
+          <p class="text-base text-slate-500 mt-6">
+            Analytics cookies help us understand how visitors interact with our
+            Services, allowing us to analyze and improve our Services (also
+            through third party analytics).
+          </p>
+        </div>
+        <div class="lg:ml-auto">
+          <!-- Toggle -->
+          <div
+            x-data="{ value: false }"
+            class="flex items-center justify-center"
+            x-id="['toggle-label']"
+          >
+            <input type="hidden" name="sendNotifications" :value="value" />
+
+            <!-- Label -->
+            <label
+              @click="$refs.toggle.click(); $refs.toggle.focus()"
+              :id="$id('toggle-label')"
+              class="text-blue-600 font-medium"
+            >
+              Enable
+            </label>
+
+            <!-- Button -->
+            <button
+              x-ref="toggle"
+              @click="value = ! value"
+              type="button"
+              role="switch"
+              :aria-checked="value"
+              :aria-labelledby="$id('toggle-label')"
+              :class="value ? 'bg-blue-500' : 'bg-blue-1000 '"
+              class="relative ml-4 inline-flex w-14 rounded-full py-1 transition"
+            >
+              <span
+                :class="value ? 'translate-x-7' : 'translate-x-1'"
+                class="bg-white h-6 w-6 rounded-full transition shadow-md"
+                aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-4 items-center">
+        <div class="lg:col-span-3">
+          <h2
+            class="text-blue-950 font-semibold mt-6 text-4xl tracking-tight lg:mx-auto"
+          >
+            Authentication
+          </h2>
+          <p class="text-base text-slate-500 mt-6">
+            Authentication cookies enable Spaziobianco to remember you so you
+            don’t have to log in as you use our Services.
+          </p>
+        </div>
+        <div class="lg:ml-auto">
+          <!-- Toggle -->
+          <div
+            x-data="{ value: false }"
+            class="flex items-center justify-center"
+            x-id="['toggle-label']"
+          >
+            <input type="hidden" name="sendNotifications" :value="value" />
+
+            <!-- Label -->
+            <label
+              @click="$refs.toggle.click(); $refs.toggle.focus()"
+              :id="$id('toggle-label')"
+              class="text-blue-600 font-medium"
+            >
+              Enable
+            </label>
+
+            <!-- Button -->
+            <button
+              x-ref="toggle"
+              @click="value = ! value"
+              type="button"
+              role="switch"
+              :aria-checked="value"
+              :aria-labelledby="$id('toggle-label')"
+              :class="value ? 'bg-blue-500' : 'bg-blue-1000 '"
+              class="relative ml-4 inline-flex w-14 rounded-full py-1 transition"
+            >
+              <span
+                :class="value ? 'translate-x-7' : 'translate-x-1'"
+                class="bg-white h-6 w-6 rounded-full transition shadow-md"
+                aria-hidden="true"></span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

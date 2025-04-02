@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import BlogPost from "@/components/blog/TagLink.astro";
+import { getCollection } from "astro:content";
+import CtaCommunity from "@/components/cta/CtaCommunity.astro";
+
+export async function getStaticPaths() {
+  const allPosts = await getCollection("posts");
+  const uniqueTags = [
+    ...new Set(allPosts.map((post) => post.data.tags).flat()),
+  ];
+
+  return uniqueTags.map((tag) => {
+    const filteredPosts = allPosts.filter((post) =>
+      post.data.tags.includes(tag)
+    );
+    return {
+      params: { tag },
+      props: { posts: filteredPosts },
+    };
+  });
+}
+
+const { tag } = Astro.params;
+const { posts } = Astro.props;
+---
+
+<BaseLayout title={tag}>
+  <section>
+    <div
+      class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-12 lg:py-36 items-start"
+    >
+      <p class="font-semibold text-blue-950 mt-6 text-3xl lg:mx-auto">
+        Posts tagged with {tag}
+      </p>
+      <ol role="list" class="mt-16 space-y-10 sm:space-y-16">
+        <li>
+          <ol
+            role="list"
+            class="rounded-2xl bg-slate-50 py-3 px-6 sm:py-7 sm:px-8"
+          >
+            {
+              posts.map((post) => (
+                <li aria-label="tag">
+                  <BlogPost
+                    url={"/posts/" + post.slug}
+                    title={post.data.title}
+                  />
+                </li>
+              ))
+            }
+          </ol>
+        </li>
+      </ol>
+    </div>
+  </section>
+  <CtaCommunity />
+</BaseLayout>

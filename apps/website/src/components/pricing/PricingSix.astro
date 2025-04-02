@@ -1,0 +1,1355 @@
+---
+const pricingPlans = [
+  {
+    name: "Hobby",
+    monthlyPrice: "15",
+    annualPrice: "8",
+    description:
+      "This plan suits individual users and hobbyists needing basic  support",
+    cardBgClass: "bg-white",
+    descriptionColor: "text-slate-500",
+    buttonClass: "bg-blue-100 hover:bg-blue-50 text-blue-600",
+    features: ["5 mb/PDF", "75 pages/PDF", "10 messages/Day", "Up to 3 PDFs"],
+    unavailableFeatures: ["Gpt-3.5-turbo model", "Test mode", "Doc summary"],
+  },
+  {
+    name: "Pro",
+    monthlyPrice: "25",
+    annualPrice: "20",
+    description: "This plan is tailored for small businesses and startups",
+    cardBgClass: "bg-white",
+    descriptionColor: "text-slate-500",
+    buttonClass: "bg-blue-500 hover:bg-blue-600 text-white",
+    features: [
+      "10 mb/PDF",
+      "150 pages/PDF",
+      "25 messages/Day",
+      "Up to 5 PDFs",
+      "Gpt-3.5-turbo model",
+    ],
+    unavailableFeatures: ["Test mode", "Doc summary"],
+  },
+  {
+    name: "Team",
+    monthlyPrice: "50",
+    annualPrice: "40",
+    description:
+      "This plan is for medium businesses, providing advanced tools.",
+    cardBgClass: "bg-white",
+    descriptionColor: "text-slate-500",
+    buttonClass: "bg-blue-100 hover:bg-blue-50 text-blue-600",
+    features: [
+      "32 mb/PDF",
+      "1500 pages/PDF",
+      "1000 messages/Day",
+      "Up to 50 PDFs",
+      "Gpt-3.5-turbo-16k model",
+      "Test mode",
+      "Doc summary",
+    ],
+    unavailableFeatures: [],
+  },
+];
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 pb-12 pt-24">
+    <div class="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24 items-end">
+      <div>
+        <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+          >pricing</span
+        >
+        <h2
+          class="text-blue-950 font-semibold tracking-tight mt-6 text-3xl lg:text-balance"
+        >
+          Always know what you'll pay, transparent pricing for everyone.
+        </h2>
+      </div>
+      <div>
+        <p class="text-slate-500 lg:text-balance">
+          Choose a plan that works the best for you and your team. Start small,
+          upgrade when you need.
+        </p>
+        <div class="md:max-w-xs mt-12 md:hidden">
+          <div
+            class="inline-flex w-full border rounded-full mt-6 overflow-hidden bg-white p-0.5 z-0 border-slate-200"
+          >
+            <button
+              class="text-black font-medium border rounded-full transition w-full py-2 block border-transparent px-8 text-xs"
+              @click="annual = false"
+              :class="annual == false ? 'bg-slate-100 border text-black ' : ''"
+              type="button">Monthly</button
+            >
+            <button
+              class="text-black font-medium border rounded-full transition w-full py-2 block border-transparent px-8 text-xs"
+              @click="annual = true"
+              :class="annual == true ? 'bg-slate-100 border text-black' : ''"
+              type="button">Annual</button
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Here starts the mobile pricing table -->
+    <div class="mt-16 grid max-w-2xl sm:mx-auto lg:max-w-none md:hidden gap-12">
+      {
+        pricingPlans.map((plan) => (
+          <section>
+            <div
+              class={` ${plan.cardBgClass}  flex flex-col  justify-between w-full  `}
+            >
+              <div>
+                <div class="space-y-4 ">
+                  <div class="flex gap-1 items-end ">
+                    <p class={` text-blue-950`}>
+                      <span class="text-5xl font-light tracking-tight    ">
+                        <span x-show="!annual">${plan.monthlyPrice}</span>
+                        <span x-show="annual">${plan.annualPrice}</span>
+                      </span>
+                      /
+                    </p>
+
+                    <span
+                      class={`text-sm font-medium block ${plan.descriptionColor}`}
+                    >
+                      Monthly
+                      <span x-show="annual" style="display: none;">
+                        (billed annually)
+                      </span>
+                    </span>
+                  </div>
+                  <p class={`text-lg   text-blue-950`}>{plan.name}</p>
+                  <p class={`text-sm lg:text-pretty ${plan.descriptionColor}`}>
+                    {plan.description}
+                  </p>
+                </div>
+              </div>
+              <div class="flex mt-6">
+                <button
+                  type="button"
+                  title={plan.name}
+                  aria-label="get started"
+                  class={`inline-flex items-center justify-center px-6 py-3.5 rounded-full w-full font-medium ${plan.buttonClass}`}
+                >
+                  Get started
+                </button>
+              </div>
+              <ul
+                class={`flex flex-col order-last mt-8 text-sm ${plan.descriptionColor} gap-y-3`}
+              >
+                {plan.features.map((feature) => (
+                  <li class="inline-flex items-center gap-2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-circle-check"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="2"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+                {plan.unavailableFeatures.map((feature) => (
+                  <li
+                    class={`inline-flex items-center gap-2 ${plan.descriptionColor} line-through opacity-50`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="icon icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z" />
+                      <path d="M9 8l6 8" />
+                      <path d="M15 8l-6 8" />
+                    </svg>
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        ))
+      }
+    </div>
+    <!---- Here starts the Desktop pricing table -->
+    <div
+      class="hidden md:block relative mx-auto mt-12 pt-12 border-t border-slate-200"
+    >
+      <table class="mx-auto w-full text-center">
+        <thead>
+          <tr class="text-left align-top">
+            <th class=""></th>
+            <th class="w-1/4 px-2">
+              <div class="text-lg font-medium leading-6 text-blue-950">
+                Hobby
+                <span
+                  class="inline-flex items-center ml-3 px-2.5 py-0.5 rounded text-xs font-medium bg-white text-blue-500 float-right"
+                >
+                  -20%
+                </span>
+              </div>
+              <div class="pr-2 mt-4 mb-2">
+                <p class="mt-6 text-sm font-normal text-slate-500">
+                  For individuals
+                </p>
+              </div>
+            </th>
+            <th class="w-1/4 px-2">
+              <div class="text-lg font-medium leading-6 text-blue-500">Pro</div>
+              <div class="pr-2 mt-4 mb-2">
+                <p class="mt-6 text-sm font-normal text-slate-500">
+                  For medium businesses
+                </p>
+              </div>
+            </th>
+            <th class="w-1/4 px-2">
+              <div class="text-lg font-medium leading-6 text-blue-950">
+                Enterprise
+              </div>
+              <div class="pr-2 mt-4 mb-2">
+                <p class="mt-6 text-sm font-normal text-slate-500">
+                  For organizations, get in touch with us and we will help you
+                  in less than 24hs
+                </p>
+              </div>
+            </th>
+          </tr>
+          <tr class="text-left align-middle">
+            <th class=""></th>
+            <th class="w-1/4 px-2">
+              <div>
+                <div class="flex mt-4 mb-6">
+                  <div class="flex-shrink-0 text-5xl font-normal text-blue-950">
+                    $16
+                  </div>
+                  <div class="mt-auto ml-2 text-sm font-normal text-blue-950">
+                    per user
+                    <br />
+                    per month
+                  </div>
+                </div>
+              </div>
+            </th>
+            <th class="w-1/4 px-2">
+              <div>
+                <div class="flex mt-4 mb-6">
+                  <div class="flex-shrink-0 text-5xl font-normal text-blue-950">
+                    $20
+                  </div>
+                  <div class="mt-auto ml-2 text-sm font-normal text-blue-950">
+                    per user
+                    <br />
+                    per month
+                  </div>
+                </div>
+              </div>
+            </th>
+          </tr>
+          <tr class="text-left align-top">
+            <th class="px-2"></th>
+            <th class="w-1/4 px-2">
+              <div class="w-full py-2 mb-4">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full w-full font-medium bg-blue-100 hover:bg-blue-50 text-blue-600"
+                >
+                  Get started
+                </button>
+              </div>
+            </th>
+            <th class="w-1/4 px-2">
+              <div class="w-full py-2 mb-4">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full w-full font-medium bg-blue-500 hover:bg-blue-600 text-white"
+                >
+                  Get in started
+                </button>
+              </div>
+            </th>
+            <th class="w-1/4 px-2">
+              <div class="w-full py-2 mb-4">
+                <button
+                  type="button"
+                  class="inline-flex items-center justify-center px-6 py-3.5 rounded-full w-full font-medium bg-blue-100 hover:bg-blue-50 text-blue-600"
+                >
+                  Get in touch
+                </button>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-white/10">
+          <tr>
+            <th
+              class="py-3 text-base font-medium text-left text-blue-950"
+              colspan="4"
+              scope="colgroup"
+            >
+              Product features
+            </th>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Analytics
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">3</td>
+            <td class="px-2 text-sm font-normal">10</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Accounts
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">5</td>
+            <td class="px-2 text-sm font-normal">10</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Integrations
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">2</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Programs
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg></td
+            >
+            <td class="px-2 text-sm font-normal">1</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Deployments
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Advanced Checkpoints
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Private Deploymentss
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th
+              class="py-3 text-base font-medium text-left text-blue-950"
+              colspan="4"
+              scope="colgroup"
+            >
+              Support and performance
+            </th>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500"
+              >Support</th
+            >
+            <td class="px-2 text-sm font-normal">Discord community</td>
+            <td class="px-2 text-sm font-normal">Live chat</td>
+            <td class="px-2 text-sm font-normal"> Dedicated Discord</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              SLA
+            </th>
+            <td class="px-2 text-sm font-normal">4 days</td>
+            <td class="px-2 text-sm font-normal">3 day</td>
+            <td class="px-2 text-sm font-normal">1 hour</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Service Agreement
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Dedicated Manager
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Training
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Custom sessions
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Dedicated support channel
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Webstorm Environments
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+
+          <tr>
+            <th
+              class="py-3 text-base font-medium text-left text-blue-950"
+              colspan="4"
+              scope="colgroup"
+            >
+              Payment
+            </th>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Included accounts
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg></td
+            >
+            <td class="px-2 text-sm font-normal">30</td>
+            <td class="px-2 text-sm font-normal">100</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Views
+              <p class="inline"></p>
+            </th>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+            <td class="px-2 text-sm font-normal">Unlimited</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Additional accounts
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg></td
+            >
+            <td class="px-2 text-sm font-normal">$23 per month</td>
+            <td class="px-2 text-sm font-normal">$40 per month</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Discounts
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Minimum term
+            </th>
+            <td class="px-2 text-sm font-normal">Month-to-month</td>
+            <td class="px-2 text-sm font-normal">Month-to-month</td>
+            <td class="px-2 text-sm font-normal">1 year</td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Pay monthly
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Pay yearly
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Pay by credit card
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                class="icon mx-auto text-slate-400 icon-tabler icons-tabler-outline icon-tabler-xbox-x"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path
+                  d="M12 21a9 9 0 0 0 9 -9a9 9 0 0 0 -9 -9a9 9 0 0 0 -9 9a9 9 0 0 0 9 9z"
+                ></path>
+                <path d="M9 8l6 8"></path>
+                <path d="M15 8l-6 8"></path>
+              </svg>
+            </td>
+          </tr>
+          <tr>
+            <th class="py-3 text-sm font-normal text-left text-slate-500">
+              Pay by bank transfer
+            </th>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+            <td class="px-2 text-sm font-normal">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-circle-check mx-auto text-blue-600"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+                <path d="M9 12l2 2l4 -4"></path>
+              </svg>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>

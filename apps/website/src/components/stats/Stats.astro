@@ -1,0 +1,44 @@
+---
+interface Stat {
+  value: string;
+  description: string;
+}
+
+interface Props {
+  stats: Stat[];
+  overline: string;
+  title: string;
+}
+
+const { stats, overline, title } = Astro.props;
+---
+
+<section>
+  <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
+    <span class="text-sm uppercase font-medium tracking-wide text-blue-600"
+      >{overline}</span
+    >
+
+    <h2
+      class="text-blue-950 font-semibold tracking-tight lg:text-5xl mt-6 text-3xl lg:text-balance"
+    >
+      {title}
+    </h2>
+
+    <div class="gap-6 grid grid-cols-1 lg:grid-cols-4 mt-12">
+      {
+        stats.map((stat) => (
+          <div>
+            <p class="text-4xl font-medium tracking-tight  lg:text-5xl text-blue-500">
+              {stat.value}
+            </p>
+
+            <p class="text-slate-500 mt-6 border-blue-500">
+              {stat.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
