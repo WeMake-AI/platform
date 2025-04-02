@@ -3,13 +3,16 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "apps/*",
+    "modules/*"
   ],
   "scripts": {
     "website:dev": "bun run --cwd apps/website dev",
     "website:build": "bun run --cwd apps/website build",
     "website:preview": "bun website:build && bun run --cwd apps/website wrangler pages dev",
     "website:check": "bun run --cwd apps/website check",
+    "well-known:dev": "bun run --cwd modules/well-known dev",
+    "well-known:deploy": "bun run --cwd modules/well-known deploy",
     "format": "prettier --write ."
   },
   "devDependencies": {
