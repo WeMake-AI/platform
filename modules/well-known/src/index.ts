@@ -41,6 +41,16 @@ export default {
     // Extract the filename from the path (remove /.well-known/ prefix)
     const filename = path.substring("/.well-known/".length);
 
+    // Check for custom domain and load alternative content
+    if (hostname === "mta-sts.cenergy.network" && filename === "mta-sts.txt") {
+      const alternativeContent = `version: STSv1\nmode: enforce\nmx: smtp.google.com\nmax_age: 604800`;
+      return new Response(alternativeContent, {
+        headers: {
+          "Content-Type": "text/plain"
+        }
+      });
+    }
+
     if (!filename) {
       return new Response("Invalid path", { status: 400 });
     }
