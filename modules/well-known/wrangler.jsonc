@@ -33,7 +33,7 @@
       "custom_domain": true
     },
     {
-      "pattern": "mta-sts-c.cenergy.network",
+      "pattern": "mta-sts.cenergy.network",
       "custom_domain": true
     }
   ],
