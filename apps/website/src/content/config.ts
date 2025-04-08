@@ -9,14 +9,14 @@ const integrations = defineCollection({
       z.object({
         title: z.string(),
         value: z.string(),
-        url: z.optional(z.string()),
-      }),
+        url: z.optional(z.string())
+      })
     ),
     logo: z.object({
       url: z.string(),
-      alt: z.string(),
-    }),
-  }),
+      alt: z.string()
+    })
+  })
 });
 const helpdesk = defineCollection({
   schema: z.object({
@@ -24,9 +24,9 @@ const helpdesk = defineCollection({
     description: z.string(),
     icon: z.object({
       url: z.string(),
-      alt: z.string(),
-    }),
-  }),
+      alt: z.string()
+    })
+  })
 });
 const customers = defineCollection({
   schema: z.object({
@@ -34,24 +34,24 @@ const customers = defineCollection({
     challengesAndSolutions: z.array(
       z.object({
         title: z.string(),
-        content: z.string(),
-      }),
+        content: z.string()
+      })
     ),
     results: z.array(z.string()),
     about: z.string(),
     details: z.record(z.string()),
     logo: z.object({
       url: z.string(),
-      alt: z.string(),
-    }),
-  }),
+      alt: z.string()
+    })
+  })
 });
 const legal = defineCollection({
   schema: z.object({
     page: z.string(),
     pubDate: z.date().optional(),
-    description: z.string(),
-  }),
+    description: z.string()
+  })
 });
 const jobs = defineCollection({
   schema: z.object({
@@ -60,9 +60,9 @@ const jobs = defineCollection({
     team: z.string(),
     flag: z.object({
       url: z.string(),
-      alt: z.string(),
-    }),
-  }),
+      alt: z.string()
+    })
+  })
 });
 const postsCollection = defineCollection({
   schema: z.object({
@@ -73,15 +73,15 @@ const postsCollection = defineCollection({
     headerImage: z
       .object({
         url: z.string(),
-        alt: z.string(),
+        alt: z.string()
       })
       .optional(),
     image: z.object({
       url: z.string(),
-      alt: z.string(),
+      alt: z.string()
     }),
-    tags: z.array(z.string()),
-  }),
+    tags: z.array(z.string())
+  })
 });
 
 export const collections = {
@@ -90,5 +90,5 @@ export const collections = {
   customers: customers,
   legal: legal,
   jobs: jobs,
-  posts: postsCollection,
+  posts: postsCollection
 };

@@ -8,24 +8,24 @@ export default defineConfig({
   output: "static",
 
   server: {
-    port: 1312,
+    port: 1312
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss()]
   },
 
   markdown: {
     drafts: true,
     shikiConfig: {
-      theme: "css-variables",
-    },
+      theme: "css-variables"
+    }
   },
 
   shikiConfig: {
     wrap: true,
     skipInline: false,
-    drafts: true,
+    drafts: true
   },
 
   site: "https://wemake.cx",
@@ -33,6 +33,6 @@ export default defineConfig({
   integrations: [sitemap(), mdx()],
 
   build: {
-    assets: "_wemake",
-  },
+    assets: "_wemake"
+  }
 });

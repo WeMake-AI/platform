@@ -9,16 +9,7 @@ headerImage:
 image:
   url: "/images/writer-florentin.jpeg"
   alt: "Das WeMake ZSH Theme – Individualität trifft auf Produktivität."
-tags:
-  [
-    "zsh",
-    "launch",
-    "wemake",
-    "produktivität",
-    "open source",
-    "community",
-    "design",
-  ]
+tags: ["zsh", "launch", "wemake", "produktivität", "open source", "community", "design"]
 ---
 
 # WeMake ZSH – Jetzt verfügbar!

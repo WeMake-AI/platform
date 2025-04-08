@@ -6,16 +6,7 @@ author: "Florentin Sakwiset"
 image:
   url: "/images/writer-florentin.jpeg"
   alt: "#"
-tags:
-  [
-    "KI",
-    "Produktivität",
-    "Workflow",
-    "Automatisierung",
-    "Zukunft der Arbeit",
-    "Tools",
-    "Tipps",
-  ]
+tags: ["KI", "Produktivität", "Workflow", "Automatisierung", "Zukunft der Arbeit", "Tools", "Tipps"]
 ---
 
 Die Arbeitswelt verändert sich rasant. Wer im Jahr 2025 mithalten will, muss die Möglichkeiten der Künstlichen Intelligenz nutzen. KI ist nicht länger Zukunftsmusik, sondern ein mächtiges Werkzeug, das unsere Produktivität auf ein neues Level heben kann. Dieser Blogbeitrag zeigt dir, wie du KI-gestützte Tools effektiv einsetzt, um deine Arbeitsabläufe zu optimieren und mehr zu erreichen.
