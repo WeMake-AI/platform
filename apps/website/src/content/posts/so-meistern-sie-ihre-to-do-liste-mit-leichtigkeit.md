@@ -6,17 +6,7 @@ author: "Florentin Sakwiset"
 image:
   url: "/images/writer-florentin.jpeg"
   alt: "#"
-tags:
-  [
-    "KI",
-    "Produktivität",
-    "To-Do-Liste",
-    "Aufgabenverwaltung",
-    "Zeitmanagement",
-    "Effizienz",
-    "Automatisierung",
-    "Tools",
-  ]
+tags: ["KI", "Produktivität", "To-Do-Liste", "Aufgabenverwaltung", "Zeitmanagement", "Effizienz", "Automatisierung", "Tools"]
 ---
 
 Hatten Sie jemals das Gefühl, von Ihrer To-Do-Liste erdrückt zu werden? In der heutigen schnelllebigen Welt ist es eine ständige Herausforderung, den Überblick über alle Aufgaben zu behalten und Prioritäten richtig zu setzen. Doch was wäre, wenn Ihnen eine intelligente Assistenz zur Seite stehen würde, die Ihnen hilft, Ihre To-Do-Liste effizient zu verwalten und Ihre Produktivität zu maximieren?

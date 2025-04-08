@@ -26,26 +26,13 @@ const ipRequestMap = new Map<string, { count: number; timestamp: number }>();
 // Helper function to sanitize input
 function sanitizeInput(input: string | null): string {
   if (!input) return "";
-  return input
-    .trim()
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/&/g, "&amp;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#x27;");
+  return input.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
 }
 
-export const onRequestPost = async (context: {
-  request: Request;
-  env: Env;
-  params: any;
-}) => {
+export const onRequestPost = async (context: { request: Request; env: Env; params: any }) => {
   try {
     // Get client IP for rate limiting
-    const clientIP =
-      context.request.headers.get("CF-Connecting-IP") ||
-      context.request.headers.get("X-Forwarded-For") ||
-      "unknown";
+    const clientIP = context.request.headers.get("CF-Connecting-IP") || context.request.headers.get("X-Forwarded-For") || "unknown";
 
     // Check rate limit
     const now = Date.now();
@@ -60,23 +47,22 @@ export const onRequestPost = async (context: {
         return new Response(
           JSON.stringify({
             success: false,
-            message:
-              "Zu viele Anfragen. Bitte versuchen Sie es später noch einmal.",
+            message: "Zu viele Anfragen. Bitte versuchen Sie es später noch einmal."
           }),
           {
             status: 429,
             headers: {
               "Content-Type": "application/json",
               "X-Content-Type-Options": "nosniff",
-              "Retry-After": "60",
-            },
-          },
+              "Retry-After": "60"
+            }
+          }
         );
       } else {
         // Increment counter
         ipRequestMap.set(clientIP, {
           count: clientRequests.count + 1,
-          timestamp: clientRequests.timestamp,
+          timestamp: clientRequests.timestamp
         });
       }
     } else {
@@ -94,16 +80,15 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: true,
-          message:
-            "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden.",
+          message: "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
         }),
         {
           status: 200,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
@@ -114,7 +99,7 @@ export const onRequestPost = async (context: {
       work_phone: sanitizeInput(formData.get("work_phone") as string) || null,
       company: sanitizeInput(formData.get("company") as string) || null,
       project_details: sanitizeInput(formData.get("project_details") as string),
-      csrf_token: formData.get("csrf_token") as string,
+      csrf_token: formData.get("csrf_token") as string
     };
 
     // Check CSRF token (in a real implementation, validate against session)
@@ -122,36 +107,32 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Ungültige Anfrage: CSRF-Token fehlt",
+          message: "Ungültige Anfrage: CSRF-Token fehlt"
         }),
         {
           status: 403,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
     // Validate required fields
-    if (
-      !contactData.full_name ||
-      !contactData.work_email ||
-      !contactData.project_details
-    ) {
+    if (!contactData.full_name || !contactData.work_email || !contactData.project_details) {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Bitte füllen Sie alle erforderlichen Felder aus",
+          message: "Bitte füllen Sie alle erforderlichen Felder aus"
         }),
         {
           status: 400,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
@@ -160,15 +141,15 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Bitte geben Sie eine gültige E-Mail-Adresse ein",
+          message: "Bitte geben Sie eine gültige E-Mail-Adresse ein"
         }),
         {
           status: 400,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
@@ -177,15 +158,15 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Der Name ist zu lang",
+          message: "Der Name ist zu lang"
         }),
         {
           status: 400,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
@@ -193,15 +174,15 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: false,
-          message: "Die Projektdetails sind zu lang",
+          message: "Die Projektdetails sind zu lang"
         }),
         {
           status: 400,
           headers: {
             "Content-Type": "application/json",
-            "X-Content-Type-Options": "nosniff",
-          },
-        },
+            "X-Content-Type-Options": "nosniff"
+          }
+        }
       );
     }
 
@@ -210,15 +191,9 @@ export const onRequestPost = async (context: {
       `
       INSERT INTO contact_submissions (full_name, work_email, work_phone, company, project_details)
       VALUES (?, ?, ?, ?, ?)
-    `,
+    `
     )
-      .bind(
-        contactData.full_name,
-        contactData.work_email,
-        contactData.work_phone,
-        contactData.company,
-        contactData.project_details,
-      )
+      .bind(contactData.full_name, contactData.work_email, contactData.work_phone, contactData.company, contactData.project_details)
       .run();
 
     // Check if the insert was successful
@@ -226,17 +201,16 @@ export const onRequestPost = async (context: {
       return new Response(
         JSON.stringify({
           success: true,
-          message:
-            "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden.",
+          message: "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
         }),
         {
           status: 201,
           headers: {
             "Content-Type": "application/json",
             "X-Content-Type-Options": "nosniff",
-            "Cache-Control": "no-store",
-          },
-        },
+            "Cache-Control": "no-store"
+          }
+        }
       );
     } else {
       throw new Error("Database insert failed");
@@ -249,16 +223,15 @@ export const onRequestPost = async (context: {
     return new Response(
       JSON.stringify({
         success: false,
-        message:
-          "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal.",
+        message: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
       }),
       {
         status: 500,
         headers: {
           "Content-Type": "application/json",
-          "X-Content-Type-Options": "nosniff",
-        },
-      },
+          "X-Content-Type-Options": "nosniff"
+        }
+      }
     );
   }
 };
