@@ -32,6 +32,10 @@
 			"pattern": "mta-sts.zerotrust.pw",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "mta-sts.cenergy.network",
+			"custom_domain": true,
+		},
 	],
 	"observability": {
 		"enabled": true,
