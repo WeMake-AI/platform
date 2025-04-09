@@ -89,7 +89,7 @@ Sie haben die folgenden Rechte in Bezug auf Ihre personenbezogenen Daten: das Re
 Bei Fragen und/oder Anmerkungen zu unserer Datenschutzrichtlinie und dieser Erklärung kontaktieren Sie uns bitte über die unten stehenden Kontaktdaten:
 
 Phichayut Sakwiset<br />
-Hannoversche Str. 26, 30938 Burgwedel<br />
+Schwarzer Bär 1, 30449 Hannover<br />
 Deutschland<br />
 E-Mail: hey@wemake.cx<br />
 Steuernummer: 26/138/13754
