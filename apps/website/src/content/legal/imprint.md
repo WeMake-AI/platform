@@ -11,7 +11,7 @@ Dieses Impressum wurde zuletzt aktualisiert am 15. Januar 2025.
 ## Inhaber dieser Webseite
 
 Phichayut Sakwiset<br />
-Hannoversche Str. 26, 30938 Burgwedel<br />
+Schwarzer Bär 1, 30449 Hannover<br />
 Deutschland<br />
 E-Mail: hey@wemake.cx<br />
 Steuernummer: 26/138/13754
