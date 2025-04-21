@@ -1,0 +1,42 @@
+---
+description: 
+globs: *package.json,*tsconfig.json,*.prettierrc,packages/*
+alwaysApply: false
+---
+# Monorepo Guidelines
+
+## 🏢 Structure Overview
+
+This repository uses a monorepo structure managed by `bun workspaces` (configured in root [package.json](mdc:package.json)). Key directories include:
+
+- **`apps/`**: Contains individual deployable applications (e.g., `apps/website`). Each app might have its own framework (like Astro) and configuration.
+- **`packages/`**: Houses shared code (utilities, UI components, libraries) intended for use across multiple `apps/` or other `packages/`.
+- **`modules/`**: Contains domain-specific business logic or features, potentially usable by different `apps/`.
+- **`docs/`**: Project documentation.
+- **`tests/`**: Root-level directory for integration or end-to-end tests spanning multiple packages/apps.
+- **`scripts/`**: Utility scripts for the repository (e.g., build, deployment orchestration).
+
+## 📦 Dependency Management
+
+1.  **Root `package.json`:** Defines workspace ranges and manages top-level development dependencies and scripts applicable to the whole monorepo (e.g., `bun format`, `bun lint`, `bun test`).
+2.  **Workspace `package.json`:** Each app (`apps/*`) and package (`packages/*`, `modules/*`) has its own `package.json` defining its specific dependencies and scripts.
+3.  **Installation:** Run `bun i` **only** from the repository root. Bun workspaces will handle installing dependencies for all packages and linking them correctly.
+4.  **Adding Dependencies:** Add dependencies to the specific app or package where they are needed using `bun add <package-name> --workspace <workspace-name>` (e.g., `bun add zod --workspace website` or `bun add zod --workspace @wemake/utils`). Avoid adding app-specific dependencies to the root `package.json`.
+5.  **`bun.lockb`:** A single lock file at the root ensures consistent dependency versions across the entire monorepo. Commit this file.
+
+## Scripts & Execution
+
+1.  **Root Scripts:** Run scripts defined in the root [package.json](mdc:package.json) from the repository root (e.g., `bun format`, `bun build`, `bun dev`).
+2.  **Workspace Scripts:** Run scripts specific to an app or package using the `--filter` flag (if using tools like Turborepo, which might be implicitly used by `bun`) or by `cd`-ing into the specific directory (`apps/website`) and running `bun run <script-name>`. Check the root `package.json` for potentially simplified workspace script commands.
+
+## 🤝 Shared Code
+
+1.  **Importing:** Apps and other packages can import code from `packages/` using their defined package name (e.g., `import { something } from '@wemake/utils'`). Bun workspaces handle the linking.
+2.  **Purpose:** Use `packages/` for genuinely reusable code. Avoid putting app-specific logic there.
+3.  **Versioning:** Shared packages might eventually have their own versions, but within the monorepo, they are typically consumed directly.
+
+## ✨ Best Practices
+
+1.  **Consistency:** Strive for consistency in tooling, linting ([.prettierrc](mdc:.prettierrc)), and TypeScript configuration ([tsconfig.json](mdc:tsconfig.json)) across workspaces, though specific overrides might exist.
+2.  **Clear Boundaries:** Maintain clear separation of concerns between apps, packages, and modules.
+3.  **Atomic Commits:** Keep commits focused on a single logical change, even if it spans multiple packages (see [workflow.mdc](mdc:.cursor/rules/workflow.mdc)).

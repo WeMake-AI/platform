@@ -1,0 +1,43 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Cloudflare Platform Rules
+
+## General Principles
+
+1.  **Leverage the Platform:** Utilize Cloudflare's services (Workers, KV, R2, D1, Durable Objects, Queues, etc.) effectively for backend logic, storage, and asynchronous tasks.
+2.  **TypeScript First:** Write all Worker code in TypeScript, adhering to the [typescript.mdc](mdc:.cursor/rules/typescript.mdc) rules.
+3.  **ES Modules:** Use the ES module format (`export default {}`) exclusively for Workers.
+4.  **Configuration Driven:** Manage Worker settings, bindings, and environment variables primarily through [wrangler.jsonc](mdc:apps/website/wrangler.jsonc).
+
+## Workers
+
+1.  **Entry Point:** The primary Worker entry point is typically within the `apps/website/src/` directory, often integrating with the Astro adapter (`@astrojs/cloudflare`). The compiled output resides in `apps/website/dist/_worker.js/`.
+2.  **Bindings:** Access Cloudflare resources (KV, R2, D1, DO, Services, Env Vars) via the `env` object passed to the `fetch` handler (or middleware). Define all bindings in [wrangler.jsonc](mdc:apps/website/wrangler.jsonc).
+3.  **Environment Variables:**
+    - Use **Secrets** for sensitive data (API keys, tokens). Manage via `wrangler secret put`. Access via `env.SECRET_NAME`. Never commit secrets.
+    - Use **Variables** for non-sensitive configuration. Define in [wrangler.jsonc](mdc:apps/website/wrangler.jsonc) under `[vars]`. Access via `env.VAR_NAME`.
+4.  **Local Development:**
+    - Use `bun run dev` (which likely runs `wrangler dev` internally via Astro).
+    - Manage local secrets and variables in `.dev.vars` at the application root (e.g., `apps/website/.dev.vars`). **Never commit this file.** Use [.dev.vars.example](mdc:.dev.vars.example) as a template.
+5.  **Type Safety:** Generate environment types using `wrangler types` and reference `worker-configuration.d.ts` in `tsconfig.json`.
+
+## Storage
+
+1.  **KV:** Use for key-value storage (config, user settings, caching). Best for high-read, low-write scenarios where eventual consistency is acceptable.
+2.  **R2:** Use for object storage (images, assets, backups). S3-compatible API.
+3.  **D1:** Use for relational data needs. SQL interface. Manage migrations using Wrangler.
+4.  **Durable Objects (DO):** Use for strong consistency, real-time coordination (WebSockets), or stateful serverless instances. Define the DO class and bind it in [wrangler.jsonc](mdc:apps/website/wrangler.jsonc).
+
+## Deployment
+
+1.  **Wrangler CLI:** Use `wrangler deploy` (likely triggered via a `bun run deploy` script in [package.json](mdc:package.json)) to deploy Workers and associated resources.
+2.  **CI/CD:** Deployment is typically automated via GitHub Actions (see `.github/workflows/`). Ensure necessary Cloudflare API tokens are securely configured as GitHub Secrets.
+
+## Logging & Debugging
+
+1.  **Local:** Monitor the `bun dev` terminal output.
+2.  **Remote:** Use `wrangler tail` to stream live logs or view logs in the Cloudflare dashboard.
+3.  Refer to [debugging.mdc](mdc:.cursor/rules/debugging.mdc) for general debugging practices.

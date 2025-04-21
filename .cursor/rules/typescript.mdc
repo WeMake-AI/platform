@@ -1,34 +1,37 @@
 ---
 description: 
-globs: *.ts
+globs: *.ts,*.tsx,*tsconfig.json
 alwaysApply: false
 ---
-# TypeScript Rules
+# TypeScript Best Practices
 
-- Write concise, technical responses with accurate TypeScript examples.
-- Use functional, declarative programming. Avoid classes.
-- Prefer iteration and modularization over duplication.
-- Use descriptive variable names with auxiliary verbs (e.g., isLoading, hasError).
-- Use lowercase with dashes for directories (e.g., `components/auth-wizard`).
-- Favor named exports for components.
-- Use the Receive an Object, Return an Object (RORO) pattern.
+## ✨ Core Principles
 
-## TypeScript
+1.  **Strong Typing:** Utilize TypeScript's type system rigorously. Avoid `any` wherever possible. Leverage type inference but provide explicit types for function signatures, complex objects, and public APIs.
+2.  **Type Generation:** Use `wrangler types` to generate accurate types (`worker-configuration.d.ts`) based on your `wrangler.jsonc` configuration (compatibility date/flags, bindings). Ensure this is included in your `tsconfig.json` `types` array.
+3.  **Interfaces vs. Types:** Prefer `interface` for defining the shape of objects and implementing classes (though classes are discouraged). Use `type` for unions, intersections, primitives, and more complex type manipulations.
+4.  **Functional Programming:** Favor pure functions, immutability, and declarative patterns over imperative code and side effects where practical. Avoid classes unless necessary for specific patterns (like Cloudflare Durable Objects).
+5.  **Modularity:** Break down logic into small, reusable functions. Iterate over collections using standard array methods (`map`, `filter`, `reduce`) instead of complex loops where it enhances readability.
+6.  **Descriptive Naming:** Use clear and descriptive names for variables, functions, and types. Use boolean prefixes like `is`, `has`, `should` for boolean variables (e.g., `isLoading`, `hasError`).
+7.  **RORO Pattern:** For functions accepting multiple options or complex parameters, use the "Receive an Object, Return an Object" (RORO) pattern for clarity and easier refactoring.
 
-- Use "function" keyword for pure functions. Omit semicolons.
-- Use TypeScript for all code. Prefer interfaces over types.
-- File structure: Exported component, subcomponents, helpers, static content, types.
-- Avoid unnecessary curly braces in conditional statements.
-- For single-line statements in conditionals, omit curly braces.
-- Use concise, one-line syntax for simple conditional statements (e.g., `if (condition) doSomething()`).
+## 🛡️ Error Handling & Validation
 
-## Error Handling and Validation
+1.  **Guard Clauses:** Use early returns (guard clauses) at the beginning of functions to handle preconditions, invalid states, or error conditions. This reduces nesting and keeps the main logic path clear.
 
-- Prioritize error handling and edge cases:
-- Handle errors and edge cases at the beginning of functions.
-- Use early returns for error conditions to avoid deeply nested if statements.
-- Place the happy path last in the function for improved readability.
-- Avoid unnecessary else statements; use if-return pattern instead.
-- Use guard clauses to handle preconditions and invalid states early.
-- Implement proper error logging and user-friendly error messages.
-- Consider using custom error types or error factories for consistent error handling.
+    ```typescript
+    function processData(data: Data | null): Result | null {
+      if (!data) {
+        console.error("Invalid data provided");
+        return null; // Early return
+      }
+
+      // --- Happy path ---
+      const result = // ... process data
+      return result;
+    }
+    ```
+
+2.  **Avoid Unnecessary `else`:** After an `if` block with a `return` (or `throw`), avoid using an `else` block for the main logic path.
+3.  **Explicit Error Handling:** Use `try...catch` blocks for operations that can throw exceptions (e.g., JSON parsing, network requests). Provide informative error messages or logging.
+4.  **Validation:** Validate external data (API responses, user input) using libraries like Zod or custom type guards before using it in your application logic.
