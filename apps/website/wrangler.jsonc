@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "wemake",
   "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2025-02-14",
   "compatibility_flags": ["nodejs_compat_v2"],
@@ -9,6 +9,12 @@
       "custom_domain": true
     }
   ],
+
+  "assets": {
+    "binding": "ASSETS",
+    "directory": "./dist"
+  },
+
   "d1_databases": [
     {
       "binding": "DB",
@@ -31,12 +37,6 @@
 
   "env": {
     "staging": {
-      "routes": [
-        {
-          "pattern": "staging.wemake.cx",
-          "custom_domain": true
-        }
-      ],
       "workers_dev": true
     }
   }
