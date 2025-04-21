@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Development Workflow & Environment
+
+## ⚙️ Task Execution & Workflow
+
+1.  **Task Definition:**
+    - Clearly understand the task requirements, acceptance criteria, and any dependencies from [docs/TASKS.md](mdc:docs/TASKS.md) and the PRD.
+2.  **Systematic Change Protocol:** Before making significant changes:
+    - **Identify Impact:** Determine affected components, dependencies, and potential side effects. Consult [docs/ARCHITECTURE.md](mdc:docs/ARCHITECTURE.md).
+    - **Plan:** Outline the steps. Tackle one logical change or file at a time.
+    - **Verify Testing:** Confirm how the change will be tested. Add tests if necessary _before_ implementing (see TDD).
+3.  **Progress Tracking:**
+    - Update [docs/TASKS.md](mdc:docs/TASKS.md) upon task completion or if requirements change during implementation.
+
+## ✅ Testing & Validation
+
+1.  **Test-Driven Development (TDD):**
+    - **New Features:** Outline tests, write failing tests, implement code, refactor.
+    - **Bug Fixes:** Write a test reproducing the bug _before_ fixing it.
+2.  **Comprehensive Tests:** Write thorough unit (Vitest), integration (Vitest), and/or end-to-end (Playwright) tests covering critical paths, edge cases, and major functionality. See `tests/` directory.
+3.  **Tests Must Pass:** All tests **must** pass (`bun test`, `bun test:e2e`) before committing or considering a task complete. Notify the human developer immediately if tests fail and cannot be easily fixed.
+4.  **No Mock Data (Except Tests):** Use mock data _only_ within test environments. Development and production should use real or realistic data sources.
+5.  **Manual Verification:** Supplement automated tests with manual checks where appropriate, especially for UI changes in `src/components/` or `src/pages/`.
+
+## 🌳 Version Control & Environment
+
+1.  **Git Hygiene:**
+    - Commit frequently with clear, atomic messages (Conventional Commits preferred).
+    - Keep the working directory clean; ensure no unrelated or temporary files are staged or committed.
+    - Use [.gitignore](mdc:.gitignore) effectively.
+2.  **Branching Strategy:** Follow the project's established branching strategy (likely feature branches off `main`). Do not create new branches unless requested or necessary for the workflow.
+3.  **.dev.vars Files:** **Never** commit `.dev.vars` files. Use [.dev.vars.example](mdc:.dev.vars.example) for templates. Do not overwrite local `.dev.vars` files without confirmation.
+4.  **Environment Awareness:** Code should function correctly across different environments (dev, staging, prod). Use environment variables configured in [wrangler.jsonc](mdc:wrangler.jsonc) and accessed via Worker bindings or Astro environment variables.
+5.  **Server Management:** Kill related running servers (`bun dev` process) before starting new ones. Restart servers after relevant configuration ([wrangler.jsonc](mdc:wrangler.jsonc), [astro.config.mjs](mdc:astro.config.mjs)), backend changes (`dist/_worker.js/`), or dependency updates ([bun.lockb](mdc:bun.lockb)).

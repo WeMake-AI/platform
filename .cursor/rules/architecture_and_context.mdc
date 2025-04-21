@@ -1,0 +1,38 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Project Architecture, Context & Documentation
+
+## 📜 Core Philosophy
+
+1.  **Simplicity:** Prioritize simple, clear, and maintainable solutions. Avoid unnecessary complexity or over-engineering.
+2.  **Iterate:** Prefer iterating on existing, working code rather than building entirely new solutions from scratch, unless fundamentally necessary or explicitly requested.
+3.  **Focus:** Concentrate efforts on the specific task assigned in [docs/TASKS.md](mdc:docs/TASKS.md). Avoid unrelated changes or scope creep.
+4.  **Quality:** Strive for a clean, organized, well-tested, and secure codebase.
+5.  **Collaboration:** These rules guide both human developers and the AI assistant for effective teamwork.
+
+## 📚 Project Context & Understanding
+
+1.  **Documentation First:**
+    - **Always** check for and thoroughly review relevant project documentation _before_ starting any task. This includes:
+      - Product Requirements Documents (PRDs) - If applicable
+      - [README.md](mdc:README.md) (Project overview, setup, patterns, technology stack)
+      - [docs/ARCHITECTURE.md](mdc:docs/ARCHITECTURE.md) (System architecture, component relationships)
+      - [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md) (Technical specifications, established patterns)
+      - [docs/TASKS.md](mdc:docs/TASKS.md) (Current development tasks, requirements)
+      - [docs/DATABASE.md](mdc:docs/DATABASE.md) (Database Schema, migrations, and usage)
+    - If documentation is missing, unclear, or conflicts with the request, **ask for clarification**.
+2.  **Architecture Adherence:**
+    - Understand and respect module boundaries, data flow, system interfaces, and component dependencies outlined in [docs/ARCHITECTURE.md](mdc:docs/ARCHITECTURE.md).
+    - Validate that changes comply with the established architecture. Warn and propose compliant solutions if a violation is detected.
+3.  **Pattern & Tech Stack Awareness:**
+    - Reference [README.md](mdc:README.md) and [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md) to understand and utilize existing patterns and technologies.
+    - The core stack includes Astro, React, Tailwind, TypeScript, Cloudflare Workers, D1, R2, KV, defined in [package.json](mdc:package.json), [astro.config.mjs](mdc:astro.config.mjs), and [wrangler.jsonc](mdc:wrangler.jsonc).
+    - Exhaust options using existing implementations before proposing new patterns or libraries.
+
+## 📄 Documentation Maintenance
+
+1.  **Update Docs:** If code changes impact architecture, technical decisions, established patterns, or task status, update the relevant documentation ([README.md](mdc:README.md), [docs/ARCHITECTURE.md](mdc:docs/ARCHITECTURE.md), [docs/DATABASE.md](mdc:docs/DATABASE.md), [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md), [docs/TASKS.md](mdc:docs/TASKS.md)).
+2.  **Keep Rules Updated:** These Cursor Rules files should be reviewed and updated periodically to reflect learned best practices and project evolution.

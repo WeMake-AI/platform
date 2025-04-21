@@ -1,0 +1,16 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Security Guidelines
+
+## 🔒 Security
+
+1.  **Server-Side Authority:** Keep sensitive logic, validation, and data manipulation strictly on the server-side (Cloudflare Worker backend, `dist/_worker.js/`). Use secure API endpoints defined in the worker.
+2.  **Input Sanitization/Validation:** Always sanitize and validate user input on the server-side (Backend Worker), preferably using libraries like Zod as mentioned in [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md).
+3.  **Dependency Awareness:** Be mindful of the security implications of adding or updating dependencies listed in [package.json](mdc:package.json). Utilize `bun audit` or GitHub Dependabot alerts.
+4.  **Credentials:** Never hardcode secrets or credentials in the codebase. Use environment variables managed via `.dev.vars` (local, see [.dev.vars.example](mdc:.dev.vars.example)) and Cloudflare Worker Secrets configured in [wrangler.jsonc](mdc:wrangler.jsonc) for deployments.
+5.  **Authentication:** Rely on Stack Auth for secure authentication flows. Validate JWTs properly in the backend worker as outlined in [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md).
+6.  **Authorization:** Implement authorization checks in the backend worker after successful authentication to ensure users can only access appropriate resources/actions.
+7.  **Data Security:** Follow secure patterns for accessing Cloudflare D1 (prepared statements, see [docs/DATABASE.md](mdc:docs/DATABASE.md)) and R2 (pre-signed URLs).

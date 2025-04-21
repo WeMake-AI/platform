@@ -1,0 +1,17 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Debugging & Troubleshooting
+
+## 🐛 Debugging & Troubleshooting
+
+1.  **Fix the Root Cause:** Prioritize fixing the underlying issue causing an error, rather than just masking or handling it, unless a temporary workaround is explicitly agreed upon.
+2.  **Console/Log Analysis:**
+    - **Browser:** Always check browser developer console (Network tab, Console tab) for errors, warnings, or relevant logs after making changes or when debugging frontend issues (Astro/React components in `src/`).
+    - **Server:** Check Cloudflare Worker logs. Locally, monitor the `bun dev` terminal output. For deployed environments (staging/production), use `wrangler tail` or the Cloudflare dashboard logs. Report findings.
+3.  **Targeted Logging:** For persistent or complex issues, add specific `console.log` statements (or use a project logger if implemented) to trace execution and variable states in both frontend (`.astro`, `.tsx`) and backend (Worker `.ts`) code. _Remember to check the output and remove temporary logs before committing._
+4.  **Check the `fixes/` Directory:** Before deep-diving into a complex or recurring bug, check the (currently hypothetical) `fixes/` directory for documented solutions to similar past issues.
+5.  **Document Complex Fixes:** If a bug requires significant effort (multiple iterations, complex logic) to fix, create a concise `.md` file in the `fixes/` directory detailing the problem, investigation steps, and the solution. Name it descriptively (e.g., `fixes/resolve-d1-query-timeout.md`).
+6.  **Research:** Use available tools (web search, documentation search like [README.md](mdc:README.md), [docs/TECHNICAL.md](mdc:docs/TECHNICAL.md), Cloudflare/Astro docs) to research solutions or best practices when stuck or unsure.
