@@ -34,3 +34,35 @@ alwaysApply: true
 3.  **.dev.vars Files:** **Never** commit `.dev.vars` files. Use [.dev.vars.example](mdc:.dev.vars.example) for templates. Do not overwrite local `.dev.vars` files without confirmation.
 4.  **Environment Awareness:** Code should function correctly across different environments (dev, staging, prod). Use environment variables configured in [wrangler.jsonc](mdc:apps/website/wrangler.jsonc) and accessed via Worker bindings or Astro environment variables.
 5.  **Server Management:** Kill related running servers (`bun dev` process) before starting new ones. Restart servers after relevant configuration ([wrangler.jsonc](mdc:wrangler.jsonc), [astro.config.mjs](mdc:apps/website/astro.config.mjs)), backend changes (`dist/_worker.js/`), or dependency updates ([bun.lockb](mdc:bun.lockb)).
+
+## 🤖 Leveraging MCP (Model Context Protocol) in Development
+
+1.  **What is MCP?**
+    - MCP is a protocol that enables seamless integration between the codebase, external tools, and AI agents. It allows the development environment to access, automate, and orchestrate workflows using standardized interfaces. See [MCP Documentation](mdc:https:/modelcontextprotocol.io/specification/2025-03-26) and [Cursor MCP Guide](mdc:https:/docs.cursor.com/context/model-context-protocol).
+2.  **When to Use MCP:**
+    - Use MCP to automate repetitive tasks, access external data sources, or connect to project management, CI/CD, or observability tools directly from the development environment.
+    - Prefer MCP-based integrations over custom scripts for tasks like code analysis, deployment, documentation generation, or data ingestion.
+3.  **How to Use MCP in This Project:**
+    - MCP servers are configured in [`~/.cursor/mcp.json`](mdc:~/.cursor/mcp.json) and can be managed via Cursor or compatible IDEs.
+    - Available MCP servers include integrations for Cloudflare, GitHub, Notion, memory, sequential thinking, and fetch utilities. Use these to:
+      - Automate deployment and observability (Cloudflare MCP)
+      - Store and recall project context (Memory MCP)
+      - Orchestrate complex, multi-step tasks (Sequential Thinking MCP)
+    - Refer to the [Cursor MCP Tools Guide](mdc:https:/docs.cursor.com/chat/tools) for usage patterns and best practices.
+4.  **Best Practices for MCP Usage:**
+    - Always prefer declarative, configuration-driven automation via MCP over ad-hoc scripts.
+    - Document any new MCP server integrations or workflows in the project README or internal docs.
+    - Ensure sensitive credentials for MCP servers are managed securely (e.g., via environment variables, not committed to version control).
+    - Regularly review and update MCP server configurations to align with evolving project needs.
+    - **Memory MCP:**
+      - Use the Memory MCP server to store, recall, and share project context, decisions, and key information across sessions and team members.
+      - Leverage Memory to document architectural decisions, known issues, or ongoing investigations, making this knowledge easily accessible for future work.
+      - Use Memory to persist insights, TODOs, or context that should survive restarts or handoffs.
+    - **Sequential Thinking MCP:**
+      - Use the Sequential Thinking MCP server to break down complex problems into stepwise, logical chains of thought.
+      - Employ Sequential Thinking for planning, debugging, or orchestrating multi-step workflows, ensuring each step is tracked and revisable.
+      - Use this tool to document reasoning, explore alternatives, and verify hypotheses before implementation.
+      - Reference sequential thinking outputs in PRs or documentation to provide transparency into the decision-making process.
+5.  **Troubleshooting:**
+    - If an MCP server is not responding or tools are missing, check the configuration in [`~/.cursor/mcp.json`](mdc:~/.cursor/mcp.json) and consult the relevant server's documentation.
+    - For advanced debugging, use the MCP Inspector or refer to the [MCP Debugging Guide](mdc:https:/modelcontextprotocol.io/development/updates).
