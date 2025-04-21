@@ -1,0 +1,28 @@
+---
+description: Debugging & Troubleshooting
+globs: 
+alwaysApply: false
+---
+# Debugging & Troubleshooting
+
+## 🐛 Debugging Steps
+
+1.  **Understand the Problem:** Clearly define the bug. What are the steps to reproduce it? What is the expected vs. actual behavior?
+2.  **Check Logs & Consoles:**
+    - **Browser:** Open the browser's developer console (usually F12). Check the **Console** tab for TypeScript errors, warnings, and `console.log` output. Check the **Network** tab for failed requests (4xx/5xx errors), slow responses, or unexpected payloads, especially for API calls to the backend worker.
+    - **Local Server (`bun dev`):** Monitor the terminal where `bun dev` is running. Look for errors during build or runtime, backend logs (`console.log` from worker code), and request logs.
+    - **Deployed Server (Cloudflare):** Use `wrangler tail` in your terminal (requires Wrangler CLI login) to stream live logs from the deployed Worker. Alternatively, check the logs section for the Worker in the Cloudflare dashboard.
+3.  **Verify Configuration:** Check relevant configuration files for syntax errors or misconfigurations:
+    - [wrangler.jsonc](mdc:apps/website/wrangler.jsonc): Worker configuration, bindings (KV, D1, R2, DO), environment variables.
+    - `.dev.vars`: Local development secrets and variables (ensure it's present and correct, **never commit this file**).
+    - [astro.config.mjs](mdc:apps/website/astro.config.mjs): Astro settings, integrations, SSR/adapter configuration.
+    - [tsconfig.json](mdc:tsconfig.json): TypeScript compilation settings.
+    - [package.json](mdc:package.json): Dependencies and scripts.
+4.  **Isolate the Issue:**
+    - **Simplify:** Temporarily remove or comment out code sections to narrow down where the error occurs.
+    - **Reproduce Minimally:** Try to create the simplest possible scenario or component state that still triggers the bug.
+5.  **Targeted Logging:** If the error source isn't obvious, add specific `console.log` statements (or use a more sophisticated logger if implemented) to trace code execution flow and inspect variable values at different points in both frontend (`.astro`, `.tsx`) and backend (Worker `.ts`) code. _Remember to remove temporary logs before committing._
+6.  **Fix the Root Cause:** Prioritize fixing the underlying issue. Avoid merely suppressing errors or implementing temporary workarounds unless explicitly necessary and documented.
+7.  **Test the Fix:** Verify the fix resolves the original issue and doesn't introduce regressions. Run relevant tests (unit, integration, e2e) as per `testing.mdc`.
+8.  **Research:** Use available tools (web search, official documentation for Astro, Cloudflare Workers, TypeScript, specific libraries) to understand error messages or find solutions.
+9.  **(Optional) Document Complex Fixes:** If a bug requires significant effort or non-obvious steps to fix, consider adding a brief `.md` file in a `docs/fixes/` directory (create if needed) detailing the problem, investigation, and solution.

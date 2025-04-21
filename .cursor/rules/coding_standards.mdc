@@ -1,0 +1,21 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Coding Standards
+
+## ✨ Code Quality & Style
+
+1.  **TypeScript Usage:** Use strict typing (`strict: true` in [tsconfig.json](mdc:tsconfig.json)), avoiding `any` where possible. Follow settings in the root [tsconfig.json](mdc:tsconfig.json) and any specific settings in app/module `tsconfig.json` files. Document complex logic or public APIs with JSDoc.
+2.  **Readability & Maintainability:** Write clean, well-organized, and self-explanatory code. Follow established patterns within the specific `app/` or `package/` or `module/`.
+3.  **Conciseness:**
+    - Keep files focused and concise (target < 300 lines). Refactor large files proactively.
+    - Break down large components (e.g., `.astro`, `.tsx`) into smaller, single-responsibility components.
+    - Omit semicolons at the end of statements (as enforced by Prettier configuration in [.prettierrc](mdc:.prettierrc)).
+    - Avoid unnecessary curly braces for single-line conditional statements (e.g., `if (condition) doSomething()`).
+4.  **Avoid Duplication (DRY):** Actively look for and reuse existing functionality, especially from shared `packages/`. Refactor to eliminate duplication across the monorepo.
+5.  **Linting/Formatting:** Ensure all code conforms to the project's ESLint and Prettier rules. Configuration is typically found in [package.json](mdc:package.json) (scripts) and config files like [.prettierrc](mdc:.prettierrc) or `.eslintrc.js`. Run `bun format` and `bun lint` from the root directory before committing.
+6.  **Pattern Consistency:** Adhere to established project patterns or patterns inferred from existing code within the relevant `app/`, `package/`, or `module/`. Do not introduce new architectural patterns without discussion.
+7.  **File Naming:** Use clear, descriptive names. Follow conventions within the specific directory (e.g., `PascalCase` for components, `kebab-case` for pages in `apps/website/src/pages/`, `camelCase` or `kebab-case` for utilities/services). Avoid temporary or vague names like "temp", "refactored", "util", "helper" in permanent file names.
+8.  **No One-Time Scripts:** Do not commit one-time utility scripts into the main codebase (`apps/`, `packages/`, `modules/`). Place them in a dedicated `scripts/` directory at the root if necessary for project tasks, clearly documenting their purpose.

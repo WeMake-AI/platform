@@ -1,0 +1,22 @@
+---
+description: Security Guidelines
+globs: 
+alwaysApply: false
+---
+# Security Guidelines
+
+## 🔒 Security Best Practices
+
+1.  **Server-Side Authority:** Implement all sensitive logic, core validation, authorization checks, and data manipulation strictly on the server-side (Cloudflare Worker backend, typically processing requests before they hit Astro for SSR or API routes). Do not trust client-side code for security-critical operations.
+2.  **Input Validation:** Validate and sanitize **all** input received from users or external systems, both on the client-side (for quick feedback) and **rigorously** on the server-side (to prevent malicious data). Use libraries or established patterns for validation (e.g., Zod).
+3.  **Output Encoding & XSS Prevention:** Encode any user-generated content appropriately before rendering it in HTML to prevent Cross-Site Scripting (XSS) attacks. Astro encodes content by default in expressions `{}`. Be cautious when using `set:html` or framework equivalents.
+4.  **Dependency Awareness:** Be mindful of the security implications of adding or updating dependencies ([package.json](mdc:package.json)). Regularly check for vulnerabilities using `bun audit` or rely on GitHub Dependabot alerts.
+5.  **Credentials & Secrets:** **Never** hardcode secrets (API keys, passwords, tokens) directly in the codebase ([.gitignore](mdc:.gitignore) should prevent accidental commits). Use environment variables:
+    - **Local Development:** Manage secrets in a `.dev.vars` file at the application root (e.g., `apps/website/.dev.vars`). See [.dev.vars.example](mdc:.dev.vars.example) if available.
+    - **Deployment (Cloudflare):** Configure secrets using Cloudflare Worker Secrets (`wrangler secret put <KEY>`) which are accessible via the environment binding in the Worker code. Define bindings in [wrangler.jsonc](mdc:apps/website/wrangler.jsonc).
+6.  **Authentication & Authorization:**
+    - Implement robust authentication mechanisms (e.g., using Cloudflare Access, JWT, session management).
+    - After authentication, always perform server-side authorization checks to ensure the authenticated user has the necessary permissions to access the requested resource or perform the requested action.
+7.  **Rate Limiting:** Implement rate limiting on sensitive endpoints (login, password reset, resource-intensive APIs) to prevent brute-force attacks and denial-of-service (DoS).
+8.  **Secure Headers:** Configure appropriate HTTP security headers (e.g., `Content-Security-Policy`, `Strict-Transport-Security`, `X-Content-Type-Options`) usually via middleware in the Cloudflare Worker or Astro.
+9.  **Least Privilege:** Ensure that Cloudflare API tokens or other credentials used in CI/CD or deployment processes have the minimum necessary permissions required for their tasks.
