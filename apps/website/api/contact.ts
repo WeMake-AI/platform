@@ -96,8 +96,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
     const contactData: ContactFormData = {
       full_name: sanitizeInput(formData.get("full_name") as string),
       work_email: sanitizeInput(formData.get("work_email") as string),
-      work_phone: sanitizeInput(formData.get("work_phone") as string) || null,
-      company: sanitizeInput(formData.get("company") as string) || null,
+      work_phone: sanitizeInput(formData.get("work_phone") as string) || undefined,
+      company: sanitizeInput(formData.get("company") as string) || undefined,
       project_details: sanitizeInput(formData.get("project_details") as string),
       csrf_token: formData.get("csrf_token") as string
     };

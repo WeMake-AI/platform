@@ -4,19 +4,21 @@
   "private": true,
   "workspaces": [
     "apps/*",
-    "modules/*"
+    "modules/*",
+    "packages/*"
   ],
+  "resolutions": {
+    "@wemake/*": "workspace:*"
+  },
   "scripts": {
-    "website:dev": "bun run --cwd apps/website dev",
-    "website:build": "bun run --cwd apps/website build",
-    "website:preview": "bun website:build && bun run --cwd apps/website wrangler pages dev",
-    "website:check": "bun run --cwd apps/website check",
-    "well-known:dev": "bun run --cwd modules/well-known dev",
-    "well-known:deploy": "bun run --cwd modules/well-known deploy",
+    "dev": "bun --cwd apps/website dev",
+    "build": "bun --cwd apps/website build",
+    "deploy": "bun --cwd apps/website wrangler deploy",
+    "test": "bun test",
     "format": "prettier --write ."
   },
   "devDependencies": {
     "prettier": "^3.5.3",
-    "wrangler": "^4.9.1"
+    "wrangler": "^4.12.0"
   }
 }

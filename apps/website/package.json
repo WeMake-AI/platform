@@ -3,29 +3,30 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run generate-types && astro check && astro build",
+    "preview": "bun run generate-types && astro build && wrangler dev --remote --env staging",
     "astro": "astro",
+    "deploy": "bun run build && wrangler deploy --env staging",
+    "deploy:prod": "bun run build && wrangler deploy",
     "check": "astro check",
-    "test": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug",
-    "test:ci": "bun build && playwright test",
-    "test:functional": "playwright test --project=chromium-functional",
-    "test:security": "playwright test --project=chromium-security"
+    "generate-types": "wrangler types && prettier worker-configuration.d.ts --write",
+    "type-check": "bun run generate-types && bun tsc",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "@astrojs/mdx": "4.2.0",
+    "@astrojs/cloudflare": "^12.5.0",
+    "@astrojs/mdx": "4.2.4",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
-    "@tailwindcss/vite": "^4.1.3",
-    "astro": "5.5.2",
+    "@tailwindcss/vite": "^4.1.4",
+    "astro": "5.7.4",
     "astro-seo": "^0.8.4",
-    "tailwindcss": "^4.1.3",
+    "tailwindcss": "^4.1.4",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250408.0",
+    "@cloudflare/workers-types": "^4.20250421.0",
     "@tailwindcss/typography": "^0.5.16"
   },
   "pnpm": {
