@@ -11,11 +11,10 @@
     "@wemake/*": "workspace:*"
   },
   "scripts": {
-    "dev": "bun run website:dev",
-    "build": "bun run website:build",
-    "deploy": "bun run --cwd apps/website wrangler deploy",
+    "dev": "bun --cwd apps/website dev",
+    "build": "bun --cwd apps/website build",
+    "deploy": "bun --cwd apps/website wrangler pages deploy",
     "test": "bun test",
-    "lint": "bun lint",
     "format": "prettier --write ."
   },
   "devDependencies": {
