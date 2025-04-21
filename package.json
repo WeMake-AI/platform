@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "bun --cwd apps/website dev",
     "build": "bun --cwd apps/website build",
-    "deploy": "bun --cwd apps/website wrangler pages deploy",
+    "deploy": "bun --cwd apps/website wrangler deploy",
     "test": "bun test",
     "format": "prettier --write ."
   },

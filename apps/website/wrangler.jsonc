@@ -1,0 +1,43 @@
+{
+  "name": "website",
+  "main": "./dist/_worker.js/index.js",
+  "compatibility_date": "2025-02-14",
+  "compatibility_flags": ["nodejs_compat_v2"],
+  "routes": [
+    {
+      "pattern": "wemake.cx",
+      "custom_domain": true
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "contact-submissions",
+      "database_id": "e44ce62c-a835-49e8-b75c-4f20f7d520a7"
+    }
+  ],
+  "r2_buckets": [
+    {
+      "binding": "WEMAKE_BUCKET",
+      "bucket_name": "wemake"
+    }
+  ],
+
+  "observability": {
+    "enabled": true
+  },
+
+  "placement": { "mode": "smart" },
+
+  "env": {
+    "staging": {
+      "routes": [
+        {
+          "pattern": "staging.wemake.cx",
+          "custom_domain": true
+        }
+      ],
+      "workers_dev": true
+    }
+  }
+}

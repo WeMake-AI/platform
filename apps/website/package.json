@@ -3,18 +3,19 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "bun run generate-types && astro check && astro build",
+    "preview": "bun run generate-types && astro build && wrangler dev --remote --env staging",
     "astro": "astro",
+    "deploy": "bun run build && wrangler deploy --env staging",
+    "deploy:prod": "bun run build && wrangler deploy",
     "check": "astro check",
-    "test": "playwright test",
-    "test:ui": "playwright test --ui",
-    "test:debug": "playwright test --debug",
-    "test:ci": "bun build && playwright test",
-    "test:functional": "playwright test --project=chromium-functional",
-    "test:security": "playwright test --project=chromium-security"
+    "generate-types": "wrangler types && prettier worker-configuration.d.ts --write",
+    "type-check": "bun run generate-types && bun tsc",
+    "format": "prettier . --write"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
+    "@astrojs/cloudflare": "^12.5.0",
     "@astrojs/mdx": "4.2.4",
     "@astrojs/rss": "^4.0.11",
     "@astrojs/sitemap": "^3.3.0",
