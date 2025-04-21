@@ -8,13 +8,11 @@ alwaysApply: true
 ## ⚙️ Task Execution & Workflow
 
 1.  **Task Definition:**
-    - Clearly understand the task requirements, acceptance criteria, and any dependencies from [docs/TASKS.md](mdc:docs/TASKS.md) and the PRD.
+    - Clearly understand the task requirements, acceptance criteria, and any dependencies.
 2.  **Systematic Change Protocol:** Before making significant changes:
-    - **Identify Impact:** Determine affected components, dependencies, and potential side effects. Consult [docs/ARCHITECTURE.md](mdc:docs/ARCHITECTURE.md).
+    - **Identify Impact:** Determine affected components, dependencies, and potential side effects.
     - **Plan:** Outline the steps. Tackle one logical change or file at a time.
     - **Verify Testing:** Confirm how the change will be tested. Add tests if necessary _before_ implementing (see TDD).
-3.  **Progress Tracking:**
-    - Update [docs/TASKS.md](mdc:docs/TASKS.md) upon task completion or if requirements change during implementation.
 
 ## ✅ Testing & Validation
 
