@@ -1,6 +1,6 @@
 {
   "name": "@wemake-ai/website",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
   "description": "Official WeMake Website",
@@ -26,14 +26,14 @@
     "@astrojs/mdx": "4.3.1",
     "@astrojs/rss": "4.0.12",
     "@astrojs/sitemap": "3.4.1",
-    "@tailwindcss/vite": "^4.1.4",
+    "@tailwindcss/vite": "^4.1.11",
     "astro": "5.12.3",
     "astro-seo": "^0.8.4",
-    "tailwindcss": "^4.1.4",
+    "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20250421.0",
+    "@cloudflare/workers-types": "^4.20250726.0",
     "@tailwindcss/typography": "^0.5.16"
   },
   "pnpm": {
