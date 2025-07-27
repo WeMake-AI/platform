@@ -79,7 +79,7 @@ our practices or for other operational, legal or regulatory reasons. We
 encourage you to periodically review this policy to stay informed about our
 privacy practices.
 
-# Security Measures for Contact Form API
+## Security Measures for Contact Form API
 
 This document outlines the security measures implemented in the contact form API
 to protect against common web vulnerabilities.
