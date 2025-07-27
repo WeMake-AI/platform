@@ -1,9 +1,10 @@
 ---
 title: "So geht Arbeiten im Jahr 2025"
 pubDate: 2024-12-01
-description:
-  "Schluss mit ineffizienten Workflows! Entdecke, wie KI deine Produktivität
-  steigern kann und lerne die Tools kennen, die dich im Jahr 2025 voranbringen."
+description: |
+  Schluss mit ineffizienten Workflows! Entdecke, wie KI deine  
+  Produktivität steigern kann und lerne die Tools kennen, die dich  
+  im Jahr 2025 voranbringen.
 author: "Florentin Sakwiset"
 image:
   url: "/images/writer-florentin.jpeg"
