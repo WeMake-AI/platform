@@ -52,13 +52,11 @@ Sicherheitsfunktionen für besonders sensible Google Workspace Konten.
 ## Einrichtungsprozess
 
 1. **Vorbereitung**
-
    - Überprüfung der Workspace-Konfiguration
    - Bereitstellung der Sicherheitsschlüssel
    - Backup wichtiger Daten
 
 2. **Aktivierung**
-
    - Einrichtung im Google Admin Console
    - Konfiguration der Sicherheitsrichtlinien
    - Verteilung der Sicherheitsschlüssel
