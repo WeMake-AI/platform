@@ -5,7 +5,14 @@
 
 version: 2
 updates:
-  - package-ecosystem: "bun"
-    directory: "/"
+  # Enable version updates for Bun
+  - package-ecosystem: "bun" # See documentation for possible values
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: ".github/workflows"
     schedule:
       interval: "weekly"

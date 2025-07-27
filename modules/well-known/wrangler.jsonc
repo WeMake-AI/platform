@@ -3,48 +3,48 @@
  * https://developers.cloudflare.com/workers/wrangler/configuration/
  */
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "well-known",
-  "main": "src/index.ts",
-  "compatibility_date": "2025-04-02",
-  "routes": [
-    {
-      "pattern": "cse.wemake.cx",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.wemake.cx",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.florentin.dev",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.viraly.me",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.zerotrust.email",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.zerotrust.pw",
-      "custom_domain": true
-    },
-    {
-      "pattern": "mta-sts.cenergy.network",
-      "custom_domain": true
-    }
-  ],
-  "observability": {
-    "enabled": true
-  },
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "well-known",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-04-02",
+	"routes": [
+		{
+			"pattern": "cse.wemake.cx",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.wemake.cx",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.florentin.dev",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.viraly.me",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.zerotrust.email",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.zerotrust.pw",
+			"custom_domain": true
+		},
+		{
+			"pattern": "mta-sts.cenergy.network",
+			"custom_domain": true
+		}
+	],
+	"observability": {
+		"enabled": true
+	},
 
-  "placement": { "mode": "smart" },
+	"placement": { "mode": "smart" },
 
-  "assets": {
-    "directory": "./src",
-    "binding": "ASSETS"
-  }
+	"assets": {
+		"directory": "./src",
+		"binding": "ASSETS"
+	}
 }

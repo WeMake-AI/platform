@@ -26,13 +26,26 @@ const ipRequestMap = new Map<string, { count: number; timestamp: number }>();
 // Helper function to sanitize input
 function sanitizeInput(input: string | null): string {
   if (!input) return "";
-  return input.trim().replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/'/g, "&#x27;");
+  return input
+    .trim()
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#x27;");
 }
 
-export const onRequestPost = async (context: { request: Request; env: Env; params: any }) => {
+export const onRequestPost = async (context: {
+  request: Request;
+  env: Env;
+  params: any;
+}) => {
   try {
     // Get client IP for rate limiting
-    const clientIP = context.request.headers.get("CF-Connecting-IP") || context.request.headers.get("X-Forwarded-For") || "unknown";
+    const clientIP =
+      context.request.headers.get("CF-Connecting-IP") ||
+      context.request.headers.get("X-Forwarded-For") ||
+      "unknown";
 
     // Check rate limit
     const now = Date.now();
@@ -47,7 +60,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
         return new Response(
           JSON.stringify({
             success: false,
-            message: "Zu viele Anfragen. Bitte versuchen Sie es später noch einmal."
+            message:
+              "Zu viele Anfragen. Bitte versuchen Sie es später noch einmal."
           }),
           {
             status: 429,
@@ -80,7 +94,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
+          message:
+            "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
         }),
         {
           status: 200,
@@ -96,7 +111,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
     const contactData: ContactFormData = {
       full_name: sanitizeInput(formData.get("full_name") as string),
       work_email: sanitizeInput(formData.get("work_email") as string),
-      work_phone: sanitizeInput(formData.get("work_phone") as string) || undefined,
+      work_phone:
+        sanitizeInput(formData.get("work_phone") as string) || undefined,
       company: sanitizeInput(formData.get("company") as string) || undefined,
       project_details: sanitizeInput(formData.get("project_details") as string),
       csrf_token: formData.get("csrf_token") as string
@@ -120,7 +136,11 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
     }
 
     // Validate required fields
-    if (!contactData.full_name || !contactData.work_email || !contactData.project_details) {
+    if (
+      !contactData.full_name ||
+      !contactData.work_email ||
+      !contactData.project_details
+    ) {
       return new Response(
         JSON.stringify({
           success: false,
@@ -193,7 +213,13 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
       VALUES (?, ?, ?, ?, ?)
     `
     )
-      .bind(contactData.full_name, contactData.work_email, contactData.work_phone, contactData.company, contactData.project_details)
+      .bind(
+        contactData.full_name,
+        contactData.work_email,
+        contactData.work_phone,
+        contactData.company,
+        contactData.project_details
+      )
       .run();
 
     // Check if the insert was successful
@@ -201,7 +227,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
       return new Response(
         JSON.stringify({
           success: true,
-          message: "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
+          message:
+            "Vielen Dank für Ihre Anfrage! Wir werden uns in Kürze bei Ihnen melden."
         }),
         {
           status: 201,
@@ -223,7 +250,8 @@ export const onRequestPost = async (context: { request: Request; env: Env; param
     return new Response(
       JSON.stringify({
         success: false,
-        message: "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
+        message:
+          "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es später noch einmal."
       }),
       {
         status: 500,
