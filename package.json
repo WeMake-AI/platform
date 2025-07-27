@@ -31,6 +31,9 @@
   "prettier": {
     "trailingComma": "none",
     "printWidth": 80,
-    "proseWrap": "always"
+    "proseWrap": "always",
+    "singleQuote": false,
+    "semi": true,
+    "useTabs": false
   }
 }
