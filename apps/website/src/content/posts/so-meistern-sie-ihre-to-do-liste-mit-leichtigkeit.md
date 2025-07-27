@@ -1,10 +1,11 @@
 ---
 title: "So meistern Sie Ihre To-Do-Liste mit Leichtigkeit"
 pubDate: 2024-12-01
-description:
-  "Erfahren Sie, wie KI Ihre Produktivität steigern kann, ohne Sie zu ersetzen.
-  Tipps & Tricks für eine effizientere Aufgabenverwaltung mit intelligenten
-  Tools."
+description: |
+  Erfahren Sie, wie KI Ihre Produktivität steigern kann,  
+  ohne Sie zu ersetzen.  
+  Tipps & Tricks für eine effizientere Aufgabenverwaltung  
+  mit intelligenten Tool
 author: "Florentin Sakwiset"
 image:
   url: "/images/writer-florentin.jpeg"
