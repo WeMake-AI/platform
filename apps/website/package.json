@@ -1,5 +1,12 @@
 {
-  "name": "website",
+  "name": "@wemake-ai/website",
+  "version": "0.0.1",
+  "author": "WeMake (https://wemake.cx)",
+  "bugs": "https://github.com/WeMake-AI/mcp/issues",
+  "description": "Official WeMake Website",
+  "homepage": "https://wemake.cx",
+  "license": "BSL-1.1",
+  "type": "module",
   "private": true,
   "scripts": {
     "dev": "astro dev",
