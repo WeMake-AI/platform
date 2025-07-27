@@ -1,10 +1,10 @@
 ---
 title: "Dein Terminal, Dein Stil – WeMake ZSH goes GA"
 pubDate: 2025-03-08
-description:
-  "Das WeMake ZSH Theme ist da! Verleihe deinem Terminal einen individuellen
-  Look und starte in eine produktivere Zukunft. Entdecke die Vision hinter dem
-  Design und was als Nächstes kommt."
+description: |  
+  Das WeMake ZSH Theme ist da! Verleihe deinem Terminal einen  
+  individuellen Look und starte in eine produktivere Zukunft.  
+  Entdecke die Vision hinter dem Design und was als Nächstes kommt.
 author: "Florentin Sakwiset"
 headerImage:
   url: "/images/articles/zsh-ga/terminal-preview.png"
@@ -24,7 +24,7 @@ tags:
   ]
 ---
 
-# WeMake ZSH – Jetzt verfügbar!
+# WeMake ZSH – Jetzt verfügbar
 
 Es ist so weit! Ein Projekt, das uns bei 💙 WeMake sehr am Herzen liegt, geht in
 die nächste Runde: Das WeMake ZSH Theme ist ab sofort allgemein verfügbar
@@ -51,10 +51,10 @@ Wünschen gestalten – Farben, Symbole, Layout, alles anpassbar.
 Der Wechsel zum Theme ist denkbar einfach. Wir haben den Prozess so gestaltet,
 dass er für jeden zugänglich ist, unabhängig von technischen Vorkenntnissen.
 
-1.  Besuche unser GitHub Repository:
+1. Besuche unser GitHub Repository:
     [WeMake ZSH Theme](https://github.com/WeMake-AI/zsh-theme).
-2.  Folge der einfachen Installationsanleitung.
-3.  Passe das Theme nach deinen Wünschen an.
+2. Folge der einfachen Installationsanleitung.
+3. Passe das Theme nach deinen Wünschen an.
 
 Und das war's schon! In wenigen Minuten hast du dein Terminal in eine Umgebung
 verwandelt, die nicht nur funktional, sondern auch ästhetisch ansprechend ist.
