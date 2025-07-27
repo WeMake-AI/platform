@@ -12,7 +12,8 @@ import rss, { pagesGlobToRssItems } from "@astrojs/rss";
 export async function GET(context) {
   return rss({
     title: "WeMake AI by Sakwiset",
-    description: "WeMake AI by Sakwiset is an AI company that provides AI solutions to businesses.",
+    description:
+      "WeMake AI by Sakwiset is an AI company that provides AI solutions to businesses.",
     site: context.site,
     items: await pagesGlobToRssItems(import.meta.glob("./blog/*.{md,mdx}"))
   });

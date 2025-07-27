@@ -1,10 +1,16 @@
 # 💙 WeMake Monolith
 
-WeMake's core platform monolith repository - empowering digital transformation through AI-driven solutions.
+WeMake's core platform monolith repository - empowering digital transformation
+through AI-driven solutions.
+
+[![License: BSL-1.1](https://img.shields.io/badge/License-BSL%201.1-blue)](LICENSE)
 
 ## About
 
-This monolith repository houses WeMake's core platform, built with a modular architecture that enables rapid innovation while maintaining a cohesive codebase. We empower organizations through advanced technologies and industry expertise to make work easier, faster, and more meaningful.
+This monolith repository houses WeMake's core platform, built with a modular
+architecture that enables rapid innovation while maintaining a cohesive
+codebase. We empower organizations through advanced technologies and industry
+expertise to make work easier, faster, and more meaningful.
 
 ## Vision
 
@@ -66,10 +72,10 @@ bun run test
 
 All commands are run from the root of the project, from a terminal:
 
-| Command      | Action                    |
-| :----------- | :------------------------ |
-| `bun i`      | Installs dependencies     |
-| `bun format` | Format code with Prettier |
+| Command       | Action                    |
+| :------------ | :------------------------ |
+| `bun install` | Installs dependencies     |
+| `bun format`  | Format code with Prettier |
 
 [Learn more about bun](https://bun.sh/docs).
 

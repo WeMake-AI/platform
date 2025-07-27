@@ -4,14 +4,16 @@
 
 - Tailwind CSS v4 Beta
 - Astro v5
-- Astro SEO - Powered by [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo)
+- Astro SEO - Powered by
+  [@astrolib/seo](https://github.com/onwidget/astrolib/tree/main/packages/seo)
 - Astro Sitemap - https://docs.astro.build/en/guides/integrations-guide/sitemap/
 - TypeScript implementation with functional, declarative programming
 - End-to-end testing with Playwright
 
 ## Project Structure
 
-This project follows a typical Astro project structure. You'll find the following key directories and files:
+This project follows a typical Astro project structure. You'll find the
+following key directories and files:
 
 ```tree
 /
@@ -37,29 +39,38 @@ This project follows a typical Astro project structure. You'll find the followin
 └── playwright.config.ts
 ```
 
-- `src/pages/`: Contains `.astro` and `.md` files. Each file becomes a route in your project based on its name.
-- `src/components/`: Ideal for placing your Astro/React/Vue/Svelte/Preact components.
+- `src/pages/`: Contains `.astro` and `.md` files. Each file becomes a route in
+  your project based on its name.
+- `src/components/`: Ideal for placing your Astro/React/Vue/Svelte/Preact
+  components.
 - `src/layouts/`: Contains layout components for consistent page structure.
 - `src/styles/`: Contains global CSS styles.
-- `public/`: For static assets such as images and fonts that you want to serve directly.
+- `public/`: For static assets such as images and fonts that you want to serve
+  directly.
 - `tests/`: Contains Playwright tests for ensuring functionality.
-- `.github/workflows/`: Contains GitHub Actions workflows for testing and deployment.
+- `.github/workflows/`: Contains GitHub Actions workflows for testing and
+  deployment.
 
 ## Versioning Strategy
 
-WeMake uses a modified semantic versioning approach to accommodate continuous growth without a rigid roadmap:
+WeMake uses a modified semantic versioning approach to accommodate continuous
+growth without a rigid roadmap:
 
 ### Version Format: X.Y.Z
 
-- **Major (X)**: Incremented for significant redesigns or breaking changes to user experience
+- **Major (X)**: Incremented for significant redesigns or breaking changes to
+  user experience
 - **Minor (Y)**: Incremented for new features and notable enhancements
-- **Patch (Z)**: Incremented for bug fixes, small UI improvements, and content updates
+- **Patch (Z)**: Incremented for bug fixes, small UI improvements, and content
+  updates
 
 ### Automated Versioning
 
-Our versioning system is automated through GitHub Actions and driven by PR labels:
+Our versioning system is automated through GitHub Actions and driven by PR
+labels:
 
-- PRs containing `frontend`, `content`, or `scripts` changes trigger minor version bumps
+- PRs containing `frontend`, `content`, or `scripts` changes trigger minor
+  version bumps
 - PRs with `breaking` in the title trigger major version bumps
 - All other changes trigger patch version bumps
 
@@ -82,10 +93,13 @@ For best results with our automated versioning:
 
 Our versioning system includes comprehensive testing tools:
 
-- **Local Tests**: Run `./tests/validate-versioning.sh` to verify versioning logic
-- **GitHub Actions**: Use the `Test Versioning` workflow to simulate versioning in CI
+- **Local Tests**: Run `./tests/validate-versioning.sh` to verify versioning
+  logic
+- **GitHub Actions**: Use the `Test Versioning` workflow to simulate versioning
+  in CI
 - **Test Files**:
-  - `tests/version-workflow-test.js`: Tests version bumping logic with different PR scenarios
+  - `tests/version-workflow-test.js`: Tests version bumping logic with different
+    PR scenarios
   - `tests/changelog-test.js`: Tests CHANGELOG generation functionality
   - `tests/validate-versioning.sh`: Orchestrates the full test suite
 
@@ -143,13 +157,15 @@ All commands are run from the root of the project, from a terminal:
 | `bun run astro ...`    | Run CLI commands like `astro add`, `astro check` |
 | `bun run astro --help` | Get help using the Astro CLI                     |
 
-Learn more - Explore more through Astro's official [documentation](https://docs.astro.build).
+Learn more - Explore more through Astro's official
+[documentation](https://docs.astro.build).
 
 ---
 
 ## WeMake v1.0.0 Release
 
-We are thrilled to announce the release of **version 1.0.0** for the WeMake website! This release includes:
+We are thrilled to announce the release of **version 1.0.0** for the WeMake
+website! This release includes:
 
 ### Core Updates
 
@@ -214,7 +230,8 @@ We are thrilled to announce the release of **version 1.0.0** for the WeMake webs
 
 ### Upcoming Features
 
-- **Image Component from Astro**: The Astro Image component will be added in future updates
+- **Image Component from Astro**: The Astro Image component will be added in
+  future updates
 
 - **Reusable Components**:
   - **Text Component**: For consistent typography
@@ -223,11 +240,13 @@ We are thrilled to announce the release of **version 1.0.0** for the WeMake webs
 
 ## Testing
 
-This project includes automated tests using Playwright to ensure the contact form and API are working correctly.
+This project includes automated tests using Playwright to ensure the contact
+form and API are working correctly.
 
 ### Test Setup
 
-The tests are configured in `playwright.config.ts` and organized in the `tests/` directory.
+The tests are configured in `playwright.config.ts` and organized in the `tests/`
+directory.
 
 ### Running Tests
 

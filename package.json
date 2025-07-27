@@ -1,5 +1,11 @@
 {
-  "name": "monolith",
+  "name": "@wemake-ai/platform",
+  "version": "0.0.1",
+  "author": "WeMake (https://wemake.cx)",
+  "bugs": "https://github.com/WeMake-AI/mcp/issues",
+  "description": "WeMake Model Context Protocol (MCP) servers",
+  "homepage": "https://wemake.cx",
+  "license": "BSL-1.1",
   "type": "module",
   "private": true,
   "workspaces": [
@@ -14,11 +20,20 @@
     "dev": "bun --cwd apps/website dev",
     "build": "bun --cwd apps/website build",
     "deploy": "bun --cwd apps/website wrangler deploy",
-    "test": "bun test",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "bun test"
   },
   "devDependencies": {
+    "markdownlint": "^0.38.0",
     "prettier": "^3.5.3",
     "wrangler": "^4.12.0"
+  },
+  "prettier": {
+    "trailingComma": "none",
+    "printWidth": 80,
+    "proseWrap": "always",
+    "singleQuote": false,
+    "semi": true,
+    "useTabs": false
   }
 }

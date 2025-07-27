@@ -19,7 +19,11 @@
  */
 
 export default {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(
+    request: Request,
+    env: Env,
+    ctx: ExecutionContext
+  ): Promise<Response> {
     const url = new URL(request.url);
     const path = url.pathname;
 
@@ -61,7 +65,9 @@ export default {
     try {
       // Try to fetch the file from ASSETS
       // This uses the directory structure we set up in wrangler.jsonc
-      const asset = await env.ASSETS.fetch(new Request(`http://placeholder${assetPath}`));
+      const asset = await env.ASSETS.fetch(
+        new Request(`http://placeholder${assetPath}`)
+      );
 
       // If file found, return it with appropriate content type
       if (asset.ok) {

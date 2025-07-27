@@ -1,6 +1,8 @@
 ---
 integration: Advanced Protection Program
-description: "Aktivieren Sie das Advanced Protection Program für Ihre über WeMake registrierte Domain und Google Workspace für maximale Sicherheit."
+description:
+  "Aktivieren Sie das Advanced Protection Program für Ihre über WeMake
+  registrierte Domain und Google Workspace für maximale Sicherheit."
 email: hey@wemake.cx
 permissions:
   - "Daten: Domain-Einstellungen, Sicherheitskonfiguration, Benutzerkonten"
@@ -27,12 +29,15 @@ logo:
 
 ## Advanced Protection für Google Workspace
 
-Schützen Sie Ihre Organisation mit Googles fortschrittlichstem Sicherheitsprogramm. Das Advanced Protection Program bietet erweiterte Sicherheitsfunktionen für besonders sensible Google Workspace Konten.
+Schützen Sie Ihre Organisation mit Googles fortschrittlichstem
+Sicherheitsprogramm. Das Advanced Protection Program bietet erweiterte
+Sicherheitsfunktionen für besonders sensible Google Workspace Konten.
 
 ## Funktionen & Vorteile
 
 - **Erweiterte Phishing-Abwehr:** Verstärkter Schutz vor gezielten Angriffen
-- **Strenge Authentifizierung:** Verpflichtende Nutzung von Sicherheitsschlüsseln
+- **Strenge Authentifizierung:** Verpflichtende Nutzung von
+  Sicherheitsschlüsseln
 - **Download-Schutz:** Erweiterte Scanning-Funktionen für Downloads
 - **Zugriffskontrolle:** Strikte Kontrolle über Drittanbieter-Zugriffe
 - **Automatische Updates:** Kontinuierliche Sicherheitsaktualisierungen
@@ -79,7 +84,8 @@ Schützen Sie Ihre Organisation mit Googles fortschrittlichstem Sicherheitsprogr
 
 ## Preise & Verfügbarkeit
 
-Die Aktivierung des Advanced Protection Program ist kostenlos für Google Workspace Nutzer. Zusätzliche Kosten können für Sicherheitsschlüssel anfallen.
+Die Aktivierung des Advanced Protection Program ist kostenlos für Google
+Workspace Nutzer. Zusätzliche Kosten können für Sicherheitsschlüssel anfallen.
 
 ## Erste Schritte
 
