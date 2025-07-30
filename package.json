@@ -1,9 +1,9 @@
 {
   "name": "@wemake-ai/platform",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
-  "description": "WeMake Model Context Protocol (MCP) servers",
+  "description": "Official WeMake Platform",
   "homepage": "https://wemake.cx",
   "license": "BSL-1.1",
   "type": "module",
@@ -20,13 +20,14 @@
     "dev": "bun --cwd apps/website dev",
     "build": "bun --cwd apps/website build",
     "deploy": "bun --cwd apps/website wrangler deploy",
-    "format": "prettier --write .",
-    "test": "bun test"
+    "format": "prettier --write ."
   },
   "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "^0.8.57",
+    "@cloudflare/workers-types": "^4.20250726.0",
     "markdownlint": "^0.38.0",
-    "prettier": "^3.5.3",
-    "wrangler": "^4.12.0"
+    "prettier": "^3.6.2",
+    "wrangler": "^4.26.0"
   },
   "prettier": {
     "trailingComma": "none",

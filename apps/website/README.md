@@ -118,13 +118,11 @@ The test suite validates various scenarios including:
 Our versioning system is implemented through these GitHub Actions workflows:
 
 - **PR Labeler** (`.github/workflows/pr-labeler.yml`):
-
   - Automatically applies labels to PRs based on changed files
   - Adds versioning labels based on PR title prefixes
   - Uses configuration in `.github/labeler.yml`
 
 - **Semantic Versioning** (`.github/workflows/semantic-versioning.yml`):
-
   - Triggers when PRs are merged to main
   - Determines version bump type based on PR labels
   - Updates package.json and CHANGELOG.md
@@ -170,13 +168,11 @@ website! This release includes:
 ### Core Updates
 
 - **Complete TypeScript Implementation**:
-
   - Functional, declarative programming approach
   - Strict error handling and validation principles
   - Comprehensive documentation for complex logic
 
 - **Astro v5 Integration**:
-
   - Leveraging Astro's partial hydration and multi-framework support
   - File-based routing system with dynamic routes
   - Content collections for organized content management
@@ -189,21 +185,18 @@ website! This release includes:
 ### Security Enhancements
 
 - **Contact Form API Security**:
-
   - Input validation and sanitization
   - CSRF protection
   - Rate limiting and bot detection
   - Secure headers implementation
 
 - **Database Integration**:
-
   - New `contact_submissions` table for managing user communications
   - End-to-end SSL encryption for data transmission
 
 ### Testing Framework
 
 - **Comprehensive Testing Suite**:
-
   - Unit tests for utility functions and helpers
   - Integration tests for complex components
   - End-to-end tests with Playwright for critical user flows
