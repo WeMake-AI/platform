@@ -8,7 +8,7 @@
         "@cloudflare/workers-types": "^4.20250726.0",
         "markdownlint": "^0.38.0",
         "prettier": "^3.6.2",
-        "wrangler": "^4.26.0",
+        "wrangler": "^4.26.1",
       },
     },
     "apps/website": {
