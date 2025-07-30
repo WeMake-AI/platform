@@ -15,9 +15,9 @@
     "@wemake/*": "workspace:*"
   },
   "scripts": {
-    "website:dev": "bun --cwd apps/website dev",
-    "website:build": "bun --cwd apps/website build",
-    "website:preview": "bun website:generate-types && bun website:build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
+    "website:dev": "bun run --cwd apps/website dev",
+    "website:build": "bun run --cwd apps/website build",
+    "website:preview": "bun run website:generate-types && bun run website:build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
     "website:deploy:staging": "bun website:build && wrangler deploy --env staging",
     "website:deploy": "bun website:build && wrangler deploy",
     "website:generate-types": "wrangler types --config apps/website/wrangler.jsonc",
