@@ -12,8 +12,6 @@
     "dev": "astro dev",
     "build": "astro check && astro build",
     "astro": "astro",
-    "deploy": "bun run build && wrangler deploy --env staging",
-    "deploy:prod": "bun run build && wrangler deploy",
     "check": "astro check",
     "type-check": "bun run generate-types && bun tsc",
     "format": "prettier . --write"

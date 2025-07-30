@@ -9,18 +9,17 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "apps/*",
-    "modules/*",
-    "packages/*"
+    "apps/*"
   ],
   "resolutions": {
     "@wemake/*": "workspace:*"
   },
   "scripts": {
-    "dev": "bun --cwd apps/website dev",
-    "build": "bun --cwd apps/website build",
-    "deploy": "bun --cwd apps/website wrangler deploy",
-    "website:preview": "bun website:generate-types && bun --cwd apps/website build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
+    "website:dev": "bun --cwd apps/website dev",
+    "website:build": "bun --cwd apps/website build",
+    "website:preview": "bun website:generate-types && bun website:build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
+    "website:deploy:staging": "bun website:build && wrangler deploy --env staging",
+    "website:deploy": "bun website:build && wrangler deploy",
     "website:generate-types": "wrangler types --config apps/website/wrangler.jsonc",
     "format": "prettier --write ."
   },
