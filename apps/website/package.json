@@ -10,8 +10,7 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "bun run generate-types && astro check && astro build",
-    "preview": "bun run generate-types && astro build && wrangler dev --remote --env staging",
+    "build": "astro check && astro build",
     "astro": "astro",
     "deploy": "bun run build && wrangler deploy --env staging",
     "deploy:prod": "bun run build && wrangler deploy",
