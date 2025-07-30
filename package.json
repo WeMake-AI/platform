@@ -20,8 +20,7 @@
     "dev": "bun --cwd apps/website dev",
     "build": "bun --cwd apps/website build",
     "deploy": "bun --cwd apps/website wrangler deploy",
-    "format": "prettier --write .",
-    "test": "bun test"
+    "format": "prettier --write ."
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.8.57",
