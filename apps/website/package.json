@@ -16,7 +16,6 @@
     "deploy": "bun run build && wrangler deploy --env staging",
     "deploy:prod": "bun run build && wrangler deploy",
     "check": "astro check",
-    "generate-types": "wrangler types && prettier worker-configuration.d.ts --write",
     "type-check": "bun run generate-types && bun tsc",
     "format": "prettier . --write"
   },
