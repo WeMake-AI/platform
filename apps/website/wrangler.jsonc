@@ -1,21 +1,14 @@
 {
   "name": "website",
   "account_id": "7e298a91c3274f38a33f93ebe112cd91",
-  "main": "./apps/website/dist/_worker.js/index.js",
+  "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2025-05-05",
   "compatibility_flags": ["nodejs_compat_v2"],
-  "routes": [
-    {
-      "pattern": "wemake.cx",
-      "custom_domain": true
-    }
-  ],
-
-  "tsconfig": "./apps/website/tsconfig.json",
-
+  "workers_dev": true,
+  "preview_urls": true,
   "assets": {
     "binding": "ASSETS",
-    "directory": "./apps/website/dist"
+    "directory": "./dist"
   },
 
   "observability": {
@@ -23,22 +16,30 @@
   },
 
   "build": {
-    "command": "bun run website:build",
-    "cwd": "./",
-    "watch_dir": "./apps/website"
+    "command": "bun run website:build"
   },
 
-  "placement": { "mode": "smart" },
+  "placement": { "mode": "default" },
 
   "env": {
     "staging": {
-      "workers_dev": true,
       "routes": [
         {
           "pattern": "staging.wemake.cx",
           "custom_domain": true
         }
       ]
+    },
+    "production": {
+      "workers_dev": false,
+      "preview_urls": false,
+      "routes": [
+        {
+          "pattern": "wemake.cx",
+          "custom_domain": true
+        }
+      ],
+      "placement": { "mode": "smart" }
     }
   }
 }
