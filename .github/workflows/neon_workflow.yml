@@ -1,4 +1,4 @@
-name: Create/Delete Neoon Branch for Pull Request
+name: Neon
 
 on:
   pull_request:
