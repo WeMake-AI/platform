@@ -1,6 +1,6 @@
 {
   "name": "@wemake-ai/platform",
-  "version": "0.0.13",
+  "version": "0.0.22",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
   "description": "Official WeMake Platform",
@@ -17,10 +17,10 @@
   "scripts": {
     "website:dev": "bun run --cwd src/website dev",
     "website:build": "bun run --cwd src/website build",
-    "website:preview": "wrangler dev --remote --env staging --config src/website/wrangler.jsonc",
-    "website:deploy:staging": "bunx wrangler deploy --env staging --config src/website/wrangler.jsonc",
-    "website:deploy": "bunx wrangler deploy --config src/website/wrangler.jsonc",
-    "website:generate-types": "wrangler types --config src/website/wrangler.jsonc",
+    "website:preview": "wrangler dev --x-remote-bindings --env='staging' --config='src/website/wrangler.jsonc'",
+    "website:deploy:staging": "bunx wrangler deploy --env='staging' --config='src/website/wrangler.jsonc'",
+    "website:deploy": "bunx wrangler deploy --env='' --config='src/website/wrangler.jsonc'",
+    "website:generate-types": "wrangler types --config='src/website/wrangler.jsonc'",
     "check": "bun run tsc && bun run lint && bun run prettier",
     "format": "bun run lint:fix && bun run prettier:fix",
     "tsc": "tsc --noEmit",
@@ -48,6 +48,14 @@
     "proseWrap": "always",
     "singleQuote": false,
     "semi": true,
-    "useTabs": false
+    "useTabs": false,
+    "overrides": [
+      {
+        "files": ".github/workflows/*.yml",
+        "options": {
+          "printWidth": 140
+        }
+      }
+    ]
   }
 }
