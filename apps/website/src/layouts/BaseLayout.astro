@@ -15,7 +15,7 @@ const { title, description } = Astro.props;
   lang="en"
   class="scroll-smooth selection:bg-blue-500 selection:text-white">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead {...(title !== undefined && { title })} {...(description !== undefined && { description })} />
   </head>
 
   <body class="bg-white flex flex-col min-h-screen">

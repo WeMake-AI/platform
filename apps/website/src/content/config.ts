@@ -85,10 +85,10 @@ const postsCollection = defineCollection({
 });
 
 export const collections = {
-  integrations: integrations,
-  helpdesk: helpdesk,
-  customers: customers,
-  legal: legal,
-  jobs: jobs,
+  integrations,
+  helpdesk,
+  customers,
+  legal,
+  jobs,
   posts: postsCollection
 };
