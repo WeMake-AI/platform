@@ -61,7 +61,7 @@ export default [
 
   // Type-aware TypeScript rules for source files only
   {
-    files: ["apps/*/src/**/*.{ts,tsx}", "src/**/*.{ts,tsx}"]
+    files: ["src/*/src/**/*.{ts,tsx}", "src/**/*.{ts,tsx}"]
     // ... type-aware rules
   },
 
@@ -106,9 +106,9 @@ bun run lint:check
 
 ```sh
 # Lint specific workspace
-bun run --cwd apps/website lint
-bun run --cwd apps/website lint:fix
-bun run --cwd apps/website lint:check
+bun run --cwd src/website lint
+bun run --cwd src/website lint:fix
+bun run --cwd src/website lint:check
 ```
 
 #### Direct ESLint Usage
@@ -118,7 +118,7 @@ bun run --cwd apps/website lint:check
 bunx eslint src/components/**/*.astro
 
 # Lint with custom options
-bunx eslint apps/website/src --ext .ts,.tsx,.astro
+bunx eslint src/website/src --ext .ts,.tsx,.astro
 
 # Fix specific files
 bunx eslint src/utils/helpers.ts --fix
@@ -210,7 +210,7 @@ bunx eslint src/utils/helpers.ts --fix
 
 ```sh
 platform/
-├── apps/
+├── src/
 │   └── website/          # Astro website application
 ├── packages/             # Shared packages
 ├── docs/                 # Documentation
@@ -299,7 +299,7 @@ jobs:
 {
   languageOptions: {
     parserOptions: {
-      project: ["./tsconfig.json", "./apps/*/tsconfig.json"];
+      project: ["./tsconfig.json", "./src/*/tsconfig.json"];
     }
   }
 }
