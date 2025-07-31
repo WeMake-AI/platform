@@ -20,7 +20,7 @@ A world where AI helps everyone reach their full potential.
 
 ```sh
 monolith/
-├── apps/                  # Application layer components
+├── src/                  # Application layer components
 ├── packages/              # Shared packages and modules
 ├── modules/               # Domain-specific modules
 ├── config/                # Configuration files
@@ -107,7 +107,7 @@ bun run lint:fix
 bun run lint:check
 
 # Lint specific workspace
-bun run --cwd apps/website lint
+bun run --cwd src/website lint
 
 # Lint specific files
 bunx eslint src/components/**/*.astro

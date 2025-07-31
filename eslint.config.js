@@ -68,8 +68,8 @@ export default [
   // TypeScript configuration (type-checked for source files only)
   {
     files: [
-      "apps/*/src/**/*.ts",
-      "apps/*/src/**/*.tsx",
+      "src/*/src/**/*.ts",
+      "src/*/src/**/*.tsx",
       "src/**/*.ts",
       "src/**/*.tsx"
     ],
@@ -78,7 +78,7 @@ export default [
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
-        project: ["./tsconfig.json", "./apps/*/tsconfig.json"],
+        project: ["./tsconfig.json", "./src/*/tsconfig.json"],
         tsconfigRootDir: import.meta.dirname
       }
     },

@@ -9,18 +9,18 @@
   "type": "module",
   "private": true,
   "workspaces": [
-    "apps/*"
+    "src/*"
   ],
   "resolutions": {
     "@wemake/*": "workspace:*"
   },
   "scripts": {
-    "website:dev": "bun run --cwd apps/website dev",
-    "website:build": "bun run --cwd apps/website build",
-    "website:preview": "bun run website:generate-types && bun run website:build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
+    "website:dev": "bun run --cwd src/website dev",
+    "website:build": "bun run --cwd src/website build",
+    "website:preview": "bun run website:generate-types && bun run website:build && wrangler dev --remote --env staging --config src/website/wrangler.jsonc",
     "website:deploy:staging": "bun website:build && wrangler deploy --env staging",
     "website:deploy": "bun website:build && wrangler deploy",
-    "website:generate-types": "wrangler types --config apps/website/wrangler.jsonc",
+    "website:generate-types": "wrangler types --config src/website/wrangler.jsonc",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:check": "eslint . --max-warnings 0",
