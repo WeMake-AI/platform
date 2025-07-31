@@ -1,6 +1,6 @@
 {
   "name": "@wemake-ai/platform",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
   "description": "Official WeMake Platform",
@@ -21,7 +21,8 @@
     "website:deploy:staging": "bun website:build && wrangler deploy --env staging",
     "website:deploy": "bun website:build && wrangler deploy",
     "website:generate-types": "wrangler types --config apps/website/wrangler.jsonc",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check": "tsc --noEmit"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.8.57",
