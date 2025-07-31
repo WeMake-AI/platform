@@ -31,7 +31,7 @@
     "staging": {
       "workers_dev": true,
       "preview_urls": true,
-      "placement": { "mode": "default" }
+      "placement": { "mode": "off" }
     }
   }
 }
