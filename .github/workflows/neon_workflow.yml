@@ -48,6 +48,9 @@ jobs:
           branch_name: |
             preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch
             }}
+          role: heyFlorentin
+          database: database
+          parent_branch: staging
           api_key: ${{ secrets.NEON_API_KEY }}
 
       - name: Run Migrations
@@ -57,7 +60,7 @@ jobs:
             ${{ steps.create_neon_branch.outputs.db_url_with_pooler }}
 
       - name: Post Schema Diff Comment to PR
-        uses: neondatabase/schema-diff-action@v1
+        uses: neondatabase/schema-diff-action@80cfa8521628e890015b60f5291a7738926617dc # v1.0.1
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           compare_branch:
@@ -72,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Delete Neon Branch
-        uses: neondatabase/delete-branch-action@v3
+        uses: neondatabase/delete-branch-action@ed7d9bfda9b787d3269d18596eea76633ec34fe2 # v3.2.0
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch:
