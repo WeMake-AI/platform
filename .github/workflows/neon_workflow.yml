@@ -1,4 +1,4 @@
-name: Neon
+name: Neon Database
 
 on:
   pull_request:
@@ -27,7 +27,7 @@ jobs:
         uses: tj-actions/branch-names@5250492686b253f06fa55861556d1027b067aeb5 # v9.0.2
 
   create_neon_branch:
-    name: Create Neon Branch
+    name: Create Branch
     outputs:
       db_url: ${{ steps.create_neon_branch.outputs.db_url }}
       db_url_with_pooler: ${{ steps.create_neon_branch.outputs.db_url_with_pooler }}
@@ -39,7 +39,7 @@ jobs:
       || github.event.action == 'reopened')
     runs-on: ubuntu-latest
     steps:
-      - name: Create Neon Branch
+      - name: Create Branch
         id: create_neon_branch
         uses: neondatabase/create-branch-action@45dc7a8a626b375bdbdabbc0b56ceb28e81b239d # v6.0.1
         with:
@@ -50,10 +50,10 @@ jobs:
           parent_branch: staging
           api_key: ${{ secrets.NEON_API_KEY }}
 
-      - name: Run Migrations
-        run: npm run db:migrate
-        env:
-          DATABASE_URL: ${{ steps.create_neon_branch.outputs.db_url_with_pooler }}
+      # - name: Run Migrations
+      #   run: npm run db:migrate
+      #   env:
+      #     DATABASE_URL: ${{ steps.create_neon_branch.outputs.db_url_with_pooler }}
 
       - name: Post Schema Diff Comment to PR
         uses: neondatabase/schema-diff-action@80cfa8521628e890015b60f5291a7738926617dc # v1.0.1
@@ -63,7 +63,7 @@ jobs:
           api_key: ${{ secrets.NEON_API_KEY }}
 
   delete_neon_branch:
-    name: Delete Neon Branch
+    name: Delete Branch
     needs: setup
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
     runs-on: ubuntu-latest
