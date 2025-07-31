@@ -1,6 +1,6 @@
 {
   "name": "@wemake-ai/platform",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
   "description": "Official WeMake Platform",
@@ -28,8 +28,8 @@
     "check": "tsc --noEmit"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.8.57",
-    "@cloudflare/workers-types": "^4.20250726.0",
+    "@cloudflare/vitest-pool-workers": "^0.8.58",
+    "@cloudflare/workers-types": "^4.20250731.0",
     "@eslint/js": "^9.32.0",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
     "@typescript-eslint/parser": "^8.38.0",

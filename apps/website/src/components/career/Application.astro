@@ -1,9 +1,12 @@
+---
+// Application component
+---
+
 <section class="bg-white">
   <div class="mx-auto max-w-7xl lg:px-16 md:px-12 px-8 xl:px-24 py-24">
     <div>
       <h2
-        class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl text-balance"
-      >
+        class="text-blue-950 font-semibold tracking-tight lg:text-5xl text-3xl text-balance">
         Bewerbung
       </h2>
       <p class="text-slate-500 mt-6 lg:text-balance lg:w-1/2">
@@ -14,8 +17,7 @@
           class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
           title="link to your page"
           aria-label="your label"
-          href="#"
-        >
+          href="#">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="icon icon-tabler icon-tabler-brand-linkedin"
@@ -26,9 +28,12 @@
             stroke="currentColor"
             fill="none"
             stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            stroke-linejoin="round">
+            <path
+              stroke="none"
+              d="M0 0h24v24H0z"
+              fill="none"
+            ></path>
             <path
               d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"
             ></path>
@@ -44,8 +49,7 @@
     <form>
       <div class="space-y-12">
         <div
-          class="mt-10 space-y-8 border-b border-slate-900/10 pb-12 sm:space-y-0 sm:border-t sm:pb-0"
-        >
+          class="mt-10 space-y-8 border-b border-slate-900/10 pb-12 sm:space-y-0 sm:border-t sm:pb-0">
           <div class="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
             <label
               for="first-name"
@@ -125,19 +129,23 @@
         <div>
           <h2 class="text-blue-950 text-xl font-semibold">Lebenslauf</h2>
           <div class="flex flex-wrap gap-3 mt-4">
-            <label for="resume-upload" class="sr-only">Lebenslauf hochladen</label>
-              <input
-                type="file"
-                id="resume-upload"
-                accept=".pdf,.doc,.docx"
-                class="hidden"
-                aria-label="Lebenslauf hochladen"
-              />
-              <label
-                for="resume-upload"
-                class="text-blue-500 hover:text-700 cursor-pointer"
-                >Hochladen</label>
-              >
+            <label
+              for="resume-upload"
+              class="sr-only"
+              >Lebenslauf hochladen</label
+            >
+            <input
+              type="file"
+              id="resume-upload"
+              accept=".pdf,.doc,.docx"
+              class="hidden"
+              aria-label="Lebenslauf hochladen"
+            />
+            <label
+              for="resume-upload"
+              class="text-blue-500 hover:text-700 cursor-pointer"
+              >Hochladen</label
+            >
           </div>
 
           <p>
@@ -148,10 +156,14 @@
         </div>
 
         <div>
-          <h2 class="text-blue-950 text-xl font-semibold">Anschreiben (Optional)</h2>
+          <h2 class="text-blue-950 text-xl font-semibold">
+            Anschreiben (Optional)
+          </h2>
           <div class="flex flex-wrap gap-3 mt-4">
             <div>
-              <label for="cover-letter-upload" class="sr-only"
+              <label
+                for="cover-letter-upload"
+                class="sr-only"
                 >Anschreiben hochladen</label
               >
               <input
@@ -182,7 +194,9 @@
           </h2>
 
           <div class="mt-4 sm:col-span-2">
-            <label for="current-employer" class="sr-only"
+            <label
+              for="current-employer"
+              class="sr-only"
               >Aktueller Arbeitgeber</label
             >
             <input
@@ -197,12 +211,14 @@
         </div>
 
         <div>
-          <h2 class="text-blue-950 text-xl font-semibold">
-            Wo wohnst du? *
-          </h2>
+          <h2 class="text-blue-950 text-xl font-semibold">Wo wohnst du? *</h2>
 
           <div class="mt-4 sm:col-span-2">
-            <label for="residence" class="sr-only">Wohnort</label>
+            <label
+              for="residence"
+              class="sr-only"
+              >Wohnort</label
+            >
             <input
               type="text"
               name="residence"
@@ -215,51 +231,56 @@
           </div>
         </div>
 
-          <div class="mt-4 sm:col-span-2">
-            <label for="message" class="block text-xl leading-6 text-blue-950 font-semibold"
-              >Deine Nachricht</label
-            >
-            <div class="mt-2">
-              <textarea
-                id="message"
-                name="message"
-                rows="4"
-                placeholder="Füge hier weitere Informationen oder Fragen hinzu, die du uns mitteilen möchtest."
-                class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950 "
-                aria-describedby="message-description"
-              ></textarea>
-              <p class="mt-1 text-sm leading-6 text-gray-600" id="message-description">
-                Optional: Nutze dieses Feld, um uns mehr über dich, deine Motivation oder relevante Erfahrungen zu erzählen.
-              </p>
-            </div>
+        <div class="mt-4 sm:col-span-2">
+          <label
+            for="message"
+            class="block text-xl leading-6 text-blue-950 font-semibold"
+            >Deine Nachricht</label
+          >
+          <div class="mt-2">
+            <textarea
+              id="message"
+              name="message"
+              rows="4"
+              placeholder="Füge hier weitere Informationen oder Fragen hinzu, die du uns mitteilen möchtest."
+              class="w-full focus:outline-none border focus:border-slate-200 py-3 appearance-none block border-transparent focus:bg-white bg-slate-50 px-3 rounded-xl text-blue-950"
+              aria-describedby="message-description"
+            ></textarea>
+            <p
+              class="mt-1 text-sm leading-6 text-gray-600"
+              id="message-description">
+              Optional: Nutze dieses Feld, um uns mehr über dich, deine
+              Motivation oder relevante Erfahrungen zu erzählen.
+            </p>
           </div>
         </div>
+      </div>
 
-        <div class="mt-10 flex">
-          <button
-            class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
-            type="submit"
-          >
-            Bewerbung absenden
-          </button>
-        </div>
-        <p class="text-sm text-slate-500 mt-10">
-          Mit dem Absenden meiner Bewerbung bestätige ich, dass ich die <a
-            class="text-blue-600 hover:text-blue-950"
-            href="/legal/agb"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Allgemeine Geschäftsbedingungen</a
-          >
-          und die <a
+      <div class="mt-10 flex">
+        <button
+          class="text-white items-center font-medium gap-3 inline-flex focus-visible:outline-2 focus-visible:outline-offset-2 focus:outline-none justify-center px-6 lg:px-8 ring-2 ring-transparent focus:ring-offset-2 focus:ring-blue-500 duration-200 py-3.5 rounded-full active:bg-blue-800 active:text-white bg-blue-500 hover:bg-blue-600 w-auto"
+          type="submit">
+          Bewerbung absenden
+        </button>
+      </div>
+      <p class="text-sm text-slate-500 mt-10">
+        Mit dem Absenden meiner Bewerbung bestätige ich, dass ich die <a
+          class="text-blue-600 hover:text-blue-950"
+          href="/legal/agb"
+          target="_blank"
+          rel="noopener noreferrer"
+          >Allgemeine Geschäftsbedingungen</a
+        >
+        und die <a
           class="text-blue-600 hover:text-blue-950"
           href="/legal/privacy"
           target="_blank"
           rel="noopener noreferrer"
           >Datenschutzerklärung</a
-          > von WeMake gelesen und verstanden habe.
-        </p>
-      </div>
+        >
+        von WeMake gelesen und verstanden habe.
+      </p>
     </form>
   </div>
 </section>
+
