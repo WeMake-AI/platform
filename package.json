@@ -1,6 +1,6 @@
 {
   "name": "@wemake-ai/platform",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "author": "WeMake (https://wemake.cx)",
   "bugs": "https://github.com/WeMake-AI/mcp/issues",
   "description": "Official WeMake Platform",
@@ -17,15 +17,17 @@
   "scripts": {
     "website:dev": "bun run --cwd apps/website dev",
     "website:build": "bun run --cwd apps/website build",
-    "website:preview": "bun run website:generate-types && bun run website:build && wrangler dev --remote --env staging --config apps/website/wrangler.jsonc",
-    "website:deploy:staging": "bun website:build && wrangler deploy --env staging",
-    "website:deploy": "bun website:build && wrangler deploy",
+    "website:preview": "wrangler dev --remote --config apps/website/wrangler.jsonc",
+    "website:deploy:staging": "wrangler deploy --env staging --config apps/website/wrangler.jsonc",
+    "website:deploy": "wrangler deploy --config apps/website/wrangler.jsonc",
     "website:generate-types": "wrangler types --config apps/website/wrangler.jsonc",
+    "check": "bun run tsc && bun run lint && bun run prettier",
+    "format": "bun run lint:fix && bun run prettier:fix",
+    "tsc": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "lint:check": "eslint . --max-warnings 0",
-    "format": "prettier --write .",
-    "check": "tsc --noEmit"
+    "prettier": "prettier . --check",
+    "prettier:fix": "prettier . --write"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "^0.8.58",
