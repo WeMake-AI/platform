@@ -60,6 +60,9 @@ jobs:
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           compare_branch: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
+          role: heyFlorentin
+          database: database
+          parent_branch: staging
           api_key: ${{ secrets.NEON_API_KEY }}
 
   delete_neon_branch:
