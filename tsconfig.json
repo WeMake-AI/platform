@@ -57,13 +57,7 @@
     "**/*.cts",
     "**/*.d.ts"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "build",
-    ".wrangler",
-    "worker-configuration.d.ts"
-  ],
+  "exclude": ["node_modules", "dist", "build", ".wrangler"],
   "ts-node": {
     "esm": true,
     "experimentalSpecifierResolution": "node"
