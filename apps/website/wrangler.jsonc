@@ -2,15 +2,16 @@
   "name": "website",
   "account_id": "7e298a91c3274f38a33f93ebe112cd91",
   "main": "./dist/_worker.js/index.js",
-  "compatibility_date": "2025-02-14",
+  "compatibility_date": "2025-05-05",
   "compatibility_flags": ["nodejs_compat_v2"],
+  "workers_dev": false,
+  "preview_urls": false,
   "routes": [
     {
       "pattern": "wemake.cx",
       "custom_domain": true
     }
   ],
-
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist"
@@ -29,12 +30,8 @@
   "env": {
     "staging": {
       "workers_dev": true,
-      "routes": [
-        {
-          "pattern": "staging.wemake.cx",
-          "custom_domain": true
-        }
-      ]
+      "preview_urls": true,
+      "placement": { "mode": "off" }
     }
   }
 }
