@@ -1,8 +1,0 @@
-# Cloudflare Workers Wrangler declaration files
-worker-configuration.d.ts
-
-# Build outputs
-dist/
-
-# Astro generated files
-.astro/

@@ -1,4 +1,4 @@
-import { D1Database, Request, Response } from "@cloudflare/workers-types";
+import { D1Database } from "@cloudflare/workers-types";
 
 interface Env {
   DB: D1Database;
@@ -38,8 +38,8 @@ function sanitizeInput(input: string | null): string {
 export const onRequestPost = async (context: {
   request: Request;
   env: Env;
-  params: Record<string, unknown>;
-}): Promise<Response> => {
+  params: any;
+}) => {
   try {
     // Get client IP for rate limiting
     const clientIP =
@@ -108,14 +108,12 @@ export const onRequestPost = async (context: {
     }
 
     // Extract and sanitize form fields
-    const workPhone = sanitizeInput(formData.get("work_phone") as string);
-    const company = sanitizeInput(formData.get("company") as string);
-
     const contactData: ContactFormData = {
       full_name: sanitizeInput(formData.get("full_name") as string),
       work_email: sanitizeInput(formData.get("work_email") as string),
-      ...(workPhone && { work_phone: workPhone }),
-      ...(company && { company }),
+      work_phone:
+        sanitizeInput(formData.get("work_phone") as string) || undefined,
+      company: sanitizeInput(formData.get("company") as string) || undefined,
       project_details: sanitizeInput(formData.get("project_details") as string),
       csrf_token: formData.get("csrf_token") as string
     };
@@ -244,9 +242,9 @@ export const onRequestPost = async (context: {
     } else {
       throw new Error("Database insert failed");
     }
-  } catch (_error) {
+  } catch (error) {
     // Log the error (in a production environment you might want to use a proper logging service)
-    // console.error("Error processing form submission:", _error);
+    console.error("Error processing form submission:", error);
 
     // Return an error response
     return new Response(

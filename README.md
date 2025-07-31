@@ -18,7 +18,7 @@ A world where AI helps everyone reach their full potential.
 
 ## Repository Structure
 
-```sh
+```tree
 monolith/
 ├── apps/                  # Application layer components
 ├── packages/              # Shared packages and modules
@@ -72,75 +72,12 @@ bun run test
 
 All commands are run from the root of the project, from a terminal:
 
-| Command              | Action                                |
-| :------------------- | :------------------------------------ |
-| `bun install`        | Installs dependencies                 |
-| `bun format`         | Format code with Prettier             |
-| `bun run lint`       | Run ESLint on entire monorepo         |
-| `bun run lint:fix`   | Run ESLint with automatic fixing      |
-| `bun run lint:check` | Run ESLint with zero warnings allowed |
-| `bun check`          | Run TypeScript type checking          |
+| Command       | Action                    |
+| :------------ | :------------------------ |
+| `bun install` | Installs dependencies     |
+| `bun format`  | Format code with Prettier |
 
 [Learn more about bun](https://bun.sh/docs).
-
-## Code Quality & Linting
-
-This project uses ESLint for code quality and consistency across the monorepo.
-
-### ESLint Configuration
-
-- **Configuration File**: `eslint.config.js` (ESLint 9+ flat config)
-- **Supported File Types**: `.js`, `.ts`, `.tsx`, `.astro`
-- **Plugins**: TypeScript ESLint, Astro ESLint
-- **Rules**: Recommended + custom rules for strict code quality
-
-### Linting Commands
-
-```sh
-# Lint entire monorepo
-bun run lint
-
-# Lint with automatic fixing
-bun run lint:fix
-
-# Strict linting (zero warnings allowed - perfect for CI)
-bun run lint:check
-
-# Lint specific workspace
-bun run --cwd apps/website lint
-
-# Lint specific files
-bunx eslint src/components/**/*.astro
-```
-
-### Development Workflow
-
-1. **Before Committing**: Run `bun run lint:fix` to auto-fix issues
-2. **CI/CD Integration**: Use `bun run lint:check` for strict validation
-3. **IDE Integration**: Configure your editor to use the ESLint config
-4. **Type Checking**: Run `bun check` for TypeScript validation
-
-### ESLint Rules Overview
-
-- **TypeScript**: Strict typing, explicit return types, no unused variables
-- **Astro**: Astro-specific best practices and syntax validation
-- **Code Style**: Object shorthand, consistent formatting
-- **Best Practices**: No console.log in production, proper error handling
-
-### Fixing Common Issues
-
-```sh
-# Fix object shorthand violations
-bun run lint:fix
-
-# Address TypeScript strict rules
-# Add explicit return types to functions
-# Remove unused variables and imports
-
-# Handle Astro-specific issues
-# Ensure proper component structure
-# Follow Astro naming conventions
-```
 
 ## Modular Architecture
 

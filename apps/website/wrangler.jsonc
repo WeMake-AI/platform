@@ -1,5 +1,5 @@
 {
-  "name": "website",
+  "name": "wemake",
   "account_id": "7e298a91c3274f38a33f93ebe112cd91",
   "main": "./dist/_worker.js/index.js",
   "compatibility_date": "2025-02-14",
@@ -38,13 +38,7 @@
 
   "env": {
     "staging": {
-      "workers_dev": true,
-      "routes": [
-        {
-          "pattern": "staging.wemake.cx",
-          "custom_domain": true
-        }
-      ]
+      "workers_dev": true
     }
   }
 }
