@@ -2,7 +2,7 @@
   "name": "website",
   "account_id": "7e298a91c3274f38a33f93ebe112cd91",
   "main": "./dist/_worker.js/index.js",
-  "compatibility_date": "2025-02-14",
+  "compatibility_date": "2025-05-05",
   "compatibility_flags": ["nodejs_compat_v2"],
   "routes": [
     {
@@ -21,20 +21,10 @@
   },
 
   "build": {
-    "command": "bun run website:build"
+    "command": "bun run website:build",
+    "cwd": "./",
+    "watch_dir": "./apps/website"
   },
 
-  "placement": { "mode": "smart" },
-
-  "env": {
-    "staging": {
-      "workers_dev": true,
-      "routes": [
-        {
-          "pattern": "staging.wemake.cx",
-          "custom_domain": true
-        }
-      ]
-    }
-  }
+  "placement": { "mode": "smart" }
 }
