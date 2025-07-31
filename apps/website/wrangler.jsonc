@@ -28,5 +28,17 @@
     "watch_dir": "./apps/website"
   },
 
-  "placement": { "mode": "smart" }
+  "placement": { "mode": "smart" },
+
+  "env": {
+    "staging": {
+      "workers_dev": true,
+      "routes": [
+        {
+          "pattern": "staging.wemake.cx",
+          "custom_domain": true
+        }
+      ]
+    }
+  }
 }
