@@ -126,16 +126,15 @@ export default [
   // Global ignores
   {
     ignores: [
-      "dist/**",
-      "build/**",
+      "**/.astro/**",
+      "**/.wrangler/**",
+      "**/dist/**",
+      "**/build/**",
       "node_modules/**",
-      ".astro/**",
-      "coverage/**",
-      "*.min.js",
+      "**/node_modules/**",
+      "**/coverage/**",
+      "**/*.min.js",
       "bun.lock",
-      "package-lock.json",
-      "yarn.lock",
-      "pnpm-lock.yaml",
       "worker-configuration.d.ts"
     ]
   }
