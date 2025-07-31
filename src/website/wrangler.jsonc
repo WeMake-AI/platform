@@ -6,12 +6,14 @@
   "compatibility_flags": ["nodejs_compat_v2"],
   "workers_dev": false,
   "preview_urls": false,
+
   "routes": [
     {
       "pattern": "wemake.cx",
       "custom_domain": true
     }
   ],
+
   "assets": {
     "binding": "ASSETS",
     "directory": "./dist"
@@ -27,11 +29,25 @@
 
   "placement": { "mode": "smart" },
 
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "4f1d50690fce4e07aae823c11a3094ec"
+    }
+  ],
+
   "env": {
     "staging": {
       "workers_dev": true,
       "preview_urls": true,
-      "placement": { "mode": "off" }
+      "placement": { "mode": "off" },
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "ff4379f07fe646338efe98bbe794a0ce",
+          "experimental_remote": true
+        }
+      ]
     }
   }
 }
