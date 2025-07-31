@@ -48,6 +48,14 @@
     "proseWrap": "always",
     "singleQuote": false,
     "semi": true,
-    "useTabs": false
+    "useTabs": false,
+    "overrides": [
+      {
+        "files": ".github/workflows/*.yml",
+        "options": {
+          "printWidth": 140
+        }
+      }
+    ]
   }
 }
