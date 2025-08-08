@@ -137,6 +137,15 @@ analytics.
 - [x] Streaming support (SSE)
 - [x] Error response standardization
 
+**MVP Implementation Priority**:
+1. `/v1/chat/completions` (covers 80% of use cases)
+2. `/v1/models` (for discovery and compatibility)
+3. `/v1/completions` (legacy support)
+
+**Advanced Features** (post-MVP):
+- Streaming support (SSE)
+- Function calling
+- Vision capabilities
 **Acceptance Criteria**:
 
 - All endpoints match OpenAI specification
