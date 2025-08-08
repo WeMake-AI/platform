@@ -52,3 +52,9 @@ critical tasks have been analyzed, designed, and approved:
 
 The planning phase is now complete, providing a solid foundation for
 implementation with all architectural decisions documented and approved.
+
+## 🔗 **Implementation Tracking**
+
+- **Detailed Roadmap**: See [OPENAI_API_ROADMAP.md](./OPENAI_API_ROADMAP.md)
+- **Progress Tracking**: Use GitHub Projects or Linear for task management
+- **Architecture Decisions**: Document in ADR format for future reference
