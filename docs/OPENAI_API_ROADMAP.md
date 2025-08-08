@@ -137,6 +137,15 @@ analytics.
 - [x] Streaming support (SSE)
 - [x] Error response standardization
 
+**MVP Implementation Priority**:
+1. `/v1/chat/completions` (covers 80% of use cases)
+2. `/v1/models` (for discovery and compatibility)
+3. `/v1/completions` (legacy support)
+
+**Advanced Features** (post-MVP):
+- Streaming support (SSE)
+- Function calling
+- Vision capabilities
 **Acceptance Criteria**:
 
 - All endpoints match OpenAI specification
@@ -158,6 +167,11 @@ analytics.
 - [x] Provider health monitoring
 - [x] Load balancing between providers
 
+**Phased Provider Implementation**:
+- **Phase 1**: OpenAI integration with abstraction interfaces  
+- **Phase 2**: Add Anthropic with existing abstraction  
+- **Phase 3**: Implement intelligent routing and failover  
+- **Phase 4**: Add additional providers (Cohere, Replicate, etc.)  
 **Acceptance Criteria**:
 
 - Multiple providers work seamlessly
