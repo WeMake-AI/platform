@@ -1,0 +1,52 @@
+# OpenRouter API Configuration
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+
+# PostHog Analytics Configuration
+POSTHOG_API_KEY=your_posthog_project_api_key_here
+POSTHOG_HOST=https://app.posthog.com
+
+# CORS Configuration
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:4321,https://wemake.cx
+
+# Rate Limiting Configuration
+RATE_LIMIT_PER_MINUTE=60
+RATE_LIMIT_PER_HOUR=1000
+RATE_LIMIT_PER_DAY=10000
+
+# Model Configuration
+MAX_TOKENS_DEFAULT=4096
+DEFAULT_MODEL=anthropic/claude-3.5-sonnet
+
+# Security Configuration
+JWT_SECRET=your_jwt_secret_key_here
+API_KEY_SALT=your_api_key_salt_here
+
+# Environment-specific Settings
+NODE_ENV=development
+LOG_LEVEL=debug
+
+# Optional: Cloudflare AI Gateway
+CLOUDFLARE_AI_GATEWAY_URL=https://gateway.ai.cloudflare.com/v1/your-account/your-gateway
+
+# Optional: Redis Configuration (if using Redis for caching)
+REDIS_URL=redis://localhost:6379
+REDIS_PASSWORD=
+
+# Optional: Monitoring and Alerting
+SENTRY_DSN=your_sentry_dsn_here
+DATADOG_API_KEY=your_datadog_api_key_here
+
+# Optional: Feature Flags
+ENABLE_STREAMING=true
+ENABLE_TOOL_CALLING=true
+ENABLE_CONVERSATION_HISTORY=true
+ENABLE_USAGE_TRACKING=true
+
+# Optional: Cost Tracking
+ENABLE_COST_TRACKING=true
+CURRENCY=USD
+
+# Optional: Model Configuration Overrides
+PREMIUM_MODELS=anthropic/claude-3.5-sonnet,openai/gpt-4-turbo
+STANDARD_MODELS=anthropic/claude-3-haiku,openai/gpt-3.5-turbo
+BUDGET_MODELS=meta-llama/llama-3-8b-instruct,mistralai/mistral-7b-instruct
