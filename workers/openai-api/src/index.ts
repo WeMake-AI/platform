@@ -63,7 +63,7 @@ function createApp(): Hono<AppContext> {
         "X-Rate-Limit-Reset",
         "X-Usage-Cost"
       ],
-      credentials: true,
+      credentials: allowedOrigins.includes("*") ? false : true,
       maxAge: 86400 // 24 hours
     })(c, next);
   });
