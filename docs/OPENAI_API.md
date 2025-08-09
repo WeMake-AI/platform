@@ -314,21 +314,20 @@ async function selectModel(
 ) {
   const models = MODEL_TIERS[tier];
 
-  for (const model of models) {
-    try {
-      // Check model availability
-      const response = await fetch("https://openrouter.ai/api/v1/models");
-      const { data } = await response.json();
-      const availableModel = data.find((m: any) => m.id === model);
+  // Fetch the full model list once, with auth
+  const res = await fetch("https://openrouter.ai/api/v1/models", {
+    headers: { Authorization: `Bearer ${env.OPENROUTER_API_KEY}` },
+  });
+  if (!res.ok) throw new Error(`Failed to list models: ${res.status}`);
+  const { data } = await res.json();
+  const ids = new Set(data.map((m: any) => m.id));
 
-      if (availableModel && availableModel.id === model) {
-        return model;
-      }
-    } catch (error) {
-      console.warn(`Model ${model} unavailable:`, error);
-    }
+  // Return the first available model in the desired tier
+  for (const m of models) {
+    if (ids.has(m)) return m;
   }
 
+  // Fallback to budget tier if none found
   if (fallback && tier !== "budget") {
     return selectModel("budget", false);
   }
