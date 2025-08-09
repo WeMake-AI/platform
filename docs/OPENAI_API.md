@@ -838,12 +838,14 @@ export async function fetchWithRetry(
 
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const response = await fetch(url, {
-        ...options,
-        signal: AbortSignal.timeout(30000) // 30s timeout
-      });
+      const controller = new AbortController();  
+      const timer = setTimeout(() => controller.abort(), 30_000);  
+      const response = await fetch(url, {  
+        ...options,  
+        signal: controller.signal,  
+      }).finally(() => clearTimeout(timer));  
 
-      if (response.ok || response.status < 500) {
+      if (response.ok || response.status < 500) { 
         return response;
       }
 
