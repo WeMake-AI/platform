@@ -321,7 +321,7 @@ async function selectModel(
       const { data } = await response.json();
       const availableModel = data.find((m: any) => m.id === model);
 
-      if (availableModel && !availableModel.pricing?.prompt?.includes("0")) {
+      if (availableModel && availableModel.id === model) {
         return model;
       }
     } catch (error) {
