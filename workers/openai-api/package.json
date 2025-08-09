@@ -1,44 +1,97 @@
 {
   "name": "@wemake/openai-api-worker",
   "version": "1.0.0",
-  "description": "OpenAI-compatible API endpoint using Cloudflare Workers",
+  "description": "OpenAI-compatible API endpoint using Cloudflare Workers with OpenRouter integration",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "wrangler dev",
+    "dev": "wrangler dev --local",
+    "dev:remote": "wrangler dev",
     "build": "wrangler deploy --dry-run",
+    "deploy": "wrangler deploy",
     "deploy:staging": "wrangler deploy --env staging",
     "deploy:production": "wrangler deploy --env production",
     "test": "vitest run",
     "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "test:load": "k6 run tests/load.test.ts",
+    "test:load": "k6 run tests/load/api.test.js",
+    "db:create": "wrangler d1 create openai-api",
+    "db:create:staging": "wrangler d1 create openai-api-staging",
+    "db:create:production": "wrangler d1 create openai-api-prod",
     "db:migrate": "wrangler d1 execute openai-api --file=./schema.sql",
     "db:migrate:staging": "wrangler d1 execute openai-api-staging --file=./schema.sql",
     "db:migrate:production": "wrangler d1 execute openai-api-prod --file=./schema.sql",
-    "lint": "eslint src",
-    "type-check": "tsc --noEmit"
+    "db:seed": "wrangler d1 execute openai-api --file=./seeds.sql",
+    "db:reset": "wrangler d1 execute openai-api --file=./reset.sql && npm run db:migrate && npm run db:seed",
+    "kv:create": "wrangler kv:namespace create CACHE && wrangler kv:namespace create RATE_LIMITER",
+    "kv:create:staging": "wrangler kv:namespace create CACHE --env staging && wrangler kv:namespace create RATE_LIMITER --env staging",
+    "kv:create:production": "wrangler kv:namespace create CACHE --env production && wrangler kv:namespace create RATE_LIMITER --env production",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"src/**/*.{ts,tsx,json}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,json}\"",
+    "type-check": "tsc --noEmit",
+    "check": "npm run type-check && npm run lint && npm run format:check",
+    "prepare": "npm run check",
+    "logs": "wrangler tail",
+    "logs:staging": "wrangler tail --env staging",
+    "logs:production": "wrangler tail --env production"
   },
   "dependencies": {
-    "hono": "^4.0.0",
+    "hono": "^4.6.3",
     "ai": "^5.0.0",
     "@ai-sdk/openai": "^2.0.0",
-    "posthog-node": "^4.0.0",
-    "zod": "^3.22.0"
+    "posthog-node": "^4.2.1",
+    "zod": "^3.23.8",
+    "@hono/zod-validator": "^0.4.1",
+    "hono-rate-limiter": "^0.4.2",
+    "@hono/swagger-ui": "^0.5.2",
+    "nanoid": "^5.0.7",
+    "date-fns": "^3.6.0"
   },
   "devDependencies": {
-    "@cloudflare/workers-types": "^4.20240000.0",
-    "@types/node": "^20.0.0",
-    "@typescript-eslint/eslint-plugin": "^6.0.0",
-    "@typescript-eslint/parser": "^6.0.0",
-    "eslint": "^8.0.0",
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/node": "^22.9.0",
+    "@typescript-eslint/eslint-plugin": "^8.15.0",
+    "@typescript-eslint/parser": "^8.15.0",
+    "eslint": "^9.15.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
-    "typescript": "^5.0.0",
-    "vitest": "^1.0.0",
-    "wrangler": "^3.0.0"
+    "prettier": "^3.3.3",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.5",
+    "@vitest/coverage-v8": "^2.1.5",
+    "wrangler": "^3.95.0",
+    "@types/k6": "^0.52.0",
+    "msw": "^2.6.4",
+    "@types/supertest": "^6.0.2",
+    "supertest": "^7.0.0"
   },
   "type": "module",
   "engines": {
-    "node": ">=18.0.0"
-  }
+    "node": ">=18.0.0",
+    "bun": ">=1.0.0"
+  },
+  "keywords": [
+    "openai",
+    "api",
+    "cloudflare",
+    "workers",
+    "ai",
+    "llm",
+    "openrouter",
+    "hono",
+    "typescript"
+  ],
+  "author": "WeMake Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wemake-cx/platform.git",
+    "directory": "workers/openai-api"
+  },
+  "bugs": {
+    "url": "https://github.com/wemake-cx/platform/issues"
+  },
+  "homepage": "https://github.com/wemake-cx/platform/tree/main/workers/openai-api"
 }
