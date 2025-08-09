@@ -83,7 +83,15 @@ export const auth = createMiddleware<AppContext>(async (c, next) => {
       throw error;
     }
 
-    console.error("Authentication error:", error);
+    const logger = createLogger({
+      requestId: c.get("requestId"),
+      userId: c.get("userId"),
+      env: c.env
+    });
+    logger.error(
+      "Authentication error",
+      error instanceof Error ? error : new Error(String(error))
+    );
     throw new HTTPException(500, {
       message: "Internal authentication error",
       res: new Response(
