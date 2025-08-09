@@ -1,18 +1,51 @@
 name = "openai-api-worker"
 main = "src/index.ts"
-compatibility_date = "2024-01-15"
+compatibility_date = "2024-12-18"
 compatibility_flags = ["nodejs_compat"]
+
+# Worker configuration
+node_compat = true
+minify = true
+send_metrics = true
+logpush = true
+
+# Limits and performance
+[limits]
+cpu_ms = 30000
+
+# Build configuration
+[build]
+command = "npm run build"
+watch_dir = "src"
 
 [env.development]
 name = "openai-api-worker-dev"
+route = "localhost:8787/v1/*"
+
+[env.development.vars]
+LOG_LEVEL = "debug"
+RATE_LIMIT_PER_MINUTE = "120"
+CACHE_TTL = "300"
 
 [env.staging]
 name = "openai-api-worker-staging"
 route = "api-staging.wemake.cx/v1/*"
 
+[env.staging.vars]
+LOG_LEVEL = "info"
+RATE_LIMIT_PER_MINUTE = "80"
+CACHE_TTL = "1800"
+
 [env.production]
 name = "openai-api-worker-prod"
 route = "api.wemake.cx/v1/*"
+
+[env.production.vars]
+LOG_LEVEL = "warn"
+RATE_LIMIT_PER_MINUTE = "60"
+RATE_LIMIT_PER_HOUR = "1000"
+RATE_LIMIT_PER_DAY = "10000"
+CACHE_TTL = "3600"
 
 # Development environment configuration
 [[env.development.d1_databases]]
@@ -26,7 +59,7 @@ id = "your-dev-kv-namespace-id"
 preview_id = "your-dev-kv-preview-id"
 
 [[env.development.kv_namespaces]]
-binding = "RATE_LIMIT"
+binding = "RATE_LIMITER"
 id = "your-dev-rate-limit-kv-id"
 preview_id = "your-dev-rate-limit-preview-id"
 
@@ -42,7 +75,7 @@ id = "your-staging-kv-namespace-id"
 preview_id = "your-staging-kv-preview-id"
 
 [[env.staging.kv_namespaces]]
-binding = "RATE_LIMIT"
+binding = "RATE_LIMITER"
 id = "your-staging-rate-limit-kv-id"
 preview_id = "your-staging-rate-limit-preview-id"
 
@@ -58,16 +91,21 @@ id = "your-prod-kv-namespace-id"
 preview_id = "your-prod-kv-preview-id"
 
 [[env.production.kv_namespaces]]
-binding = "RATE_LIMIT"
+binding = "RATE_LIMITER"
 id = "your-prod-rate-limit-kv-id"
 preview_id = "your-prod-rate-limit-preview-id"
 
-# Environment variables (these will be set via wrangler secrets)
+# Global environment variables
 [vars]
 ALLOWED_ORIGINS = "http://localhost:3000,https://wemake.cx,https://staging.wemake.cx"
 RATE_LIMIT_PER_MINUTE = "60"
+RATE_LIMIT_PER_HOUR = "1000"
+RATE_LIMIT_PER_DAY = "10000"
 MAX_TOKENS_DEFAULT = "4096"
 DEFAULT_MODEL = "anthropic/claude-3.5-sonnet"
+MAX_REQUEST_SIZE = "10485760"
+CACHE_TTL = "3600"
+LOG_LEVEL = "info"
 
 # Secrets (use 'wrangler secret put' to set these)
 # OPENROUTER_API_KEY = set via wrangler secret

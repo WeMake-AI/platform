@@ -1,5 +1,20 @@
--- D1 Database Schema for WeMake OpenAI API
--- This schema supports usage tracking, rate limiting, and API key management
+-- =============================================================================
+-- D1 Database Schema for WeMake OpenAI API Worker
+-- =============================================================================
+-- This schema supports:
+-- - Usage tracking and analytics
+-- - Rate limiting and quota management
+-- - API key management and authentication
+-- - Conversation history and message storage
+-- - Cost tracking and billing
+-- - Audit logging and security
+-- - Webhook integrations
+-- - User preferences and settings
+--
+-- Version: 1.0.0
+-- Compatible with: Cloudflare D1 (SQLite)
+-- Created: 2024-12-18
+-- =============================================================================
 
 -- Usage logs for tracking AI model usage and costs
 CREATE TABLE IF NOT EXISTS usage_logs (
@@ -232,4 +247,236 @@ CREATE TRIGGER IF NOT EXISTS update_webhooks_timestamp
 AFTER UPDATE ON webhooks
 BEGIN
   UPDATE webhooks SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+-- =============================================================================
+-- SESSION MANAGEMENT
+-- =============================================================================
+
+-- User sessions table for authentication and tracking
+CREATE TABLE IF NOT EXISTS user_sessions (
+  id TEXT PRIMARY KEY,
+  user_id TEXT NOT NULL,
+  token_hash TEXT NOT NULL UNIQUE,
+  ip_address TEXT,
+  user_agent TEXT,
+  expires_at DATETIME NOT NULL,
+  is_active BOOLEAN DEFAULT TRUE,
+  last_activity_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes for user_sessions table
+CREATE INDEX IF NOT EXISTS idx_user_sessions_user_id ON user_sessions(user_id);
+CREATE INDEX IF NOT EXISTS idx_user_sessions_token_hash ON user_sessions(token_hash);
+CREATE INDEX IF NOT EXISTS idx_user_sessions_expires_at ON user_sessions(expires_at);
+CREATE INDEX IF NOT EXISTS idx_user_sessions_is_active ON user_sessions(is_active);
+
+-- =============================================================================
+-- ANALYTICS AND AGGREGATION
+-- =============================================================================
+
+-- Daily usage aggregation for analytics
+CREATE TABLE IF NOT EXISTS daily_usage_stats (
+  id TEXT PRIMARY KEY,
+  date DATE NOT NULL,
+  user_id TEXT,
+  model TEXT,
+  total_requests INTEGER DEFAULT 0,
+  total_tokens INTEGER DEFAULT 0,
+  total_cost REAL DEFAULT 0.0,
+  avg_latency REAL DEFAULT 0.0,
+  success_rate REAL DEFAULT 1.0,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  UNIQUE(date, user_id, model)
+);
+
+-- Indexes for daily_usage_stats table
+CREATE INDEX IF NOT EXISTS idx_daily_usage_stats_date ON daily_usage_stats(date);
+CREATE INDEX IF NOT EXISTS idx_daily_usage_stats_user_id ON daily_usage_stats(user_id);
+CREATE INDEX IF NOT EXISTS idx_daily_usage_stats_model ON daily_usage_stats(model);
+
+-- System health metrics table
+CREATE TABLE IF NOT EXISTS system_metrics (
+  id TEXT PRIMARY KEY,
+  metric_name TEXT NOT NULL,
+  metric_value REAL NOT NULL,
+  metric_unit TEXT,
+  tags TEXT, -- JSON object for additional metadata
+  timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes for system_metrics table
+CREATE INDEX IF NOT EXISTS idx_system_metrics_name ON system_metrics(metric_name);
+CREATE INDEX IF NOT EXISTS idx_system_metrics_timestamp ON system_metrics(timestamp);
+
+-- =============================================================================
+-- FEATURE FLAGS AND CONFIGURATION
+-- =============================================================================
+
+-- Feature flags table for dynamic configuration
+CREATE TABLE IF NOT EXISTS feature_flags (
+  id TEXT PRIMARY KEY,
+  flag_name TEXT NOT NULL UNIQUE,
+  is_enabled BOOLEAN DEFAULT FALSE,
+  rollout_percentage INTEGER DEFAULT 0 CHECK (rollout_percentage >= 0 AND rollout_percentage <= 100),
+  target_users TEXT, -- JSON array of user IDs
+  conditions TEXT, -- JSON object for conditions
+  description TEXT,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Indexes for feature_flags table
+CREATE INDEX IF NOT EXISTS idx_feature_flags_name ON feature_flags(flag_name);
+CREATE INDEX IF NOT EXISTS idx_feature_flags_enabled ON feature_flags(is_enabled);
+
+-- =============================================================================
+-- ADDITIONAL TRIGGERS
+-- =============================================================================
+
+CREATE TRIGGER IF NOT EXISTS update_user_sessions_timestamp 
+AFTER UPDATE ON user_sessions
+BEGIN
+  UPDATE user_sessions SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+CREATE TRIGGER IF NOT EXISTS update_daily_usage_stats_timestamp 
+AFTER UPDATE ON daily_usage_stats
+BEGIN
+  UPDATE daily_usage_stats SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+CREATE TRIGGER IF NOT EXISTS update_feature_flags_timestamp 
+AFTER UPDATE ON feature_flags
+BEGIN
+  UPDATE feature_flags SET updated_at = CURRENT_TIMESTAMP WHERE id = NEW.id;
+END;
+
+-- =============================================================================
+-- MIGRATION SCRIPTS AND ENVIRONMENT SETUP
+-- =============================================================================
+
+-- Insert default feature flags
+INSERT OR IGNORE INTO feature_flags (id, flag_name, is_enabled, description) VALUES
+('streaming-enabled', 'streaming_enabled', true, 'Enable streaming responses for real-time output'),
+('tool-calling-enabled', 'tool_calling_enabled', true, 'Enable function/tool calling capabilities'),
+('conversation-history', 'conversation_history_enabled', true, 'Enable conversation history storage'),
+('usage-tracking', 'usage_tracking_enabled', true, 'Enable detailed usage tracking and analytics'),
+('cost-tracking', 'cost_tracking_enabled', true, 'Enable cost tracking and billing calculations'),
+('rate-limiting', 'rate_limiting_enabled', true, 'Enable rate limiting for API requests'),
+('webhook-notifications', 'webhook_notifications_enabled', false, 'Enable webhook notifications for events'),
+('debug-mode', 'debug_mode_enabled', false, 'Enable debug mode for detailed logging'),
+('cache-responses', 'cache_responses_enabled', true, 'Enable response caching for performance'),
+('ai-gateway', 'ai_gateway_enabled', false, 'Enable Cloudflare AI Gateway integration');
+
+-- =============================================================================
+-- VIEWS FOR ANALYTICS AND REPORTING
+-- =============================================================================
+
+-- View for user usage summary
+CREATE VIEW IF NOT EXISTS user_usage_summary AS
+SELECT 
+  u.user_id,
+  COUNT(u.id) as total_requests,
+  SUM(u.total_tokens) as total_tokens,
+  SUM(u.cost) as total_cost,
+  AVG(u.latency) as avg_latency,
+  COUNT(CASE WHEN u.status = 'success' THEN 1 END) * 100.0 / COUNT(u.id) as success_rate,
+  MIN(u.created_at) as first_request,
+  MAX(u.created_at) as last_request
+FROM usage_logs u
+GROUP BY u.user_id;
+
+-- View for model usage statistics
+CREATE VIEW IF NOT EXISTS model_usage_stats AS
+SELECT 
+  u.model,
+  COUNT(u.id) as total_requests,
+  SUM(u.total_tokens) as total_tokens,
+  SUM(u.cost) as total_cost,
+  AVG(u.latency) as avg_latency,
+  COUNT(CASE WHEN u.status = 'success' THEN 1 END) * 100.0 / COUNT(u.id) as success_rate,
+  COUNT(DISTINCT u.user_id) as unique_users
+FROM usage_logs u
+GROUP BY u.model;
+
+-- View for daily usage trends
+CREATE VIEW IF NOT EXISTS daily_usage_trends AS
+SELECT 
+  DATE(u.created_at) as date,
+  COUNT(u.id) as total_requests,
+  SUM(u.total_tokens) as total_tokens,
+  SUM(u.cost) as total_cost,
+  AVG(u.latency) as avg_latency,
+  COUNT(DISTINCT u.user_id) as unique_users,
+  COUNT(DISTINCT u.model) as unique_models
+FROM usage_logs u
+GROUP BY DATE(u.created_at)
+ORDER BY date DESC;
+
+-- =============================================================================
+-- CLEANUP AND MAINTENANCE PROCEDURES
+-- =============================================================================
+
+-- Note: These are SQL comments for maintenance procedures
+-- Actual cleanup should be implemented in the application code
+
+-- Cleanup old usage logs (older than 90 days)
+-- DELETE FROM usage_logs WHERE created_at < datetime('now', '-90 days');
+
+-- Cleanup expired sessions
+-- DELETE FROM user_sessions WHERE expires_at < datetime('now') OR is_active = FALSE;
+
+-- Cleanup old audit logs (older than 1 year)
+-- DELETE FROM audit_logs WHERE created_at < datetime('now', '-1 year');
+
+-- Cleanup old system metrics (older than 30 days)
+-- DELETE FROM system_metrics WHERE timestamp < datetime('now', '-30 days');
+
+-- Update daily usage stats (should be run daily)
+-- INSERT OR REPLACE INTO daily_usage_stats (
+--   id, date, user_id, model, total_requests, total_tokens, total_cost, avg_latency, success_rate
+-- )
+-- SELECT 
+--   user_id || '-' || model || '-' || DATE(created_at) as id,
+--   DATE(created_at) as date,
+--   user_id,
+--   model,
+--   COUNT(*) as total_requests,
+--   SUM(total_tokens) as total_tokens,
+--   SUM(cost) as total_cost,
+--   AVG(latency) as avg_latency,
+--   COUNT(CASE WHEN status = 'success' THEN 1 END) * 100.0 / COUNT(*) as success_rate
+-- FROM usage_logs 
+-- WHERE DATE(created_at) = DATE('now', '-1 day')
+-- GROUP BY DATE(created_at), user_id, model;
+
+-- =============================================================================
+-- SCHEMA VERSION AND METADATA
+-- =============================================================================
+
+-- Schema metadata table
+CREATE TABLE IF NOT EXISTS schema_metadata (
+  key TEXT PRIMARY KEY,
+  value TEXT NOT NULL,
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert schema version and metadata
+INSERT OR REPLACE INTO schema_metadata (key, value) VALUES
+('schema_version', '1.0.0'),
+('created_date', '2024-12-18'),
+('description', 'WeMake OpenAI API Worker Database Schema'),
+('compatible_with', 'Cloudflare D1 (SQLite)'),
+('last_migration', datetime('now'));
+
+-- Trigger for schema_metadata updates
+CREATE TRIGGER IF NOT EXISTS update_schema_metadata_timestamp 
+AFTER UPDATE ON schema_metadata
+BEGIN
+  UPDATE schema_metadata SET updated_at = CURRENT_TIMESTAMP WHERE key = NEW.key;
 END;

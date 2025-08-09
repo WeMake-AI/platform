@@ -1,52 +1,185 @@
-# OpenRouter API Configuration
+# =============================================================================
+# WeMake OpenAI API Worker - Environment Variables Template
+# =============================================================================
+# Copy this file to .dev.vars for local development
+# Use 'wrangler secret put' for production secrets
+# Documentation: https://developers.cloudflare.com/workers/configuration/environment-variables/
+
+# =============================================================================
+# REQUIRED: OpenRouter API Configuration
+# =============================================================================
+# Your OpenRouter API key for accessing LLM models
+# Get your key from: https://openrouter.ai/keys
 OPENROUTER_API_KEY=your_openrouter_api_key_here
 
-# PostHog Analytics Configuration
+# OpenRouter API base URL (usually doesn't need to change)
+OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
+
+# =============================================================================
+# ANALYTICS: PostHog Configuration
+# =============================================================================
+# PostHog project API key for analytics and observability
+# Get your key from: https://app.posthog.com/project/settings
 POSTHOG_API_KEY=your_posthog_project_api_key_here
+
+# PostHog host URL (use your self-hosted instance if applicable)
 POSTHOG_HOST=https://app.posthog.com
 
-# CORS Configuration
-ALLOWED_ORIGINS=http://localhost:3000,http://localhost:4321,https://wemake.cx
+# Enable/disable PostHog tracking (true/false)
+POSTHOG_ENABLED=true
 
-# Rate Limiting Configuration
+# =============================================================================
+# SECURITY: CORS and Authentication
+# =============================================================================
+# Comma-separated list of allowed origins for CORS
+ALLOWED_ORIGINS=http://localhost:3000,http://localhost:4321,https://wemake.cx,https://staging.wemake.cx
+
+# Salt for hashing API keys (generate a random string)
+API_KEY_SALT=your_random_salt_string_here
+
+# JWT secret for token signing (generate a strong random string)
+JWT_SECRET=your_jwt_secret_key_here
+
+# =============================================================================
+# RATE LIMITING: Traffic Control
+# =============================================================================
+# Rate limits for authenticated users
 RATE_LIMIT_PER_MINUTE=60
 RATE_LIMIT_PER_HOUR=1000
 RATE_LIMIT_PER_DAY=10000
 
-# Model Configuration
+# Rate limits for unauthenticated requests (IP-based)
+IP_RATE_LIMIT_PER_MINUTE=10
+IP_RATE_LIMIT_PER_HOUR=100
+
+# Burst allowance for rate limiting
+RATE_LIMIT_BURST=10
+
+# =============================================================================
+# MODEL CONFIGURATION: Default Settings
+# =============================================================================
+# Default maximum tokens for completions
 MAX_TOKENS_DEFAULT=4096
+
+# Default model when none specified
 DEFAULT_MODEL=anthropic/claude-3.5-sonnet
 
-# Security Configuration
-JWT_SECRET=your_jwt_secret_key_here
-API_KEY_SALT=your_api_key_salt_here
+# Maximum request size in bytes (10MB)
+MAX_REQUEST_SIZE=10485760
 
-# Environment-specific Settings
+# Default temperature for model responses
+DEFAULT_TEMPERATURE=0.7
+
+# =============================================================================
+# ENVIRONMENT: Runtime Configuration
+# =============================================================================
+# Environment type (development, staging, production)
 NODE_ENV=development
+
+# Logging level (debug, info, warn, error)
 LOG_LEVEL=debug
 
-# Optional: Cloudflare AI Gateway
+# Cache TTL in seconds
+CACHE_TTL=3600
+
+# =============================================================================
+# CLOUDFLARE: AI Gateway Configuration
+# =============================================================================
+# Cloudflare AI Gateway URL for request routing and caching
+# Format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}
 CLOUDFLARE_AI_GATEWAY_URL=https://gateway.ai.cloudflare.com/v1/your-account/your-gateway
 
-# Optional: Redis Configuration (if using Redis for caching)
+# Enable/disable AI Gateway usage (true/false)
+AI_GATEWAY_ENABLED=false
+
+# =============================================================================
+# STORAGE: Database and Cache Configuration
+# =============================================================================
+# Redis configuration for caching (if using external Redis)
 REDIS_URL=redis://localhost:6379
 REDIS_PASSWORD=
+REDIS_ENABLED=false
 
-# Optional: Monitoring and Alerting
+# Cache configuration
+ENABLE_RESPONSE_CACHING=true
+CACHE_COMPRESSION=true
+
+# =============================================================================
+# MONITORING: Observability and Alerting
+# =============================================================================
+# Sentry DSN for error tracking and monitoring
+# Get your DSN from: https://sentry.io/settings/projects/
 SENTRY_DSN=your_sentry_dsn_here
-DATADOG_API_KEY=your_datadog_api_key_here
+SENTRY_ENABLED=false
 
-# Optional: Feature Flags
+# Datadog API key for metrics and APM
+DATADOG_API_KEY=your_datadog_api_key_here
+DATADOG_ENABLED=false
+
+# Health check configuration
+HEALTH_CHECK_ENABLED=true
+HEALTH_CHECK_INTERVAL=30
+
+# =============================================================================
+# FEATURES: Application Feature Flags
+# =============================================================================
+# Enable streaming responses for real-time output
 ENABLE_STREAMING=true
+
+# Enable function/tool calling capabilities
 ENABLE_TOOL_CALLING=true
+
+# Enable conversation history storage
 ENABLE_CONVERSATION_HISTORY=true
+
+# Enable detailed usage tracking and analytics
 ENABLE_USAGE_TRACKING=true
 
-# Optional: Cost Tracking
+# Enable request/response validation
+ENABLE_VALIDATION=true
+
+# Enable request deduplication
+ENABLE_DEDUPLICATION=false
+
+# =============================================================================
+# BILLING: Cost and Usage Tracking
+# =============================================================================
+# Enable cost tracking and billing calculations
 ENABLE_COST_TRACKING=true
+
+# Currency for cost calculations
 CURRENCY=USD
 
-# Optional: Model Configuration Overrides
-PREMIUM_MODELS=anthropic/claude-3.5-sonnet,openai/gpt-4-turbo
-STANDARD_MODELS=anthropic/claude-3-haiku,openai/gpt-3.5-turbo
-BUDGET_MODELS=meta-llama/llama-3-8b-instruct,mistralai/mistral-7b-instruct
+# Cost tracking precision (decimal places)
+COST_PRECISION=4
+
+# =============================================================================
+# MODELS: Configuration and Tiers
+# =============================================================================
+# Premium tier models (highest cost, best performance)
+PREMIUM_MODELS=anthropic/claude-3.5-sonnet,openai/gpt-4-turbo,openai/gpt-4o
+
+# Standard tier models (balanced cost and performance)
+STANDARD_MODELS=anthropic/claude-3-haiku,openai/gpt-3.5-turbo,anthropic/claude-3-sonnet
+
+# Budget tier models (lowest cost, good performance)
+BUDGET_MODELS=meta-llama/llama-3-8b-instruct,mistralai/mistral-7b-instruct,anthropic/claude-3-haiku
+
+# Model fallback order (comma-separated)
+MODEL_FALLBACK_ORDER=anthropic/claude-3.5-sonnet,anthropic/claude-3-sonnet,anthropic/claude-3-haiku
+
+# =============================================================================
+# DEVELOPMENT: Debug and Testing
+# =============================================================================
+# Enable debug mode for detailed logging
+DEBUG_MODE=false
+
+# Enable request/response logging (be careful with sensitive data)
+LOG_REQUESTS=false
+LOG_RESPONSES=false
+
+# Mock mode for testing (bypasses actual API calls)
+MOCK_MODE=false
+
+# Test API key for development
+TEST_API_KEY=test_key_for_development

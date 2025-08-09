@@ -1,0 +1,201 @@
+# GitHub Actions Deployment Configuration
+# This file defines environment-specific deployment settings for the OpenAI API Worker
+
+# Environment Configuration
+environments:
+  development:
+    name: "Development"
+    url: "https://dev-api.wemake.dev"
+    branch: "develop"
+    auto_deploy: true
+    protection_rules:
+      required_reviewers: 0
+      wait_timer: 0
+    secrets:
+      - CLOUDFLARE_API_TOKEN
+      - CLOUDFLARE_ACCOUNT_ID
+      - OPENROUTER_API_KEY
+      - POSTHOG_API_KEY
+      - DATABASE_URL
+    variables:
+      - ENVIRONMENT=development
+      - LOG_LEVEL=debug
+      - RATE_LIMIT_PER_MINUTE=120
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:4321
+      - ENABLE_DEBUG_LOGS=true
+
+  staging:
+    name: "Staging"
+    url: "https://staging-api.wemake.dev"
+    branch: "staging"
+    auto_deploy: true
+    protection_rules:
+      required_reviewers: 1
+      wait_timer: 0
+    secrets:
+      - CLOUDFLARE_API_TOKEN
+      - CLOUDFLARE_ACCOUNT_ID
+      - OPENROUTER_API_KEY
+      - POSTHOG_API_KEY
+      - DATABASE_URL
+    variables:
+      - ENVIRONMENT=staging
+      - LOG_LEVEL=info
+      - RATE_LIMIT_PER_MINUTE=100
+      - CORS_ORIGINS=https://staging.wemake.dev
+      - ENABLE_DEBUG_LOGS=false
+
+  production:
+    name: "Production"
+    url: "https://api.wemake.dev"
+    branch: "main"
+    auto_deploy: false
+    protection_rules:
+      required_reviewers: 2
+      wait_timer: 5
+    secrets:
+      - CLOUDFLARE_API_TOKEN
+      - CLOUDFLARE_ACCOUNT_ID
+      - OPENROUTER_API_KEY
+      - POSTHOG_API_KEY
+      - DATABASE_URL
+    variables:
+      - ENVIRONMENT=production
+      - LOG_LEVEL=warn
+      - RATE_LIMIT_PER_MINUTE=60
+      - CORS_ORIGINS=https://wemake.dev,https://app.wemake.dev
+      - ENABLE_DEBUG_LOGS=false
+
+# Deployment Strategy
+deployment:
+  strategy: "rolling"
+  health_check:
+    endpoint: "/health"
+    timeout: 30
+    retries: 3
+    expected_status: 200
+
+  rollback:
+    enabled: true
+    automatic: false
+    conditions:
+      - health_check_failure
+      - error_rate_threshold: 5%
+      - response_time_threshold: 2000ms
+
+# Monitoring and Alerts
+monitoring:
+  health_checks:
+    - endpoint: "/health"
+      interval: "5m"
+      timeout: "10s"
+    - endpoint: "/v1/models"
+      interval: "10m"
+      timeout: "15s"
+
+  alerts:
+    - name: "High Error Rate"
+      condition: "error_rate > 5%"
+      duration: "5m"
+      severity: "critical"
+    - name: "High Response Time"
+      condition: "response_time > 2000ms"
+      duration: "10m"
+      severity: "warning"
+    - name: "Health Check Failure"
+      condition: "health_check_failed"
+      duration: "1m"
+      severity: "critical"
+
+# Security Configuration
+security:
+  secrets_scanning: true
+  dependency_scanning: true
+  code_scanning: true
+
+  required_checks:
+    - "lint"
+    - "test"
+    - "security"
+    - "build"
+
+  branch_protection:
+    main:
+      required_status_checks:
+        - "lint"
+        - "test"
+        - "security"
+        - "build"
+      required_reviews: 2
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: true
+    staging:
+      required_status_checks:
+        - "lint"
+        - "test"
+        - "build"
+      required_reviews: 1
+      dismiss_stale_reviews: true
+    develop:
+      required_status_checks:
+        - "lint"
+        - "test"
+      required_reviews: 0
+
+# Notification Configuration
+notifications:
+  slack:
+    enabled: false
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    channels:
+      - "#deployments"
+      - "#alerts"
+
+  email:
+    enabled: false
+    recipients:
+      - "devops@wemake.dev"
+      - "engineering@wemake.dev"
+
+  github:
+    enabled: true
+    pr_comments: true
+    deployment_status: true
+
+# Performance Configuration
+performance:
+  build:
+    cache_enabled: true
+    cache_key: "deps-${runner.os}-${hashFiles('**/bun.lockb')}"
+    parallel_jobs: 4
+
+  deployment:
+    timeout: "10m"
+    retry_attempts: 3
+    retry_delay: "30s"
+
+# Quality Gates
+quality_gates:
+  test_coverage:
+    minimum: 80
+    fail_on_decrease: true
+
+  code_quality:
+    eslint_max_warnings: 0
+    typescript_strict: true
+
+  security:
+    vulnerability_threshold: "high"
+    license_compliance: true
+
+# Maintenance Windows
+maintenance:
+  allowed_hours:
+    - "02:00-04:00 UTC" # Low traffic window
+
+  blocked_days:
+    - "friday" # No Friday deployments
+    - "saturday"
+    - "sunday"
+
+  emergency_override: true
