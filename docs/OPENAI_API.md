@@ -122,7 +122,7 @@ bun run dev
 
 #### Core Setup
 
-````typescript
+```typescript
 // Install dependencies
 // bun add ai @ai-sdk/openai
 
@@ -130,15 +130,8 @@ bun run dev
 import { openai } from "@ai-sdk/openai";
 import { generateText, streamText } from "ai";
 
-// Replace module-scope client/model with a factory that takes env
-
--export const openrouter = openai({
--  apiKey: env.OPENROUTER_API_KEY,
--  baseURL: "https://openrouter.ai/api/v1"
--});
--
--// Model configuration
--const model = openrouter("anthropic/claude-3.5-sonnet");
+// Model configuration
+const model = openrouter("anthropic/claude-3.5-sonnet");
 export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
   const client = openai({
     apiKey: env.OPENROUTER_API_KEY,
@@ -146,6 +139,7 @@ export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
   });
   return client(id);
 }
+```
 
 #### Streaming Implementation
 
@@ -156,7 +150,7 @@ export default {
     const { messages } = await request.json();
 
     const result = await streamText({
-      model,
+      model: createModel(env, "anthropic/claude-3.5-sonnet"),
       messages,
       temperature: 0.7,
       maxTokens: 4096
@@ -165,7 +159,7 @@ export default {
     return result.toAIStreamResponse();
   }
 };
-````
+```
 
 #### Tool Calling Support
 
@@ -539,7 +533,7 @@ preview_id = "your-kv-preview-id"
 
 ### Database Schema
 
-````sql
+```sql
 -- D1 Database Schema
 CREATE TABLE IF NOT EXISTS usage_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -579,6 +573,7 @@ CREATE TABLE IF NOT EXISTS api_keys (
 
 CREATE INDEX IF NOT EXISTS idx_api_keys_user_id ON api_keys(user_id);
 CREATE INDEX IF NOT EXISTS idx_api_keys_key_hash ON api_keys(key_hash);
+```
 
 ## 🚀 **API Implementation**
 
@@ -645,7 +640,7 @@ app.onError((err, c) => {
 });
 
 export default app;
-````
+```
 
 ### Authentication Middleware
 
@@ -967,7 +962,7 @@ describe("Integration Tests", () => {
 
 ### Load Testing
 
-````typescript
+```typescript
 // tests/load.test.ts (executed by k6, not Vitest)
 import http from "k6/http";
 import { check } from "k6";
@@ -1011,6 +1006,7 @@ export default function () {
     "response time < 2000ms": (r) => r.timings.duration < 2000
   });
 }
+```
 
 ## 📦 **Deployment Guide**
 
@@ -1035,7 +1031,7 @@ bun run dev
 bun run test
 bun run test:integration
 bun run test:load
-````
+```
 
 ### Production Deployment
 
