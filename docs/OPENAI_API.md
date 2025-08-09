@@ -437,6 +437,8 @@ async function trackUsage({
     }
   });
 
+async function trackUsage(env: Env, { model, inputTokens, outputTokens, userId, requestId }: UsageEvent) {
+  const cost = calculateCost(model, inputTokens, outputTokens);
   // Store in database for billing
   await env.DB.prepare(
     `
