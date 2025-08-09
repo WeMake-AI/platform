@@ -955,10 +955,9 @@ describe("Integration Tests", () => {
 ### Load Testing
 
 ```typescript
-// tests/load.test.ts
-import { describe, it } from "vitest";
-import { check } from "k6";
+// tests/load.test.ts (executed by k6, not Vitest)
 import http from "k6/http";
+import { check } from "k6";
 
 export const options = {
   stages: [
@@ -966,11 +965,11 @@ export const options = {
     { duration: "5m", target: 100 }, // Stay at 100 users
     { duration: "2m", target: 200 }, // Ramp up to 200 users
     { duration: "5m", target: 200 }, // Stay at 200 users
-    { duration: "2m", target: 0 } // Ramp down
+    { duration: "2m", target: 0 }    // Ramp down
   ],
   thresholds: {
     http_req_duration: ["p(95)<2000"], // 95% of requests under 2s
-    http_req_failed: ["rate<0.1"] // Error rate under 10%
+    http_req_failed: ["rate<0.1"]       // Error rate under 10%
   }
 };
 
@@ -999,7 +998,6 @@ export default function () {
     "response time < 2000ms": (r) => r.timings.duration < 2000
   });
 }
-```
 
 ## 📦 **Deployment Guide**
 
