@@ -811,13 +811,18 @@ export async function setCachedResponse(
 }
 
 // Generate cache key for deterministic requests
-export function generateCacheKey(
+export async function generateCacheKey(
   messages: any[],
   model: string,
   temperature: number
-): string {
+): Promise<string> {
   const content = JSON.stringify({ messages, model, temperature });
-  return `chat:${btoa(content).slice(0, 32)}`;
+  const data = new TextEncoder().encode(content);
+  const hash = await crypto.subtle.digest("SHA-256", data);
+  const hex = Array.from(new Uint8Array(hash))
+    .map(b => b.toString(16).padStart(2, "0"))
+    .join("");
+  return `chat:${hex.slice(0, 32)}`;
 }
 
 // Connection pooling and retry logic
