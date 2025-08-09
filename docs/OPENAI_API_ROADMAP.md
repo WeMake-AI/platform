@@ -526,36 +526,33 @@ and comprehensive operational procedures.
 
 ### CI/CD Pipeline
 
-```yaml
-# GitHub Actions Workflow
-name: OpenAI API CI/CD
-on: [push, pull_request]
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-      - run: bun install
-      - run: bun run test
-      - run: bun run lint
-      - run: bun run type-check
-
   deploy-staging:
     needs: test
     if: github.ref == 'refs/heads/develop'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: wrangler deploy --env staging
+      - uses: oven-sh/setup-bun@v1
+      - name: Install deps
+        run: bun install
+        working-directory: workers/openai-api
+      - name: Deploy (staging)
+        run: bunx wrangler deploy --env staging
+        working-directory: workers/openai-api
 
   deploy-production:
     needs: test
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
-      - run: wrangler deploy --env production
-```
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v1
+      - name: Install deps
+        run: bun install
+        working-directory: workers/openai-api
+      - name: Deploy (production)
+        run: bunx wrangler deploy --env production
+        working-directory: workers/openai-api
 
 ### Monitoring Stack
 
