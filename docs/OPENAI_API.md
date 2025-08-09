@@ -130,15 +130,22 @@ bun run dev
 import { openai } from "@ai-sdk/openai";
 import { generateText, streamText } from "ai";
 
-// OpenRouter configuration
-const openrouter = openai({
-  apiKey: env.OPENROUTER_API_KEY,
-  baseURL: "https://openrouter.ai/api/v1"
-});
+// Replace module-scope client/model with a factory that takes env
 
-// Model configuration
-const model = openrouter("anthropic/claude-3.5-sonnet");
-```
+-export const openrouter = openai({
+-  apiKey: env.OPENROUTER_API_KEY,
+-  baseURL: "https://openrouter.ai/api/v1"
+-});
+-
+-// Model configuration
+-const model = openrouter("anthropic/claude-3.5-sonnet");
++export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
++  const client = openai({
++    apiKey: env.OPENROUTER_API_KEY,
++    baseURL: "https://openrouter.ai/api/v1",
++  });
++  return client(id);
++}
 
 #### Streaming Implementation
 
