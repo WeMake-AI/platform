@@ -542,18 +542,20 @@ CREATE TABLE IF NOT EXISTS usage_logs (
   output_tokens INTEGER NOT NULL,
   cost REAL NOT NULL,
   latency INTEGER NOT NULL,
-  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX idx_user_id (user_id),
-  INDEX idx_created_at (created_at)
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX IF NOT EXISTS idx_usage_logs_user_id ON usage_logs(user_id);
+CREATE INDEX IF NOT EXISTS idx_usage_logs_created_at ON usage_logs(created_at);
 
 CREATE TABLE IF NOT EXISTS rate_limits (
   id TEXT PRIMARY KEY,
   user_id TEXT NOT NULL,
   requests_count INTEGER DEFAULT 0,
-  window_start DATETIME DEFAULT CURRENT_TIMESTAMP,
-  INDEX idx_user_id (user_id)
+  window_start DATETIME DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX IF NOT EXISTS idx_rate_limits_user_id ON rate_limits(user_id);
 
 CREATE TABLE IF NOT EXISTS api_keys (
   id TEXT PRIMARY KEY,
@@ -564,11 +566,11 @@ CREATE TABLE IF NOT EXISTS api_keys (
   rate_limit INTEGER DEFAULT 1000,
   is_active BOOLEAN DEFAULT TRUE,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-  last_used_at DATETIME,
-  INDEX idx_user_id (user_id),
-  INDEX idx_key_hash (key_hash)
+  last_used_at DATETIME
 );
-```
+
+CREATE INDEX IF NOT EXISTS idx_api_keys_user_id ON api_keys(user_id);
+CREATE INDEX IF NOT EXISTS idx_api_keys_key_hash ON api_keys(key_hash);
 
 ## 🚀 **API Implementation**
 
