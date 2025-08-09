@@ -135,7 +135,7 @@ const model = openrouter("anthropic/claude-3.5-sonnet");
 export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
   const client = openai({
     apiKey: env.OPENROUTER_API_KEY,
-    baseURL: "https://openrouter.ai/api/v1",
+    baseURL: "https://openrouter.ai/api/v1"
   });
   return client(id);
 }
@@ -838,14 +838,14 @@ export async function fetchWithRetry(
 
   for (let i = 0; i < maxRetries; i++) {
     try {
-      const controller = new AbortController();  
-      const timer = setTimeout(() => controller.abort(), 30_000);  
-      const response = await fetch(url, {  
-        ...options,  
-        signal: controller.signal,  
-      }).finally(() => clearTimeout(timer));  
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 30_000);
+      const response = await fetch(url, {
+        ...options,
+        signal: controller.signal
+      }).finally(() => clearTimeout(timer));
 
-      if (response.ok || response.status < 500) { 
+      if (response.ok || response.status < 500) {
         return response;
       }
 
@@ -975,11 +975,11 @@ export const options = {
     { duration: "5m", target: 100 }, // Stay at 100 users
     { duration: "2m", target: 200 }, // Ramp up to 200 users
     { duration: "5m", target: 200 }, // Stay at 200 users
-    { duration: "2m", target: 0 }    // Ramp down
+    { duration: "2m", target: 0 } // Ramp down
   ],
   thresholds: {
     http_req_duration: ["p(95)<2000"], // 95% of requests under 2s
-    http_req_failed: ["rate<0.1"]       // Error rate under 10%
+    http_req_failed: ["rate<0.1"] // Error rate under 10%
   }
 };
 
