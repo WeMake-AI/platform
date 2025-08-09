@@ -28,7 +28,7 @@ and PostHog analytics.
 
 ### Installation
 
-```bash
+```sh
 # Clone and setup
 git clone https://github.com/WeMake-AI/platform.git
 cd platform/workers/openai-api
@@ -68,8 +68,8 @@ bun run dev
   },
   "dependencies": {
     "hono": "^4.0.0",
-    "ai": "^5.0.0",               // latest SDK v5 (5.0.8)
-    "@ai-sdk/openai": "^2.0.0",   // latest adapter (2.0.7)
+    "ai": "^5.0.0", // latest SDK v5 (5.0.8)
+    "@ai-sdk/openai": "^2.0.0", // latest adapter (2.0.7)
     "posthog-node": "^4.0.0",
     "zod": "^3.22.0"
   },
@@ -122,7 +122,7 @@ bun run dev
 
 #### Core Setup
 
-```typescript
+````typescript
 // Install dependencies
 // bun add ai @ai-sdk/openai
 
@@ -139,13 +139,13 @@ import { generateText, streamText } from "ai";
 -
 -// Model configuration
 -const model = openrouter("anthropic/claude-3.5-sonnet");
-+export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
-+  const client = openai({
-+    apiKey: env.OPENROUTER_API_KEY,
-+    baseURL: "https://openrouter.ai/api/v1",
-+  });
-+  return client(id);
-+}
+export function createModel(env: Env, id = "anthropic/claude-3.5-sonnet") {
+  const client = openai({
+    apiKey: env.OPENROUTER_API_KEY,
+    baseURL: "https://openrouter.ai/api/v1",
+  });
+  return client(id);
+}
 
 #### Streaming Implementation
 
@@ -165,7 +165,7 @@ export default {
     return result.toAIStreamResponse();
   }
 };
-```
+````
 
 #### Tool Calling Support
 
@@ -323,7 +323,7 @@ async function selectModel(
 
   // Fetch the full model list once, with auth
   const res = await fetch("https://openrouter.ai/api/v1/models", {
-    headers: { Authorization: `Bearer ${env.OPENROUTER_API_KEY}` },
+    headers: { Authorization: `Bearer ${env.OPENROUTER_API_KEY}` }
   });
   if (!res.ok) throw new Error(`Failed to list models: ${res.status}`);
   const { data } = await res.json();
@@ -494,7 +494,7 @@ async function trackUsage(env: Env, { model, inputTokens, outputTokens, userId, 
 
 ### Environment Variables
 
-```bash
+```sh
 # .dev.vars (local development)
 OPENROUTER_API_KEY=your_openrouter_api_key
 POSTHOG_API_KEY=your_posthog_project_api_key
@@ -539,7 +539,7 @@ preview_id = "your-kv-preview-id"
 
 ### Database Schema
 
-```sql
+````sql
 -- D1 Database Schema
 CREATE TABLE IF NOT EXISTS usage_logs (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -645,7 +645,7 @@ app.onError((err, c) => {
 });
 
 export default app;
-```
+````
 
 ### Authentication Middleware
 
@@ -828,7 +828,7 @@ export async function generateCacheKey(
   const data = new TextEncoder().encode(content);
   const hash = await crypto.subtle.digest("SHA-256", data);
   const hex = Array.from(new Uint8Array(hash))
-    .map(b => b.toString(16).padStart(2, "0"))
+    .map((b) => b.toString(16).padStart(2, "0"))
     .join("");
   return `chat:${hex.slice(0, 32)}`;
 }
@@ -967,7 +967,7 @@ describe("Integration Tests", () => {
 
 ### Load Testing
 
-```typescript
+````typescript
 // tests/load.test.ts (executed by k6, not Vitest)
 import http from "k6/http";
 import { check } from "k6";
@@ -1016,7 +1016,7 @@ export default function () {
 
 ### Local Development Setup
 
-```bash
+```sh
 # Clone repository
 git clone https://github.com/WeMake-AI/platform.git
 cd platform/workers/openai-api
@@ -1035,11 +1035,11 @@ bun run dev
 bun run test
 bun run test:integration
 bun run test:load
-```
+````
 
 ### Production Deployment
 
-```bash
+```sh
 # Build and deploy to Cloudflare Workers
 bun run build
 bun run deploy:staging

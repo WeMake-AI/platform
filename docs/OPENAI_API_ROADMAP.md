@@ -17,7 +17,7 @@ practices with CI/CD integration, monitoring, and operational excellence.
 
 ## 🏗️ Architecture Overview
 
-```
+```sh
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Client Apps   │───▶│  Cloudflare      │───▶│   OpenRouter    │
 │                 │    │  Workers API     │    │   (LLM Models)  │
@@ -93,6 +93,7 @@ structure.
 - All dependencies install successfully
 - Database connections established
 - Basic health check endpoint responds
+
 ---
 
 ### Phase 2: Core Authentication & Security Implementation
@@ -526,33 +527,17 @@ and comprehensive operational procedures.
 
 ### CI/CD Pipeline
 
-  deploy-staging:
-    needs: test
-    if: github.ref == 'refs/heads/develop'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-      - name: Install deps
-        run: bun install
-        working-directory: workers/openai-api
-      - name: Deploy (staging)
-        run: bunx wrangler deploy --env staging
-        working-directory: workers/openai-api
+deploy-staging: needs: test if: github.ref == 'refs/heads/develop' runs-on:
+ubuntu-latest steps: - uses: actions/checkout@v4 - uses: oven-sh/setup-bun@v1 -
+name: Install deps run: bun install working-directory: workers/openai-api -
+name: Deploy (staging) run: bunx wrangler deploy --env staging
+working-directory: workers/openai-api
 
-  deploy-production:
-    needs: test
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-      - name: Install deps
-        run: bun install
-        working-directory: workers/openai-api
-      - name: Deploy (production)
-        run: bunx wrangler deploy --env production
-        working-directory: workers/openai-api
+deploy-production: needs: test if: github.ref == 'refs/heads/main' runs-on:
+ubuntu-latest steps: - uses: actions/checkout@v4 - uses: oven-sh/setup-bun@v1 -
+name: Install deps run: bun install working-directory: workers/openai-api -
+name: Deploy (production) run: bunx wrangler deploy --env production
+working-directory: workers/openai-api
 
 ### Monitoring Stack
 
