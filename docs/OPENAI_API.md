@@ -68,8 +68,8 @@ bun run dev
   },
   "dependencies": {
     "hono": "^4.0.0",
-    "ai": "^3.0.0",
-    "@ai-sdk/openai": "^0.0.50",
+    "ai": "^5.0.0",               // latest SDK v5 (5.0.8)
+    "@ai-sdk/openai": "^2.0.0",   // latest adapter (2.0.7)
     "posthog-node": "^4.0.0",
     "zod": "^3.22.0"
   },
