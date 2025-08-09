@@ -120,6 +120,36 @@ export default [
     }
   },
 
+  // Cloudflare Workers configuration
+  {
+    files: ["workers/**/*.{js,ts,tsx}"],
+    languageOptions: {
+      parser: tsparser,
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module"
+      },
+      globals: {
+        // Cloudflare Workers globals
+        crypto: "readonly",
+        console: "readonly",
+        fetch: "readonly",
+        Response: "readonly",
+        Request: "readonly",
+        TextEncoder: "readonly",
+        TextDecoder: "readonly",
+        D1Database: "readonly",
+        KVNamespace: "readonly",
+        addEventListener: "readonly",
+        self: "readonly",
+        caches: "readonly"
+      }
+    },
+    rules: {
+      "no-console": "off" // Allow console in workers for logging
+    }
+  },
+
   // Prettier compatibility (must be last)
   prettier,
 
