@@ -1,0 +1,394 @@
+name: OpenAI API Worker CI/CD
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - develop
+    paths:
+      - "workers/openai-api/**"
+      - ".github/workflows/openai-api-worker.yml"
+  pull_request:
+    branches:
+      - main
+      - staging
+      - develop
+    paths:
+      - "workers/openai-api/**"
+      - ".github/workflows/openai-api-worker.yml"
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: "Environment to deploy to"
+        required: true
+        default: "staging"
+        type: choice
+        options:
+          - development
+          - staging
+          - production
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write
+
+env:
+  NODE_VERSION: "20"
+  BUN_VERSION: "latest"
+  WORKER_DIR: "workers/openai-api"
+
+jobs:
+  # Job 1: Setup and validation
+  setup:
+    name: Setup & Validation
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.determine-env.outputs.environment }}
+      should-deploy: ${{ steps.determine-env.outputs.should-deploy }}
+      worker-changed: ${{ steps.changes.outputs.worker }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check for worker changes
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            worker:
+              - 'workers/openai-api/**'
+              - '.github/workflows/openai-api-worker.yml'
+
+      - name: Determine environment
+        id: determine-env
+        run: |
+          if [[ "${{ github.event_name }}" == "workflow_dispatch" ]]; then
+            echo "environment=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT
+            echo "should-deploy=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+            echo "environment=production" >> $GITHUB_OUTPUT
+            echo "should-deploy=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/staging" ]]; then
+            echo "environment=staging" >> $GITHUB_OUTPUT
+            echo "should-deploy=true" >> $GITHUB_OUTPUT
+          elif [[ "${{ github.ref }}" == "refs/heads/develop" ]]; then
+            echo "environment=development" >> $GITHUB_OUTPUT
+            echo "should-deploy=true" >> $GITHUB_OUTPUT
+          else
+            echo "environment=preview" >> $GITHUB_OUTPUT
+            echo "should-deploy=false" >> $GITHUB_OUTPUT
+          fi
+
+  # Job 2: Install dependencies and cache
+  dependencies:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    needs: setup
+    if: needs.setup.outputs.worker-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        id: cache-deps
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-deps-
+
+      - name: Install root dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        run: bun install --frozen-lockfile
+
+      - name: Install worker dependencies
+        if: steps.cache-deps.outputs.cache-hit != 'true'
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun install --frozen-lockfile
+
+  # Job 3: Linting and type checking
+  lint:
+    name: Lint & Type Check
+    runs-on: ubuntu-latest
+    needs: [setup, dependencies]
+    if: needs.setup.outputs.worker-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+
+      - name: Run ESLint
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun run lint
+
+      - name: Run TypeScript type check
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun run type-check
+
+  # Job 4: Testing
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    needs: [setup, dependencies]
+    if: needs.setup.outputs.worker-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+
+      - name: Run unit tests
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun run test
+        env:
+          NODE_ENV: test
+
+      - name: Run integration tests
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun run test:integration
+        env:
+          NODE_ENV: test
+
+      - name: Upload test coverage
+        uses: codecov/codecov-action@v4
+        if: always()
+        with:
+          file: ${{ env.WORKER_DIR }}/coverage/lcov.info
+          flags: openai-api-worker
+          name: openai-api-worker-coverage
+
+  # Job 5: Security scanning
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: [setup, dependencies]
+    if: needs.setup.outputs.worker-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+
+      - name: Run security audit
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun audit
+        continue-on-error: true
+
+      - name: Run Snyk security scan
+        uses: snyk/actions/node@master
+        if: github.event_name == 'pull_request'
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --file=${{ env.WORKER_DIR }}/package.json --severity-threshold=high
+        continue-on-error: true
+
+  # Job 6: Build worker
+  build:
+    name: Build Worker
+    runs-on: ubuntu-latest
+    needs: [setup, dependencies, lint, test]
+    if: needs.setup.outputs.worker-changed == 'true'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+
+      - name: Build worker
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun run build
+        env:
+          NODE_ENV: production
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: worker-build-${{ github.sha }}
+          path: ${{ env.WORKER_DIR }}/dist/
+          retention-days: 7
+
+  # Job 7: Deploy to Cloudflare Workers
+  deploy:
+    name: Deploy to ${{ needs.setup.outputs.environment }}
+    runs-on: ubuntu-latest
+    needs: [setup, build, security]
+    if: |
+      needs.setup.outputs.should-deploy == 'true' &&
+      needs.setup.outputs.worker-changed == 'true'
+    environment:
+      name: ${{ needs.setup.outputs.environment }}
+      url: ${{ steps.deploy.outputs.deployment-url }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: ${{ env.BUN_VERSION }}
+
+      - name: Restore dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            node_modules
+            ${{ env.WORKER_DIR }}/node_modules
+            ~/.bun/install/cache
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/bun.lockb', '**/package.json') }}
+
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: worker-build-${{ github.sha }}
+          path: ${{ env.WORKER_DIR }}/dist/
+
+      - name: Setup Wrangler
+        working-directory: ${{ env.WORKER_DIR }}
+        run: bun install -g wrangler
+
+      - name: Deploy to Cloudflare Workers
+        id: deploy
+        working-directory: ${{ env.WORKER_DIR }}
+        run: |
+          # Deploy based on environment
+          if [[ "${{ needs.setup.outputs.environment }}" == "production" ]]; then
+            wrangler deploy --env production
+            echo "deployment-url=https://api.wemake.dev" >> $GITHUB_OUTPUT
+          elif [[ "${{ needs.setup.outputs.environment }}" == "staging" ]]; then
+            wrangler deploy --env staging
+            echo "deployment-url=https://staging-api.wemake.dev" >> $GITHUB_OUTPUT
+          else
+            wrangler deploy --env development
+            echo "deployment-url=https://dev-api.wemake.dev" >> $GITHUB_OUTPUT
+          fi
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: Run post-deployment health check
+        run: |
+          sleep 10  # Wait for deployment to propagate
+          curl -f ${{ steps.deploy.outputs.deployment-url }}/health || exit 1
+
+      - name: Update deployment status
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: deployment } = await github.rest.repos.createDeploymentStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              deployment_id: context.payload.deployment?.id || 0,
+              state: '${{ job.status }}' === 'success' ? 'success' : 'failure',
+              environment_url: '${{ steps.deploy.outputs.deployment-url }}',
+              description: 'Deployment ${{ job.status }}'
+            });
+
+  # Job 8: Notify on deployment
+  notify:
+    name: Notify Deployment
+    runs-on: ubuntu-latest
+    needs: [setup, deploy]
+    if: always() && needs.setup.outputs.should-deploy == 'true'
+    steps:
+      - name: Notify deployment success
+        if: needs.deploy.result == 'success'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (context.eventName === 'pull_request') {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `🚀 **OpenAI API Worker deployed successfully!**\n\n` +
+                      `**Environment:** ${{ needs.setup.outputs.environment }}\n` +
+                      `**Commit:** ${context.sha.substring(0, 7)}\n` +
+                      `**Health Check:** [View Status](https://api.wemake.dev/health)\n\n` +
+                      `The deployment is now live and ready for testing.`
+              });
+            }
+
+      - name: Notify deployment failure
+        if: needs.deploy.result == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            if (context.eventName === 'pull_request') {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: `❌ **OpenAI API Worker deployment failed!**\n\n` +
+                      `**Environment:** ${{ needs.setup.outputs.environment }}\n` +
+                      `**Commit:** ${context.sha.substring(0, 7)}\n\n` +
+                      `Please check the [workflow logs](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}) for details.`
+              });
+            }
