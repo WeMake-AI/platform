@@ -34,7 +34,7 @@ velocity.
 
 ### One-Block Setup
 
-```bash
+```sh
 # Clone monorepo and navigate to workspace
 git clone https://github.com/WeMake-AI/platform.git /Users/admin/Repositories/WeMake/platform
 cd /Users/admin/Repositories/WeMake/platform
@@ -166,7 +166,7 @@ database_id = "your-d1-database-id"
 
 ### Cloudflare Secrets Setup
 
-```bash
+```sh
 # Set production secrets (never commit to git)
 wrangler secret put OPENROUTER_API_KEY --env production
 wrangler secret put POSTHOG_API_KEY --env production
@@ -440,7 +440,7 @@ export const rateLimitMiddleware = createMiddleware<{ Bindings: Env }>(
 
 ### Environment Setup Commands
 
-```bash
+```sh
 # Monorepo dependency installation
 cd /Users/admin/Repositories/WeMake/platform
 bun install
@@ -467,7 +467,7 @@ wrangler kv:namespace create "CACHE" --preview
 
 ### Testing Commands
 
-```bash
+```sh
 # Unit tests
 bun run test
 
