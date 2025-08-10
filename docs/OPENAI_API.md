@@ -157,7 +157,7 @@ requirements based on security and monitoring specifications]
 
 ### System Architecture
 
-```
+```sh
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   Client Apps   │───▶│  Cloudflare      │───▶│   OpenRouter    │
 │                 │    │  Workers API     │    │   (LLM Models)  │
@@ -227,7 +227,7 @@ requirements based on security and monitoring specifications]
 
 ### Folder Structure
 
-```
+```sh
 platform/
 ├── workers/
 │   └── openai-api/
@@ -248,10 +248,7 @@ platform/
 
 ### Code Ownership
 
-- **Primary Owners**: Platform Engineering Team
-- **Secondary Owners**: DevOps Engineering Team
-- **Reviewers**: Security Team (for security-related changes)
-- **CODEOWNERS**: Automated review assignment
+- **Primary Owners**: @heyFlorentin
 
 ### Build Isolation
 
@@ -262,25 +259,25 @@ platform/
 
 ## Rollout & Migration Plan
 
-### Phase 1: Foundation (Weeks 1-2)
+### Phase 1: Foundation
 
 - Environment setup and infrastructure provisioning
 - Basic authentication and security implementation
 - Core API endpoint development
 
-### Phase 2: Integration (Weeks 3-5)
+### Phase 2: Integration
 
 - OpenRouter and AI SDK integration
 - PostHog observability implementation
 - Streaming response development
 
-### Phase 3: Optimization (Weeks 6-8)
+### Phase 3: Optimization
 
 - Performance optimization and caching
 - Comprehensive testing implementation
 - Security hardening and compliance
 
-### Phase 4: Production (Weeks 9-10)
+### Phase 4: Production
 
 - Staging environment validation
 - Production deployment and monitoring
@@ -609,7 +606,7 @@ jobs:
 
 ### Monorepo Folder Layout
 
-```
+```sh
 platform/
 ├── workers/
 │   └── openai-api/
