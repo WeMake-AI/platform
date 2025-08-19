@@ -41,7 +41,7 @@ jobs:
     steps:
       - name: Create Branch
         id: create_neon_branch
-        uses: neondatabase/create-branch-action@45dc7a8a626b375bdbdabbc0b56ceb28e81b239d # v6.0.1
+        uses: neondatabase/create-branch-action@5c59720f0092955bc8b846ac0cd184b1093c27a2 # v6.1.0
         with:
           project_id: ${{ vars.NEON_PROJECT_ID }}
           branch_name: preview/pr-${{ github.event.number }}-${{ needs.setup.outputs.branch }}
