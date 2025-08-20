@@ -21,7 +21,7 @@
     "@astrojs/rss": "4.0.12",
     "@astrojs/sitemap": "3.4.2",
     "@tailwindcss/vite": "^4.1.11",
-    "astro": "5.12.8",
+    "astro": "5.13.1",
     "astro-seo": "^0.8.4",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3"
